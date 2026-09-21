@@ -1,0 +1,11 @@
+@import './color-learning.css';
+@import './animal-learning.css';
+@import './building-learning.css';
+@import './quiz-building.css';
+@import './animal-quiz.css';
+@import './quiz-color';
+@import './home.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

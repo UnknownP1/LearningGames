@@ -1,0 +1,661 @@
+/* ========================================
+   COLOR LEARNING
+======================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        #bcefff,
+        #f7fdff
+    );
+    overflow: hidden;
+}
+
+
+/* ========================================
+   MAIN GAME
+======================================== */
+
+.color-game {
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 18px 18px 22px;
+}
+
+
+/* ========================================
+   TOP BUTTON
+======================================== */
+
+.color-game__top {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.color-game__icon-button {
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 4px 12px #0002;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.color-game__icon-button:active {
+    transform: scale(0.9);
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.color-game__title {
+    margin: 8px 0 5px;
+
+    color: #08777b;
+
+    font-size: clamp(
+        28px,
+        6vw,
+        52px
+    );
+
+    text-align: center;
+}
+
+
+/* ========================================
+   SUBTITLE
+======================================== */
+
+.color-game__subtitle {
+    margin: 0 0 15px;
+
+    color: #397477;
+
+    font-size: clamp(
+        16px,
+        3vw,
+        23px
+    );
+
+    text-align: center;
+}
+
+
+/* ========================================
+   COLOR DISPLAY
+======================================== */
+
+.color-display {
+    width: min(
+        560px,
+        92vw
+    );
+
+    height: min(
+        39vh,
+        350px
+    );
+
+    background: #ffffff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px #0002;
+
+    transition: 0.25s;
+}
+
+
+/* ========================================
+   COLOR SWATCH
+======================================== */
+
+.color-display__swatch {
+    width: min(
+        230px,
+        45vw
+    );
+
+    height: min(
+        230px,
+        45vw
+    );
+
+    border-radius: 38%;
+
+    box-shadow:
+        inset 0 10px 18px #fff5,
+        0 10px 20px #0002;
+
+    transition: 0.25s;
+}
+
+
+/* ========================================
+   COLOR NAME
+======================================== */
+
+.color-display__name {
+    margin-top: 14px;
+
+    font-size: clamp(
+        28px,
+        6vw,
+        48px
+    );
+
+    font-weight: 900;
+
+    color: #126b70;
+}
+
+
+/* ========================================
+   HINT
+======================================== */
+
+.color-game__hint {
+    margin: 12px 0 9px;
+
+    color: #52777a;
+
+    font-size: 18px;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   COLOR CARDS CONTAINER
+======================================== */
+
+.color-game__colors {
+    width: min(
+        850px,
+        96vw
+    );
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 10px;
+}
+
+
+/* ========================================
+   COLOR CARD
+======================================== */
+
+.color-card {
+    border: 0;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 9px 5px 8px;
+
+    box-shadow:
+        0 5px 12px #0002;
+
+    font-weight: 800;
+
+    color: #276568;
+
+    font-size: clamp(
+        12px,
+        2vw,
+        17px
+    );
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.color-card:hover {
+    transform: translateY(-2px);
+}
+
+.color-card:active {
+    transform: scale(0.94);
+}
+
+
+/* ========================================
+   ACTIVE COLOR CARD
+======================================== */
+
+.color-card--active {
+    outline: 4px solid #7dd3d3;
+}
+
+
+/* ========================================
+   COLOR DOT
+======================================== */
+
+.color-card__dot {
+    display: block;
+
+    height: clamp(
+        45px,
+        8vw,
+        75px
+    );
+
+    border-radius: 16px;
+
+    margin-bottom: 6px;
+
+    box-shadow:
+        inset 0 6px 10px #fff5;
+}
+
+
+/* ========================================
+   COLOR NAME ON CARD
+======================================== */
+
+.color-card__name {
+    display: block;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.color-game__message {
+    position: fixed;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform:
+        translate(
+            -50%,
+            120px
+        );
+
+    background: #ffffff;
+
+    padding: 13px 24px;
+
+    border-radius: 999px;
+
+    color: #08777b;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 7px 20px #0003;
+
+    opacity: 0;
+
+    transition: 0.3s;
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   MESSAGE SHOW
+======================================== */
+
+.color-game__message--show {
+    transform:
+        translate(
+            -50%,
+            0
+        );
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .color-game {
+        padding: 10px 9px;
+    }
+
+
+    .color-game__icon-button {
+        width: 44px;
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+
+    .color-display {
+        height: 42vh;
+
+        border-width: 5px;
+    }
+
+
+    .color-display__swatch {
+        width: 48vw;
+        height: 48vw;
+
+        max-width: 205px;
+        max-height: 205px;
+    }
+
+
+    .color-game__colors {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .color-card {
+        padding: 7px 4px;
+    }
+
+
+    .color-card__dot {
+        height: 55px;
+    }
+
+
+    .color-game__hint {
+        margin: 8px 0 6px;
+
+        font-size: 16px;
+    }
+}
+
+
+/* ========================================
+   MOBILE LANDSCAPE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .color-game {
+        padding: 8px 12px;
+    }
+
+
+    .color-game__title {
+        font-size: 30px;
+
+        margin: 2px 0;
+    }
+
+
+    .color-game__subtitle {
+        font-size: 15px;
+
+        margin-bottom: 6px;
+    }
+
+
+    .color-display {
+        height: 48vh;
+
+        min-height: 180px;
+    }
+
+
+    .color-display__swatch {
+        width: min(
+            170px,
+            28vh
+        );
+
+        height: min(
+            170px,
+            28vh
+        );
+    }
+
+
+    .color-display__name {
+        font-size: 30px;
+
+        margin-top: 6px;
+    }
+
+
+    .color-game__hint {
+        font-size: 14px;
+
+        margin: 5px 0;
+    }
+
+
+    .color-game__colors {
+        gap: 7px;
+    }
+
+
+    .color-card {
+        padding: 5px;
+    }
+
+
+    .color-card__dot {
+        height: 45px;
+
+        margin-bottom: 3px;
+    }
+}
+
+/* ========================================
+   NEXT BUTTON
+======================================== */
+
+.color-game__next-button {
+    position: fixed !important;
+
+    right: 35px !important;
+    bottom: 35px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 14px !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    padding: 15px 24px !important;
+
+    border: none !important;
+    border-radius: 999px !important;
+
+    background: #0aa5a5 !important;
+    color: #ffffff !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+
+    box-shadow: 0 6px 16px #0003 !important;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.color-game__next-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 9px 20px #0003 !important;
+}
+
+.color-game__next-button:active {
+    transform: scale(0.94);
+}
+
+.color-game__next-button span:last-child {
+    font-size: 28px;
+    line-height: 1;
+}
+
+
+/* ========================================
+   MOBILE LANDSCAPE
+======================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .color-game__next-button {
+        position: fixed !important;
+
+        right: 15px !important;
+        bottom: 15px !important;
+
+        padding: 10px 16px !important;
+
+        font-size: 15px !important;
+
+        gap: 8px !important;
+    }
+
+    .color-game__next-button span:last-child {
+        font-size: 22px;
+    }
+
+}
+
+/* ========================================
+   NEXT BUTTON
+======================================== */
+
+.color-game__next-button {
+    position: fixed;
+
+    right: 35px;
+    bottom: 35px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 24px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: #0aa5a5;
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    box-shadow: 0 6px 16px #0003;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.color-game__next-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 9px 20px #0003;
+}
+
+.color-game__next-button:active {
+    transform: scale(0.94);
+}
+
+.color-game__next-button span:last-child {
+    font-size: 28px;
+    line-height: 1;
+}
+
+
+/* ========================================
+   NEXT BUTTON - MOBILE LANDSCAPE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .color-game__next-button {
+        right: 15px;
+        bottom: 15px;
+
+        padding: 10px 16px;
+
+        font-size: 15px;
+    }
+
+    .color-game__next-button span:last-child {
+        font-size: 22px;
+    }
+
+}

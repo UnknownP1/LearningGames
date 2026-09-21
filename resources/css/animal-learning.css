@@ -1,0 +1,349 @@
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.animal-game {
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 18px 18px 22px;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        #bcefff,
+        #f7fdff
+    );
+
+    overflow: hidden;
+}
+
+
+.animal-game__top {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.animal-game__icon-button {
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #fff;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 4px 12px #0002;
+
+    cursor: pointer;
+}
+
+
+.animal-game__title {
+    margin: 8px 0 5px;
+
+    color: #08777b;
+
+    font-size: clamp(
+        28px,
+        6vw,
+        52px
+    );
+
+    text-align: center;
+}
+
+
+.animal-game__subtitle {
+    margin: 0 0 15px;
+
+    color: #397477;
+
+    font-size: clamp(
+        16px,
+        3vw,
+        23px
+    );
+
+    text-align: center;
+}
+
+
+.animal-display {
+    width: min(560px, 92vw);
+    height: min(39vh, 350px);
+
+    background: #fff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px #0002;
+}
+
+
+.animal-display__emoji {
+    font-size: min(
+        180px,
+        25vw
+    );
+
+    line-height: 1;
+
+    margin-bottom: 18px;
+}
+
+
+.animal-display__name {
+    font-size: clamp(
+        28px,
+        6vw,
+        48px
+    );
+
+    font-weight: 900;
+
+    color: #126b70;
+}
+
+
+.animal-game__hint {
+    margin: 12px 0 9px;
+
+    color: #52777a;
+
+    font-size: 18px;
+}
+
+
+.animal-game__animals {
+    width: min(850px, 96vw);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 10px;
+}
+
+
+.animal-card {
+    border: 0;
+
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 9px 5px 8px;
+
+    box-shadow:
+        0 5px 12px #0002;
+
+    font-weight: 800;
+
+    color: #276568;
+
+    font-size: clamp(
+        12px,
+        2vw,
+        17px
+    );
+
+    cursor: pointer;
+
+    transition:
+        .15s;
+}
+
+
+.animal-card:active {
+    transform: scale(.94);
+}
+
+
+.animal-card--active {
+    outline: 4px solid #9ad9d9;
+}
+
+
+.animal-card__emoji {
+    display: block;
+
+    font-size: clamp(
+        40px,
+        7vw,
+        70px
+    );
+
+    line-height: 1;
+
+    margin-bottom: 8px;
+}
+
+
+.animal-card__name {
+    display: block;
+}
+
+
+.animal-game__next-button {
+    position: fixed;
+
+    right: 22px;
+    bottom: 20px;
+
+    border: 0;
+
+    padding: 14px 22px;
+
+    border-radius: 999px;
+
+    background: #08777b;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    box-shadow:
+        0 6px 16px #0003;
+
+    cursor: pointer;
+}
+
+
+.animal-game__next-button:active {
+    transform: scale(.95);
+}
+
+
+.animal-game__message {
+    position: fixed;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform:
+        translate(-50%, 120px);
+
+    background: #fff;
+
+    padding: 13px 24px;
+
+    border-radius: 999px;
+
+    color: #08777b;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 7px 20px #0003;
+
+    opacity: 0;
+
+    transition: .3s;
+}
+
+
+.animal-game__message--show {
+    transform:
+        translate(-50%, 0);
+
+    opacity: 1;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MOBILE
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 600px) {
+
+    .animal-game {
+        padding: 10px 9px;
+    }
+
+
+    .animal-game__icon-button {
+        width: 44px;
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+
+    .animal-display {
+        height: 42vh;
+
+        border-width: 5px;
+    }
+
+
+    .animal-display__emoji {
+        font-size: 30vw;
+    }
+
+
+    .animal-game__animals {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .animal-card {
+        padding: 7px 4px;
+    }
+
+
+    .animal-card__emoji {
+        font-size: 55px;
+    }
+
+
+    .animal-game__hint {
+        margin: 8px 0 6px;
+    }
+
+
+    .animal-game__next-button {
+        right: 12px;
+        bottom: 12px;
+
+        padding: 11px 17px;
+
+        font-size: 16px;
+    }
+
+}

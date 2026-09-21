@@ -1,0 +1,510 @@
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.animal-quiz {
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 18px 18px 22px;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        #bcefff,
+        #f7fdff
+    );
+
+    overflow: hidden;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| TOP
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__top {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.animal-quiz__icon-button {
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #fff;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 4px 12px #0002;
+
+    cursor: pointer;
+}
+
+
+.animal-quiz__number {
+    padding: 10px 17px;
+
+    background: #fff;
+
+    border-radius: 999px;
+
+    color: #08777b;
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 4px 12px #0002;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| TITLE
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__title {
+    margin: 8px 0 18px;
+
+    color: #08777b;
+
+    font-size: clamp(
+        28px,
+        6vw,
+        52px
+    );
+
+    text-align: center;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CONTENT
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__content {
+    width: min(1050px, 96vw);
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+
+    align-items: center;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DISPLAY
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__display {
+    width: 100%;
+
+    height: min(
+        48vh,
+        420px
+    );
+
+    background: #fff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px #0002;
+}
+
+
+.animal-quiz__emoji {
+    font-size: min(
+        220px,
+        24vw
+    );
+
+    line-height: 1;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ANSWERS
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__answers {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.animal-quiz__answer {
+    min-height: 170px;
+
+    border: 0;
+
+    border-radius: 25px;
+
+    background: #fff;
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    box-shadow:
+        0 6px 15px #0002;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        box-shadow .15s;
+}
+
+
+.animal-quiz__answer:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 20px #0003;
+}
+
+
+.animal-quiz__answer:active {
+    transform: scale(.95);
+}
+
+
+.animal-quiz__answer--selected {
+    outline: 5px solid #9ad9d9;
+}
+
+
+.animal-quiz__answer--correct {
+    outline: 5px solid #45b94b;
+}
+
+
+.animal-quiz__answer--wrong {
+    outline: 5px solid #ef3b3b;
+}
+
+
+.animal-quiz__answer-emoji {
+    font-size: 65px;
+
+    line-height: 1;
+}
+
+
+.animal-quiz__answer-name {
+    color: #276568;
+
+    font-size: clamp(
+        17px,
+        2.2vw,
+        23px
+    );
+
+    font-weight: 900;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FEEDBACK
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__feedback {
+    margin-top: 14px;
+
+    padding: 10px 25px;
+
+    border-radius: 999px;
+
+    background: #fff;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 15px #0002;
+}
+
+
+.animal-quiz__feedback--correct {
+    color: #45a84b;
+}
+
+
+.animal-quiz__feedback--wrong {
+    color: #ef3b3b;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| NEXT BUTTON
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__next-button {
+    position: fixed;
+
+    right: 22px;
+    bottom: 20px;
+
+    border: 0;
+
+    padding: 14px 22px;
+
+    border-radius: 999px;
+
+    background: #08777b;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 6px 16px #0003;
+
+    cursor: pointer;
+}
+
+
+.animal-quiz__next-button:active {
+    transform: scale(.95);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FINISHED
+|--------------------------------------------------------------------------
+*/
+
+.animal-quiz__finished {
+    width: min(
+        600px,
+        92vw
+    );
+
+    margin: auto;
+
+    padding: 40px 25px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    box-shadow:
+        0 8px 25px #0002;
+}
+
+
+.animal-quiz__finished-icon {
+    font-size: 80px;
+
+    margin-bottom: 10px;
+}
+
+
+.animal-quiz__finished h1 {
+    margin: 0;
+
+    color: #08777b;
+
+    font-size: 40px;
+}
+
+
+.animal-quiz__finished p {
+    color: #52777a;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+.animal-quiz__restart-button {
+    border: 0;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    background: #08777b;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+.animal-quiz__restart-button:active {
+    transform: scale(.95);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MOBILE
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 700px) {
+
+    .animal-quiz {
+        padding: 10px 9px;
+    }
+
+
+    .animal-quiz__icon-button {
+        width: 44px;
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+
+    .animal-quiz__number {
+        padding: 8px 12px;
+
+        font-size: 14px;
+    }
+
+
+    .animal-quiz__title {
+        margin: 8px 0 12px;
+    }
+
+
+    .animal-quiz__content {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        width: 96vw;
+    }
+
+
+    .animal-quiz__display {
+        height: 30vh;
+
+        min-height: 190px;
+
+        border-width: 5px;
+    }
+
+
+    .animal-quiz__emoji {
+        font-size: 120px;
+    }
+
+
+    .animal-quiz__answers {
+        gap: 8px;
+    }
+
+
+    .animal-quiz__answer {
+        min-height: 105px;
+
+        border-radius: 18px;
+
+        padding: 8px;
+    }
+
+
+    .animal-quiz__answer-emoji {
+        font-size: 45px;
+    }
+
+
+    .animal-quiz__answer-name {
+        font-size: 16px;
+    }
+
+
+    .animal-quiz__feedback {
+        margin-top: 8px;
+
+        font-size: 18px;
+    }
+
+
+    .animal-quiz__next-button {
+        right: 12px;
+        bottom: 12px;
+
+        padding: 11px 17px;
+
+        font-size: 16px;
+    }
+
+}

@@ -1,0 +1,691 @@
+/* ========================================
+   COLOR QUIZ
+   STYLE DISESUAIKAN DENGAN COLOR LEARNING
+======================================== */
+
+.color-quiz {
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 18px 18px 22px;
+
+    background: linear-gradient(
+        #bcefff,
+        #f7fdff
+    );
+
+    font-family: Arial, sans-serif;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   TOP
+======================================== */
+
+.color-quiz__top {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.color-quiz__icon-button {
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 4px 12px #0002;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+
+.color-quiz__icon-button:active {
+    transform: scale(0.94);
+}
+
+
+/* ========================================
+   NOMOR SOAL
+======================================== */
+
+.color-quiz__number {
+    padding: 11px 20px;
+
+    background: #fff;
+
+    border-radius: 999px;
+
+    color: #397477;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 12px #0002;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.color-quiz__title {
+    margin: 8px 0 5px;
+
+    color: #08777b;
+
+    font-size: clamp(
+        28px,
+        6vw,
+        52px
+    );
+
+    text-align: center;
+}
+
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.color-quiz__content {
+    width: min(
+        1050px,
+        94vw
+    );
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(400px, 1fr)
+        minmax(400px, 1fr);
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 5px;
+}
+
+
+/* ========================================
+   COLOR DISPLAY
+======================================== */
+
+.color-quiz__display {
+    width: 100%;
+
+    height: min(
+        350px,
+        42vh
+    );
+
+    background: #fff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px #0002;
+
+    transition: 0.25s;
+}
+
+
+.color-quiz__swatch {
+    width: min(
+        230px,
+        24vw
+    );
+
+    height: min(
+        230px,
+        24vw
+    );
+
+    border-radius: 38%;
+
+    box-shadow:
+        inset 0 10px 18px #fff5,
+        0 10px 20px #0002;
+
+    transition: 0.25s;
+}
+
+
+/* ========================================
+   ANSWERS
+======================================== */
+
+.color-quiz__answers {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.color-quiz__answer {
+    min-height: 160px;
+
+    border: 0;
+
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 9px 5px 8px;
+
+    box-shadow:
+        0 5px 12px #0002;
+
+    color: #276568;
+
+    font-size: clamp(
+        16px,
+        2vw,
+        20px
+    );
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+
+.color-quiz__answer:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 15px #0003;
+}
+
+
+.color-quiz__answer:active {
+    transform: scale(0.94);
+}
+
+
+/* ========================================
+   WARNA DALAM PILIHAN
+======================================== */
+
+.color-quiz__answer-dot {
+    width: 105px;
+
+    height: 90px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        inset 0 6px 10px #fff5,
+        0 5px 10px #0002;
+}
+
+
+.color-quiz__answer-name {
+    font-size: 20px;
+}
+
+
+/* ========================================
+   JAWABAN BENAR
+======================================== */
+
+.color-quiz__answer--correct {
+    outline: 5px solid #57c879;
+
+    box-shadow:
+        0 5px 15px #57c87955;
+}
+
+
+/* ========================================
+   JAWABAN SALAH
+======================================== */
+
+.color-quiz__answer--wrong {
+    outline: 5px solid #e57373;
+
+    box-shadow:
+        0 5px 15px #e5737355;
+}
+
+
+/* ========================================
+   FEEDBACK
+======================================== */
+
+.color-quiz__feedback {
+    margin-top: 12px;
+
+    padding: 9px 24px;
+
+    background: #fff;
+
+    border-radius: 999px;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 15px #0002;
+}
+
+
+.color-quiz__feedback--correct {
+    color: #299c4b;
+}
+
+
+.color-quiz__feedback--wrong {
+    color: #d95b5b;
+}
+
+
+/* ========================================
+   NEXT BUTTON
+======================================== */
+
+.color-quiz__next-button {
+    position: fixed;
+
+    right: 35px;
+
+    bottom: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    padding: 15px 24px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #0aa5a5;
+
+    color: #fff;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 6px 16px #0003;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+
+.color-quiz__next-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 20px #0003;
+}
+
+
+.color-quiz__next-button:active {
+    transform: scale(0.94);
+}
+
+
+.color-quiz__next-button span:last-child {
+    font-size: 28px;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   QUIZ SELESAI
+======================================== */
+
+.color-quiz__finished {
+    width: min(
+        560px,
+        90vw
+    );
+
+    margin-top: 12vh;
+
+    padding: 40px;
+
+    background: #fff;
+
+    border: 7px solid #9ad9d9;
+
+    border-radius: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px #0002;
+}
+
+
+.color-quiz__finished-icon {
+    font-size: 75px;
+
+    margin-bottom: 8px;
+}
+
+
+.color-quiz__finished h1 {
+    margin: 0 0 10px;
+
+    color: #08777b;
+
+    font-size: 42px;
+}
+
+
+.color-quiz__finished p {
+    margin: 0 0 25px;
+
+    color: #397477;
+
+    font-size: 20px;
+}
+
+
+.color-quiz__restart-button {
+    border: 0;
+
+    padding: 14px 25px;
+
+    border-radius: 999px;
+
+    background: #0aa5a5;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .color-quiz {
+        padding: 10px 9px;
+    }
+
+
+    .color-quiz__icon-button {
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+
+    .color-quiz__number {
+        padding: 8px 13px;
+
+        font-size: 14px;
+    }
+
+
+    .color-quiz__title {
+        margin: 5px 0 12px;
+
+        font-size: 30px;
+    }
+
+
+    .color-quiz__content {
+        width: 96vw;
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .color-quiz__display {
+        height: 35vh;
+
+        min-height: 180px;
+
+        border-width: 5px;
+    }
+
+
+    .color-quiz__swatch {
+        width: 170px;
+
+        height: 170px;
+    }
+
+
+    .color-quiz__answers {
+        gap: 8px;
+    }
+
+
+    .color-quiz__answer {
+        min-height: 115px;
+
+        border-radius: 20px;
+    }
+
+
+    .color-quiz__answer-dot {
+        width: 75px;
+
+        height: 58px;
+    }
+
+
+    .color-quiz__answer-name {
+        font-size: 16px;
+    }
+
+
+    .color-quiz__feedback {
+        margin-top: 8px;
+
+        padding: 7px 18px;
+
+        font-size: 17px;
+    }
+
+
+    .color-quiz__next-button {
+        right: 15px;
+
+        bottom: 15px;
+
+        padding: 10px 16px;
+
+        font-size: 15px;
+    }
+
+
+    .color-quiz__next-button span:last-child {
+        font-size: 22px;
+    }
+
+}
+
+
+/* ========================================
+   MOBILE LANDSCAPE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .color-quiz {
+        padding: 8px 12px;
+    }
+
+
+    .color-quiz__icon-button {
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+
+    .color-quiz__number {
+        padding: 7px 13px;
+
+        font-size: 14px;
+    }
+
+
+    .color-quiz__title {
+        margin: 2px 0 8px;
+
+        font-size: 30px;
+    }
+
+
+    .color-quiz__content {
+        width: 92vw;
+
+        grid-template-columns:
+            minmax(260px, 1fr)
+            minmax(300px, 1fr);
+
+        gap: 15px;
+    }
+
+
+    .color-quiz__display {
+        height: 48vh;
+
+        min-height: 150px;
+
+        border-width: 5px;
+    }
+
+
+    .color-quiz__swatch {
+        width: min(
+            150px,
+            30vh
+        );
+
+        height: min(
+            150px,
+            30vh
+        );
+    }
+
+
+    .color-quiz__answers {
+        gap: 7px;
+    }
+
+
+    .color-quiz__answer {
+        min-height: 90px;
+
+        padding: 5px;
+    }
+
+
+    .color-quiz__answer-dot {
+        width: 65px;
+
+        height: 45px;
+    }
+
+
+    .color-quiz__answer-name {
+        font-size: 15px;
+    }
+
+
+    .color-quiz__feedback {
+        margin-top: 5px;
+
+        padding: 6px 15px;
+
+        font-size: 16px;
+    }
+
+
+    .color-quiz__next-button {
+        right: 15px;
+
+        bottom: 15px;
+
+        padding: 10px 16px;
+
+        font-size: 15px;
+    }
+
+}
