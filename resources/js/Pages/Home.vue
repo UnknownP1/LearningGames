@@ -12,6 +12,10 @@ function goToBuildings() {
     window.location.href = '/bangunan'
 }
 
+function goToShapes() {
+    window.location.href = '/bentuk'
+}
+
 </script>
 
 
@@ -100,6 +104,29 @@ function goToBuildings() {
 
                     <div class="home__menu-description">
                         Yuk kenali berbagai bangunan!
+                    </div>
+
+                </button>
+
+
+                <!-- BENTUK -->
+
+                <button
+                    type="button"
+                    class="home__menu home__menu--shapes"
+                    @click="goToShapes"
+                >
+
+                    <div class="home__menu-icon">
+                        🔷
+                    </div>
+
+                    <div class="home__menu-title">
+                        Mengenal Bentuk
+                    </div>
+
+                    <div class="home__menu-description">
+                        Yuk kenali berbagai bentuk!
                     </div>
 
                 </button>

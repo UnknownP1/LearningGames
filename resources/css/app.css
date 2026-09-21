@@ -1,6 +1,8 @@
 @import './color-learning.css';
 @import './animal-learning.css';
 @import './building-learning.css';
+@import './shape-learning.css';
+@import './quiz-shape.css';
 @import './quiz-building.css';
 @import './animal-quiz.css';
 @import './quiz-color';
