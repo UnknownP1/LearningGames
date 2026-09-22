@@ -1,124 +1,79 @@
 <script setup>
 
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 
 /*
 |--------------------------------------------------------------------------
-| DATA HEWAN
-|--------------------------------------------------------------------------
-*/
-
-const animals = {
-
-    kucing: {
-        name: 'Kucing',
-        emoji: '🐱',
-    },
-
-    anjing: {
-        name: 'Anjing',
-        emoji: '🐶',
-    },
-
-    kelinci: {
-        name: 'Kelinci',
-        emoji: '🐰',
-    },
-
-    sapi: {
-        name: 'Sapi',
-        emoji: '🐮',
-    },
-
-    ayam: {
-        name: 'Ayam',
-        emoji: '🐔',
-    },
-
-    gajah: {
-        name: 'Gajah',
-        emoji: '🐘',
-    },
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| DATA QUIZ
-|--------------------------------------------------------------------------
-|
-| Setiap soal mempunyai:
-|
-| - hewan yang harus ditebak
-| - 4 pilihan jawaban
-|
-| Urutan pilihan dibuat berbeda-beda.
+| DATA SOAL
 |--------------------------------------------------------------------------
 */
 
 const questions = [
-
     {
-        answer: animals.kucing,
+        answer: 'Kucing',
+
+        emoji: '🐱',
 
         options: [
-            animals.anjing,
-            animals.kucing,
-            animals.sapi,
-            animals.kelinci,
+            'Anjing',
+            'Kucing',
+            'Sapi',
+            'Kelinci',
         ],
     },
 
-
     {
-        answer: animals.gajah,
+        answer: 'Gajah',
+
+        emoji: '🐘',
 
         options: [
-            animals.ayam,
-            animals.gajah,
-            animals.kucing,
-            animals.sapi,
+            'Ayam',
+            'Gajah',
+            'Kucing',
+            'Sapi',
         ],
     },
 
-
     {
-        answer: animals.kelinci,
+        answer: 'Kelinci',
+
+        emoji: '🐰',
 
         options: [
-            animals.sapi,
-            animals.anjing,
-            animals.kelinci,
-            animals.ayam,
+            'Sapi',
+            'Anjing',
+            'Kelinci',
+            'Ayam',
         ],
     },
 
-
     {
-        answer: animals.ayam,
+        answer: 'Ayam',
+
+        emoji: '🐔',
 
         options: [
-            animals.kucing,
-            animals.ayam,
-            animals.gajah,
-            animals.anjing,
+            'Kucing',
+            'Ayam',
+            'Gajah',
+            'Anjing',
         ],
     },
 
-
     {
-        answer: animals.anjing,
+        answer: 'Anjing',
+
+        emoji: '🐶',
 
         options: [
-            animals.kelinci,
-            animals.sapi,
-            animals.anjing,
-            animals.gajah,
+            'Kelinci',
+            'Sapi',
+            'Anjing',
+            'Gajah',
         ],
     },
-
 ]
 
 
@@ -128,49 +83,56 @@ const questions = [
 |--------------------------------------------------------------------------
 */
 
-// Nomor soal saat ini
 const currentQuestionIndex = ref(0)
 
-// Jawaban yang dipilih
-const selectedAnswer = ref(null)
+const selectedAnswer = ref('')
 
-// Status jawaban
-const answerStatus = ref(null)
+const answerStatus = ref('')
 
-// Apakah quiz sudah selesai
 const quizFinished = ref(false)
-
-// Status Score
 
 const score = ref(0)
 
 
 /*
 |--------------------------------------------------------------------------
-| SOAL SAAT INI
+| CURRENT QUESTION
 |--------------------------------------------------------------------------
 */
 
-const currentQuestion = computed(() => {
+function currentQuestion() {
 
     return questions[
         currentQuestionIndex.value
     ]
 
-})
+}
 
 
 /*
 |--------------------------------------------------------------------------
-| NOMOR SOAL
+| HOME
 |--------------------------------------------------------------------------
 */
 
-const questionNumber = computed(() => {
+function goHome() {
 
-    return currentQuestionIndex.value + 1
+    window.location.href = '/'
 
-})
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| KEMBALI KE PEMBELAJARAN
+|--------------------------------------------------------------------------
+*/
+
+function goToLearning() {
+
+    window.location.href = '/hewan'
+
+}
 
 
 /*
@@ -179,25 +141,26 @@ const questionNumber = computed(() => {
 |--------------------------------------------------------------------------
 */
 
-function selectAnswer(animal) {
+function selectAnswer(answer) {
 
-    // Jangan bisa memilih lagi setelah menjawab
-    if (answerStatus.value !== null) {
+    // Tidak bisa memilih lagi
+    if (selectedAnswer.value) {
         return
     }
 
 
     // Simpan jawaban
-    selectedAnswer.value = animal
+    selectedAnswer.value = answer
 
 
     // Cek jawaban
     if (
-        animal.name ===
-        currentQuestion.value.answer.name
+        answer ===
+        currentQuestion().answer
     ) {
 
         answerStatus.value = 'correct'
+
         score.value += 20
 
     } else {
@@ -217,32 +180,30 @@ function selectAnswer(animal) {
 
 function nextQuestion() {
 
-    // Kalau masih ada soal
     if (
-        currentQuestionIndex.value <
+        currentQuestionIndex.value
+        <
         questions.length - 1
     ) {
 
         currentQuestionIndex.value++
 
-        selectedAnswer.value = null
+        selectedAnswer.value = ''
 
-        answerStatus.value = null
+        answerStatus.value = ''
 
-        return
+    } else {
+
+        quizFinished.value = true
 
     }
-
-
-    // Kalau sudah soal terakhir
-    quizFinished.value = true
 
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| ULANGI QUIZ
+| RESTART
 |--------------------------------------------------------------------------
 */
 
@@ -250,82 +211,15 @@ function restartQuiz() {
 
     currentQuestionIndex.value = 0
 
-    selectedAnswer.value = null
+    selectedAnswer.value = ''
 
-    answerStatus.value = null
+    answerStatus.value = ''
 
     quizFinished.value = false
 
     score.value = 0
 
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| KEMBALI KE PENGENALAN HEWAN
-|--------------------------------------------------------------------------
-*/
-
-function goBack() {
-
-    window.location.href = '/hewan'
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| FEEDBACK
-|--------------------------------------------------------------------------
-*/
-
-const feedbackMessage = computed(() => {
-
-    if (
-        answerStatus.value === 'correct'
-    ) {
-
-        return 'Benar! 🎉'
-
-    }
-
-
-    if (
-        answerStatus.value === 'wrong'
-    ) {
-
-        return 'Belum tepat 😊'
-
-    }
-
-
-    return ''
-
-})
-
-
-/*
-|--------------------------------------------------------------------------
-| TEKS TOMBOL
-|--------------------------------------------------------------------------
-*/
-
-const nextButtonText = computed(() => {
-
-    if (
-        currentQuestionIndex.value ===
-        questions.length - 1
-    ) {
-
-        return 'Selesai'
-
-    }
-
-
-    return 'Selanjutnya'
-
-})
 
 </script>
 
@@ -335,81 +229,97 @@ const nextButtonText = computed(() => {
     <main class="animal-quiz">
 
 
-        <!-- TOP -->
-
-        <div class="animal-quiz__top">
-
-
-            <!-- HOME -->
-
-            <button
-                type="button"
-                class="animal-quiz__icon-button"
-                aria-label="Kembali ke pengenalan hewan"
-                @click="goBack"
-            >
-
-                🏠
-
-            </button>
-
-
-            <!-- NOMOR SOAL -->
-
-            <div class="animal-quiz__number">
-
-                Soal {{ questionNumber }}
-                / {{ questions.length }}
-
-            </div>
-
-
-        </div>
-
-
-        <!-- QUIZ -->
+        <!-- =====================================================
+             QUIZ
+        ====================================================== -->
 
         <template v-if="!quizFinished">
 
 
-            <!-- TITLE -->
+            <!-- =================================================
+                 TOP
+            ================================================== -->
 
-            <h1 class="animal-quiz__title">
-
-                Hewan Apakah Ini? 🐾
-
-            </h1>
+            <div class="animal-quiz__top">
 
 
-            <!-- MAIN CONTENT -->
+                <!-- HOME -->
 
-            <div class="animal-quiz__content">
+                <button
+                    type="button"
+
+                    class="animal-quiz__icon-button"
+
+                    aria-label="Kembali ke menu utama"
+
+                    @click="goHome"
+                >
+
+                    🏠
+
+                </button>
 
 
-                <!-- HEWAN -->
+                <!-- QUESTION NUMBER -->
 
-                <section class="animal-quiz__display">
+                <div class="animal-quiz__number">
+
+                    Soal
+                    {{ currentQuestionIndex + 1 }}
+                    /
+                    {{ questions.length }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIN CARD
+            ================================================== -->
+
+            <section class="animal-quiz__card">
+
+
+                <!-- TITLE -->
+
+                <h1 class="animal-quiz__title">
+
+                    Hewan Apakah Ini? 🐾
+
+                </h1>
+
+
+                <!-- =================================================
+                     DISPLAY
+                ================================================== -->
+
+                <div class="animal-quiz__display">
 
                     <div class="animal-quiz__emoji">
 
-                        {{ currentQuestion.answer.emoji }}
+                        {{ currentQuestion().emoji }}
 
                     </div>
 
-                </section>
+                </div>
 
 
-                <!-- PILIHAN -->
+                <!-- =================================================
+                     ANSWERS
+                ================================================== -->
 
                 <div class="animal-quiz__answers">
 
 
                     <button
-                        v-for="
-                            animal in
-                            currentQuestion.options
-                        "
-                        :key="animal.name"
+                        v-for="(
+                            option,
+                            index
+                        ) in currentQuestion().options"
+
+                        :key="option"
 
                         type="button"
 
@@ -417,132 +327,250 @@ const nextButtonText = computed(() => {
 
                         :class="{
 
-                            'animal-quiz__answer--selected':
-                                selectedAnswer?.name ===
-                                animal.name,
-
                             'animal-quiz__answer--correct':
-                                answerStatus &&
-                                animal.name ===
-                                currentQuestion.answer.name,
+                                selectedAnswer &&
+                                option ===
+                                currentQuestion().answer,
 
                             'animal-quiz__answer--wrong':
-                                selectedAnswer?.name ===
-                                animal.name &&
-                                answerStatus === 'wrong'
+                                selectedAnswer === option &&
+                                option !==
+                                currentQuestion().answer
 
                         }"
 
+                        :disabled="
+                            !!selectedAnswer
+                        "
+
                         @click="
-                            selectAnswer(animal)
+                            selectAnswer(option)
                         "
                     >
 
+
+                        <!-- LETTER -->
+
                         <span
-                            class="animal-quiz__answer-emoji"
+                            class="
+                                animal-quiz__answer-letter
+                            "
                         >
 
-                            {{ animal.emoji }}
+                            {{
+                                String.fromCharCode(
+                                    65 + index
+                                )
+                            }}
 
                         </span>
 
 
+                        <!-- PURE TEXT -->
+
                         <span
-                            class="animal-quiz__answer-name"
+                            class="
+                                animal-quiz__answer-name
+                            "
                         >
 
-                            {{ animal.name }}
+                            {{ option }}
 
                         </span>
+
 
                     </button>
 
 
                 </div>
 
-            </div>
+
+                <!-- =================================================
+                     FEEDBACK
+                ================================================== -->
+
+                <div
+                    v-if="selectedAnswer"
+
+                    class="animal-quiz__feedback"
+
+                    :class="{
+
+                        'animal-quiz__feedback--correct':
+                            answerStatus === 'correct',
+
+                        'animal-quiz__feedback--wrong':
+                            answerStatus === 'wrong'
+
+                    }"
+                >
+
+                    <span
+                        v-if="
+                            answerStatus === 'correct'
+                        "
+                    >
+
+                        🎉 Benar!
+
+                    </span>
 
 
-            <!-- FEEDBACK -->
+                    <span v-else>
 
-            <div
-                v-if="answerStatus"
+                        😊 Belum tepat!
 
-                class="animal-quiz__feedback"
+                    </span>
 
-                :class="{
-
-                    'animal-quiz__feedback--correct':
-                        answerStatus === 'correct',
-
-                    'animal-quiz__feedback--wrong':
-                        answerStatus === 'wrong'
-
-                }"
-            >
-
-                {{ feedbackMessage }}
-
-            </div>
+                </div>
 
 
-            <!-- NEXT -->
+                <!-- =================================================
+                     NEXT
+                ================================================== -->
 
-            <button
-                v-if="answerStatus"
+                <button
+                    v-if="selectedAnswer"
 
-                type="button"
+                    type="button"
 
-                class="animal-quiz__next-button"
+                    class="animal-quiz__next-button"
 
-                @click="nextQuestion"
-            >
+                    @click="nextQuestion"
+                >
 
-                <span>
-                    {{ nextButtonText }}
-                </span>
+                    <span>
 
-                <span>
-                    →
-                </span>
+                        {{
+                            currentQuestionIndex ===
+                            questions.length - 1
 
-            </button>
+                                ? 'Lihat Hasil'
+
+                                : 'Soal Berikutnya'
+                        }}
+
+                    </span>
+
+
+                    <span>
+
+                        →
+
+                    </span>
+
+                </button>
+
+
+            </section>
 
 
         </template>
 
 
-        <!-- SELESAI -->
-        
+        <!-- =====================================================
+             FINISHED
+        ====================================================== -->
+
         <section
             v-else
+
             class="animal-quiz__finished"
         >
+
+
+            <!-- ICON -->
+
             <div class="animal-quiz__finished-icon">
+
                 🎉
+
             </div>
+
+
+            <!-- TITLE -->
 
             <h1>
+
                 Quiz Selesai!
+
             </h1>
 
+
+            <!-- SCORE -->
+
             <div class="animal-quiz__score">
+
                 ⭐ {{ score }} / 100
+
             </div>
 
+
+            <!-- DESCRIPTION -->
+
             <p>
+
                 Kamu berhasil menjawab
-                {{ score / 20 }} soal dengan benar!
+                {{ score / 20 }}
+                soal dengan benar!
+
             </p>
 
-            <button
-                type="button"
-                class="animal-quiz__restart-button"
-                @click="restartQuiz"
-            >
-                Coba Lagi
 
-            </button>
+            <!-- =================================================
+                 FINISHED ACTIONS
+            ================================================== -->
+
+            <div class="animal-quiz__finished-actions">
+
+
+                <!-- HOME -->
+
+                <button
+                    type="button"
+
+                    class="animal-quiz__finished-button"
+
+                    @click="goHome"
+                >
+
+                    <span>
+
+                        🏠
+
+                    </span>
+
+
+                    <span>
+
+                        Home
+
+                    </span>
+
+                </button>
+
+
+                <!-- KEMBALI KE PEMBELAJARAN -->
+
+                <button
+                    type="button"
+
+                    class="animal-quiz__finished-button"
+
+                    @click="goToLearning"
+                >
+
+                    <span>
+
+                        Kembali ke Pembelajaran
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
 
         </section>
 

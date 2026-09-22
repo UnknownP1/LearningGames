@@ -1,117 +1,79 @@
 <script setup>
-import { ref, computed } from 'vue'
+
+import { ref } from 'vue'
 
 
 /*
 |--------------------------------------------------------------------------
-| DATA WARNA
-|--------------------------------------------------------------------------
-*/
-
-const colors = {
-    merah: {
-        name: 'Merah',
-        hex: '#ef3b3b',
-    },
-
-    biru: {
-        name: 'Biru',
-        hex: '#3199e8',
-    },
-
-    kuning: {
-        name: 'Kuning',
-        hex: '#ffd22e',
-    },
-
-    hijau: {
-        name: 'Hijau',
-        hex: '#45b94b',
-    },
-
-    ungu: {
-        name: 'Ungu',
-        hex: '#9a55d5',
-    },
-
-    pink: {
-        name: 'Pink',
-        hex: '#f36fa5',
-    },
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| DATA QUIZ
-|--------------------------------------------------------------------------
-|
-| Setiap soal mempunyai:
-|
-| - warna yang harus ditebak
-| - 4 pilihan jawaban
-|
-| Urutan pilihan sengaja dibuat berbeda-beda.
+| DATA SOAL
 |--------------------------------------------------------------------------
 */
 
 const questions = [
-
     {
-        answer: colors.merah,
+        answer: 'Merah',
+
+        color: '#ef3b3b',
 
         options: [
-            colors.hijau,
-            colors.merah,
-            colors.biru,
-            colors.kuning,
+            'Biru',
+            'Merah',
+            'Kuning',
+            'Hijau',
         ],
     },
 
     {
-        answer: colors.pink,
+        answer: 'Biru',
+
+        color: '#3199e8',
 
         options: [
-            colors.biru,
-            colors.pink,
-            colors.ungu,
-            colors.hijau,
+            'Hijau',
+            'Kuning',
+            'Biru',
+            'Ungu',
         ],
     },
 
     {
-        answer: colors.biru,
+        answer: 'Kuning',
+
+        color: '#ffd22e',
 
         options: [
-            colors.kuning,
-            colors.hijau,
-            colors.merah,
-            colors.biru,
+            'Pink',
+            'Merah',
+            'Kuning',
+            'Biru',
         ],
     },
 
     {
-        answer: colors.kuning,
+        answer: 'Hijau',
+
+        color: '#45b94b',
 
         options: [
-            colors.ungu,
-            colors.kuning,
-            colors.pink,
-            colors.merah,
+            'Ungu',
+            'Hijau',
+            'Biru',
+            'Merah',
         ],
     },
 
     {
-        answer: colors.ungu,
+        answer: 'Ungu',
+
+        color: '#9a55d5',
 
         options: [
-            colors.hijau,
-            colors.kuning,
-            colors.ungu,
-            colors.biru,
+            'Kuning',
+            'Pink',
+            'Ungu',
+            'Hijau',
         ],
     },
-
 ]
 
 
@@ -121,43 +83,54 @@ const questions = [
 |--------------------------------------------------------------------------
 */
 
-// Nomor soal saat ini
 const currentQuestionIndex = ref(0)
 
-// Jawaban yang dipilih
-const selectedAnswer = ref(null)
+const selectedAnswer = ref('')
 
-// Status jawaban
-const answerStatus = ref(null)
+const answerStatus = ref('')
 
-// Apakah quiz sudah selesai
 const quizFinished = ref(false)
-
-// Status Score
 
 const score = ref(0)
 
 
 /*
 |--------------------------------------------------------------------------
-| SOAL SAAT INI
+| CURRENT QUESTION
 |--------------------------------------------------------------------------
 */
 
-const currentQuestion = computed(() => {
-    return questions[currentQuestionIndex.value]
-})
+function currentQuestion() {
+    return questions[
+        currentQuestionIndex.value
+    ]
+}
 
 
 /*
 |--------------------------------------------------------------------------
-| NOMOR SOAL
+| HOME
 |--------------------------------------------------------------------------
 */
 
-const questionNumber = computed(() => {
-    return currentQuestionIndex.value + 1
-})
+function goHome() {
+
+    window.location.href = '/'
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| KEMBALI KE PEMBELAJARAN
+|--------------------------------------------------------------------------
+*/
+
+function goToLearning() {
+
+    window.location.href = '/warna'
+
+}
 
 
 /*
@@ -166,30 +139,35 @@ const questionNumber = computed(() => {
 |--------------------------------------------------------------------------
 */
 
-function selectAnswer(color) {
+function selectAnswer(answer) {
 
-    // Jangan bisa memilih setelah menjawab
-    if (answerStatus.value !== null) {
+    // Tidak bisa memilih lagi
+    // setelah jawaban dipilih
+    if (selectedAnswer.value) {
         return
     }
 
-    // Simpan pilihan
-    selectedAnswer.value = color
+
+    // Simpan jawaban
+    selectedAnswer.value = answer
 
 
     // Cek jawaban
     if (
-        color.name ===
-        currentQuestion.value.answer.name
+        answer ===
+        currentQuestion().answer
     ) {
 
         answerStatus.value = 'correct'
+
         score.value += 20
 
     } else {
 
         answerStatus.value = 'wrong'
+
     }
+
 }
 
 
@@ -201,30 +179,30 @@ function selectAnswer(color) {
 
 function nextQuestion() {
 
-    // Kalau masih ada soal
     if (
-        currentQuestionIndex.value <
+        currentQuestionIndex.value
+        <
         questions.length - 1
     ) {
 
         currentQuestionIndex.value++
 
-        selectedAnswer.value = null
+        selectedAnswer.value = ''
 
-        answerStatus.value = null
+        answerStatus.value = ''
 
-        return
+    } else {
+
+        quizFinished.value = true
+
     }
 
-
-    // Kalau sudah soal terakhir
-    quizFinished.value = true
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| ULANGI QUIZ
+| RESTART QUIZ
 |--------------------------------------------------------------------------
 */
 
@@ -232,64 +210,15 @@ function restartQuiz() {
 
     currentQuestionIndex.value = 0
 
-    selectedAnswer.value = null
+    selectedAnswer.value = ''
 
-    answerStatus.value = null
+    answerStatus.value = ''
 
     quizFinished.value = false
 
     score.value = 0
+
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| KEMBALI KE BELAJAR
-|--------------------------------------------------------------------------
-*/
-
-function goBack() {
-    window.location.href = '/warna'
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| FEEDBACK
-|--------------------------------------------------------------------------
-*/
-
-const feedbackMessage = computed(() => {
-
-    if (answerStatus.value === 'correct') {
-        return 'Benar! 🎉'
-    }
-
-    if (answerStatus.value === 'wrong') {
-        return 'Belum tepat 😊'
-    }
-
-    return ''
-})
-
-
-/*
-|--------------------------------------------------------------------------
-| TEKS TOMBOL
-|--------------------------------------------------------------------------
-*/
-
-const nextButtonText = computed(() => {
-
-    if (
-        currentQuestionIndex.value ===
-        questions.length - 1
-    ) {
-        return 'Selesai'
-    }
-
-    return 'Next'
-})
 
 </script>
 
@@ -299,192 +228,391 @@ const nextButtonText = computed(() => {
     <main class="color-quiz">
 
 
-        <!-- ========================================
-             TOP
-        ========================================= -->
-
-        <div class="color-quiz__top">
-
-            <button
-                type="button"
-                class="color-quiz__icon-button"
-                aria-label="Kembali ke belajar warna"
-                @click="goBack"
-            >
-                🏠
-            </button>
-
-
-            <div class="color-quiz__number">
-                Soal {{ questionNumber }} / {{ questions.length }}
-            </div>
-
-        </div>
-
-
-        <!-- ========================================
+        <!-- =====================================================
              QUIZ
-        ========================================= -->
+        ====================================================== -->
 
         <template v-if="!quizFinished">
 
 
-            <!-- TITLE -->
+            <!-- =================================================
+                 TOP
+            ================================================== -->
 
-            <h1 class="color-quiz__title">
-                Warna Apakah Ini? 🎨
-            </h1>
-
-
-            <!-- MAIN AREA -->
-
-            <div class="color-quiz__content">
+            <div class="color-quiz__top">
 
 
-                <!-- ==================================
-                     WARNA YANG HARUS DITEBAK
-                =================================== -->
+                <!-- HOME -->
 
-                <section class="color-quiz__display">
+                <button
+                    type="button"
+
+                    class="color-quiz__icon-button"
+
+                    aria-label="Kembali ke menu utama"
+
+                    @click="goHome"
+                >
+
+                    🏠
+
+                </button>
+
+
+                <!-- QUESTION NUMBER -->
+
+                <div class="color-quiz__number">
+
+                    Soal
+                    {{ currentQuestionIndex + 1 }}
+                    /
+                    {{ questions.length }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIN CARD
+            ================================================== -->
+
+            <section class="color-quiz__card">
+
+
+                <!-- TITLE -->
+
+                <h1 class="color-quiz__title">
+
+                    Warna Apakah Ini? 🌈
+
+                </h1>
+
+
+                <!-- =================================================
+                     COLOR DISPLAY
+                ================================================== -->
+
+                <div class="color-quiz__display">
 
                     <div
-                        class="color-quiz__swatch"
+                        class="color-quiz__color"
+
                         :style="{
                             backgroundColor:
-                                currentQuestion.answer.hex
+                                currentQuestion().color
                         }"
-                    ></div>
+                    >
+                    </div>
 
-                </section>
+                </div>
 
 
-                <!-- ==================================
-                     PILIHAN JAWABAN
-                =================================== -->
+                <!-- =================================================
+                     ANSWERS
+                ================================================== -->
 
                 <div class="color-quiz__answers">
 
+
                     <button
-                        v-for="color in currentQuestion.options"
-                        :key="color.name"
+                        v-for="(
+                            option,
+                            index
+                        ) in currentQuestion().options"
+
+                        :key="option"
+
                         type="button"
+
                         class="color-quiz__answer"
 
                         :class="{
 
-                            'color-quiz__answer--selected':
-                                selectedAnswer?.name ===
-                                color.name,
-
                             'color-quiz__answer--correct':
-                                answerStatus &&
-                                color.name ===
-                                currentQuestion.answer.name,
+                                selectedAnswer &&
+                                option ===
+                                currentQuestion().answer,
 
                             'color-quiz__answer--wrong':
-                                selectedAnswer?.name ===
-                                color.name &&
-                                answerStatus === 'wrong'
+                                selectedAnswer === option &&
+                                option !==
+                                currentQuestion().answer
 
                         }"
 
-                        @click="selectAnswer(color)"
+                        :disabled="
+                            !!selectedAnswer
+                        "
+
+                        @click="
+                            selectAnswer(option)
+                        "
                     >
 
+
+                        <!-- LETTER A / B / C / D -->
+
                         <span
-                            class="color-quiz__answer-dot"
+                            class="
+                                color-quiz__answer-letter
+                            "
+                        >
+
+                            {{
+                                String.fromCharCode(
+                                    65 + index
+                                )
+                            }}
+
+                        </span>
+
+
+                        <!-- COLOR DOT -->
+
+                        <span
+                            class="
+                                color-quiz__answer-color
+                            "
+
                             :style="{
                                 backgroundColor:
-                                    color.hex
+                                    option === 'Merah'
+                                        ? '#ef3b3b'
+                                        : option === 'Biru'
+                                            ? '#3199e8'
+                                            : option === 'Kuning'
+                                                ? '#ffd22e'
+                                                : option === 'Hijau'
+                                                    ? '#45b94b'
+                                                    : option === 'Ungu'
+                                                        ? '#9a55d5'
+                                                        : '#f36fa5'
                             }"
-                        ></span>
-
-                        <span class="color-quiz__answer-name">
-                            {{ color.name }}
+                        >
                         </span>
+
+
+                        <!-- ANSWER NAME -->
+
+                        <span
+                            class="
+                                color-quiz__answer-name
+                            "
+                        >
+
+                            {{ option }}
+
+                        </span>
+
 
                     </button>
 
+
                 </div>
 
-            </div>
+
+                <!-- =================================================
+                     FEEDBACK
+                ================================================== -->
+
+                <div
+                    v-if="selectedAnswer"
+
+                    class="color-quiz__feedback"
+
+                    :class="{
+
+                        'color-quiz__feedback--correct':
+                            answerStatus === 'correct',
+
+                        'color-quiz__feedback--wrong':
+                            answerStatus === 'wrong'
+
+                    }"
+                >
 
 
-            <!-- ========================================
-                 FEEDBACK
-            ========================================= -->
+                    <span
+                        v-if="
+                            answerStatus === 'correct'
+                        "
+                    >
 
-            <div
-                v-if="answerStatus"
-                class="color-quiz__feedback"
+                        🎉 Benar!
 
-                :class="{
-                    'color-quiz__feedback--correct':
-                        answerStatus === 'correct',
-
-                    'color-quiz__feedback--wrong':
-                        answerStatus === 'wrong'
-                }"
-            >
-                {{ feedbackMessage }}
-            </div>
+                    </span>
 
 
-            <!-- ========================================
-                 NEXT BUTTON
-            ========================================= -->
+                    <span v-else>
 
-            <button
-                v-if="answerStatus"
-                type="button"
-                class="color-quiz__next-button"
-                @click="nextQuestion"
-            >
-                <span>
-                    {{ nextButtonText }}
-                </span>
+                        😊 Belum tepat!
 
-                <span>
-                    →
-                </span>
-            </button>
+                    </span>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     NEXT BUTTON
+                ================================================== -->
+
+                <button
+                    v-if="selectedAnswer"
+
+                    type="button"
+
+                    class="color-quiz__next-button"
+
+                    @click="nextQuestion"
+                >
+
+                    <span>
+
+                        {{
+                            currentQuestionIndex ===
+                            questions.length - 1
+
+                                ? 'Lihat Hasil'
+
+                                : 'Soal Berikutnya'
+                        }}
+
+                    </span>
+
+
+                    <span>
+
+                        →
+
+                    </span>
+
+                </button>
+
+
+            </section>
 
 
         </template>
 
 
-        <!-- ========================================
-             QUIZ SELESAI
-        ========================================= -->
+        <!-- =====================================================
+             FINISHED
+        ====================================================== -->
 
         <section
             v-else
-            class="quiz__finished"
+
+            class="color-quiz__finished"
         >
-            <div class="quiz__finished-icon">
+
+
+            <!-- ICON -->
+
+            <div class="color-quiz__finished-icon">
+
                 🎉
+
             </div>
+
+
+            <!-- TITLE -->
 
             <h1>
+
                 Quiz Selesai!
+
             </h1>
 
-            <div class="quiz__score">
+
+            <!-- SCORE -->
+
+            <div class="color-quiz__score">
+
                 ⭐ {{ score }} / 100
+
             </div>
 
+
+            <!-- DESCRIPTION -->
+
             <p>
+
                 Kamu berhasil menjawab
-                {{ score / 20 }} soal dengan benar!
+                {{ score / 20 }}
+                soal dengan benar!
+
             </p>
 
-            <button
-                type="button"
-                class="quiz__restart-button"
-                @click="restartQuiz"
-            >
-                Coba Lagi
-            </button>
+
+            <!-- =================================================
+                 FINISHED BUTTONS
+            ================================================== -->
+
+            <div class="color-quiz__finished-actions">
+
+
+                <!-- HOME -->
+
+                <button
+                    type="button"
+
+                    class="
+                        color-quiz__finished-button
+                    "
+
+                    @click="goHome"
+                >
+
+                    <span>
+
+                        🏠
+
+                    </span>
+
+
+                    <span>
+
+                        Home
+
+                    </span>
+
+                </button>
+
+
+                <!-- KEMBALI KE PEMBELAJARAN -->
+
+                <button
+                    type="button"
+
+                    class="
+                        color-quiz__finished-button
+                    "
+
+                    @click="goToLearning"
+                >
+
+                    <span>
+
+                        
+
+                    </span>
+
+
+                    <span>
+
+                        Kembali ke Pembelajaran
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
         </section>
 
 

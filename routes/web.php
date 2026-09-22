@@ -64,8 +64,8 @@ Route::get('/hewan/quiz', function () {
 */
 
 Route::get('/bangunan', function () {
-    return Inertia::render('Buildings');
-})->name('buildings.learn');
+    return Inertia::render('Building');
+})->name('building.learn');
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +75,27 @@ Route::get('/bangunan', function () {
 
 Route::get('/bangunan/quiz', function () {
     return Inertia::render('BuildingQuiz');
-})->name('buildings.quiz');
+})->name('building.quiz');
+
+/*
+|--------------------------------------------------------------------------
+| PENGENALAN BENTUK
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/bentuk', function () {
+    return Inertia::render('Shapes');
+})->name('Shapes.learn');
+
+/*
+|--------------------------------------------------------------------------
+| QUIZ BENTUK
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/bentuk/quiz', function () {
+    return Inertia::render('ShapesQuiz');
+})->name('Shapes.quiz');
 
 /*
 |--------------------------------------------------------------------------

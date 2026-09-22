@@ -1,18 +1,21 @@
+/* ========================================
+   ANIMAL LEARNING
+======================================== */
+
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
 
-.animal-game {
-    width: 100%;
+/* ========================================
+   BODY
+======================================== */
+
+body {
+    margin: 0;
+
     min-height: 100dvh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 18px 18px 22px;
 
     font-family: Arial, sans-serif;
 
@@ -25,23 +28,69 @@
 }
 
 
-.animal-game__top {
+/* ========================================
+   MAIN GAME
+======================================== */
+
+.animal-learning {
     width: 100%;
 
+    min-height: 100dvh;
+
     display: flex;
-    justify-content: space-between;
+
+    flex-direction: column;
+
     align-items: center;
+
+    padding: 18px 18px 22px;
+
+    font-family: Arial, sans-serif;
 }
 
 
-.animal-game__icon-button {
+/* ========================================
+   TOP
+======================================== */
+
+.animal-learning__top {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        52px
+        1fr
+        52px;
+
+    grid-template-rows:
+        auto
+        auto;
+
+    align-items: center;
+
+    margin-bottom: 5px;
+}
+
+
+/* ========================================
+   HOME BUTTON
+======================================== */
+
+.animal-learning__home-button {
+    grid-column: 1;
+
+    grid-row: 1;
+
     width: 52px;
+
     height: 52px;
 
     border: 0;
+
     border-radius: 50%;
 
-    background: #fff;
+    background: #ffffff;
 
     font-size: 26px;
 
@@ -49,11 +98,45 @@
         0 4px 12px #0002;
 
     cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.animal-learning__home-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px #0003;
+}
+
+.animal-learning__home-button:active {
+    transform: scale(0.9);
 }
 
 
-.animal-game__title {
-    margin: 8px 0 5px;
+/* ========================================
+   TITLE AREA
+======================================== */
+
+.animal-learning__title-area {
+    grid-column: 2;
+
+    grid-row: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-top: 2px;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.animal-learning__title {
+    margin: 0;
 
     color: #08777b;
 
@@ -63,12 +146,20 @@
         52px
     );
 
+    font-weight: 400;
+
+    line-height: 1.1;
+
     text-align: center;
 }
 
 
-.animal-game__subtitle {
-    margin: 0 0 15px;
+/* ========================================
+   SUBTITLE
+======================================== */
+
+.animal-learning__subtitle {
+    margin: 5px 0 12px;
 
     color: #397477;
 
@@ -78,43 +169,102 @@
         23px
     );
 
+    line-height: 1.2;
+
     text-align: center;
 }
 
 
-.animal-display {
-    width: min(560px, 92vw);
-    height: min(39vh, 350px);
+/* ========================================
+   TOP SPACER
+======================================== */
 
-    background: #fff;
+.animal-learning__top-spacer {
+    grid-column: 3;
+
+    grid-row: 1;
+
+    width: 52px;
+
+    height: 52px;
+}
+
+
+/* ========================================
+   ANIMAL DISPLAY
+======================================== */
+
+.animal-display {
+    width: min(
+        560px,
+        92vw
+    );
+
+    height: min(
+        39vh,
+        350px
+    );
+
+    background: #ffffff;
 
     border: 7px solid #9ad9d9;
 
     border-radius: 35px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
     box-shadow:
         0 8px 25px #0002;
+
+    transition: 0.25s;
 }
 
 
+/* ========================================
+   ANIMAL EMOJI
+======================================== */
+
 .animal-display__emoji {
+    width: min(
+        230px,
+        45vw
+    );
+
+    height: min(
+        230px,
+        45vw
+    );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     font-size: min(
         180px,
-        25vw
+        30vw
     );
 
     line-height: 1;
-
-    margin-bottom: 18px;
 }
 
 
+/* ========================================
+   ANIMAL NAME
+======================================== */
+
 .animal-display__name {
+    margin-top: 14px;
+
+    color: #126b70;
+
     font-size: clamp(
         28px,
         6vw,
@@ -123,21 +273,120 @@
 
     font-weight: 900;
 
-    color: #126b70;
+    line-height: 1.05;
+
+    text-align: center;
 }
 
 
-.animal-game__hint {
-    margin: 12px 0 9px;
+/* ========================================
+   SPEAKER BUTTON
+======================================== */
+
+.animal-learning__speaker-button {
+    width: min(
+        420px,
+        90vw
+    );
+
+    min-height: 54px;
+
+    margin-top: 10px;
+
+    padding: 10px 20px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #08777b;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 14px #0002;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        box-shadow .15s;
+}
+
+.animal-learning__speaker-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px #0003;
+}
+
+.animal-learning__speaker-button:active {
+    transform: scale(.96);
+}
+
+
+/* ========================================
+   SPEAKER ICON
+======================================== */
+
+.animal-learning__speaker-icon {
+    font-size: 27px;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   SPEAKER TEXT
+======================================== */
+
+.animal-learning__speaker-text {
+    line-height: 1.1;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   HINT
+======================================== */
+
+.animal-learning__hint {
+    margin: 10px 0 7px;
 
     color: #52777a;
 
     font-size: 18px;
+
+    line-height: 1.2;
+
+    text-align: center;
 }
 
 
-.animal-game__animals {
-    width: min(850px, 96vw);
+/* ========================================
+   ANIMAL CARDS
+======================================== */
+
+.animal-learning__list {
+    width: min(
+        850px,
+        96vw
+    );
 
     display: grid;
 
@@ -148,14 +397,18 @@
 }
 
 
+/* ========================================
+   ANIMAL CARD
+======================================== */
+
 .animal-card {
     border: 0;
 
-    background: #fff;
+    background: #ffffff;
 
     border-radius: 20px;
 
-    padding: 9px 5px 8px;
+    padding: 9px 5px 7px;
 
     box-shadow:
         0 5px 12px #0002;
@@ -172,87 +425,103 @@
 
     cursor: pointer;
 
-    transition:
-        .15s;
+    transition: 0.15s;
+
+    overflow: hidden;
 }
 
+.animal-card:hover {
+    transform: translateY(-2px);
+}
 
 .animal-card:active {
-    transform: scale(.94);
+    transform: scale(0.94);
 }
 
+
+/* ========================================
+   ACTIVE ANIMAL
+======================================== */
 
 .animal-card--active {
-    outline: 4px solid #9ad9d9;
+    outline: 4px solid #7dd3d3;
 }
 
+
+/* ========================================
+   ANIMAL EMOJI ON CARD
+======================================== */
 
 .animal-card__emoji {
     display: block;
 
+    height: clamp(
+        45px,
+        8vw,
+        75px
+    );
+
+    margin-bottom: 4px;
+
     font-size: clamp(
-        40px,
-        7vw,
-        70px
+        38px,
+        6vw,
+        60px
     );
 
     line-height: 1;
 
-    margin-bottom: 8px;
+    text-align: center;
 }
 
+
+/* ========================================
+   ANIMAL NAME ON CARD
+======================================== */
 
 .animal-card__name {
     display: block;
-}
 
+    width: 100%;
 
-.animal-game__next-button {
-    position: fixed;
+    color: #276568;
 
-    right: 22px;
-    bottom: 20px;
-
-    border: 0;
-
-    padding: 14px 22px;
-
-    border-radius: 999px;
-
-    background: #08777b;
-
-    color: #fff;
-
-    font-size: 18px;
+    font-size: clamp(
+        12px,
+        1.9vw,
+        17px
+    );
 
     font-weight: 900;
 
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    line-height: 1.05;
 
-    box-shadow:
-        0 6px 16px #0003;
+    text-align: center;
 
-    cursor: pointer;
+    transform: translateY(-2px);
+
+    overflow-wrap: break-word;
 }
 
 
-.animal-game__next-button:active {
-    transform: scale(.95);
-}
+/* ========================================
+   MESSAGE
+======================================== */
 
-
-.animal-game__message {
+.animal-learning__message {
     position: fixed;
 
     left: 50%;
+
     bottom: 18px;
 
     transform:
-        translate(-50%, 120px);
+        translate(
+            -50%,
+            120px
+        );
 
-    background: #fff;
+    background: #ffffff;
 
     padding: 13px 24px;
 
@@ -269,38 +538,157 @@
 
     opacity: 0;
 
-    transition: .3s;
+    transition: 0.3s;
+
+    pointer-events: none;
+
+    z-index: 20;
 }
 
 
-.animal-game__message--show {
+/* ========================================
+   MESSAGE SHOW
+======================================== */
+
+.animal-learning__message--show {
     transform:
-        translate(-50%, 0);
+        translate(
+            -50%,
+            0
+        );
 
     opacity: 1;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| MOBILE
-|--------------------------------------------------------------------------
-*/
+/* ========================================
+   NEXT BUTTON
+======================================== */
+
+.animal-learning__next-button {
+    position: fixed !important;
+
+    right: 35px !important;
+
+    bottom: 35px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    gap: 14px !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    padding: 15px 24px !important;
+
+    border: none !important;
+
+    border-radius: 999px !important;
+
+    background: #0aa5a5 !important;
+
+    color: #ffffff !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 20px !important;
+
+    font-weight: 900 !important;
+
+    box-shadow:
+        0 6px 16px #0003 !important;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.animal-learning__next-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 20px #0003 !important;
+}
+
+.animal-learning__next-button:active {
+    transform: scale(0.94);
+}
+
+.animal-learning__next-button span:last-child {
+    font-size: 28px;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 600px) {
 
-    .animal-game {
+    .animal-learning {
         padding: 10px 9px;
     }
 
 
-    .animal-game__icon-button {
+    /* TOP */
+
+    .animal-learning__top {
+        grid-template-columns:
+            44px
+            1fr
+            44px;
+
+        margin-bottom: 2px;
+    }
+
+
+    .animal-learning__home-button {
         width: 44px;
+
         height: 44px;
 
         font-size: 21px;
     }
 
+
+    .animal-learning__top-spacer {
+        width: 44px;
+
+        height: 44px;
+    }
+
+
+    /* TITLE */
+
+    .animal-learning__title-area {
+        margin-top: 2px;
+    }
+
+
+    .animal-learning__title {
+        font-size: 28px;
+
+        line-height: 1.08;
+    }
+
+
+    .animal-learning__subtitle {
+        margin: 4px 0 8px;
+
+        font-size: 16px;
+    }
+
+
+    /* DISPLAY */
 
     .animal-display {
         height: 42vh;
@@ -310,11 +698,62 @@
 
 
     .animal-display__emoji {
-        font-size: 30vw;
+        width: 48vw;
+
+        height: 48vw;
+
+        max-width: 205px;
+
+        max-height: 205px;
+
+        font-size: 110px;
     }
 
 
-    .animal-game__animals {
+    .animal-display__name {
+        font-size: 30px;
+
+        margin-top: 10px;
+    }
+
+
+    /* SPEAKER */
+
+    .animal-learning__speaker-button {
+        width: min(
+            360px,
+            90vw
+        );
+
+        min-height: 46px;
+
+        margin-top: 7px;
+
+        padding: 8px 15px;
+
+        gap: 9px;
+
+        font-size: 14px;
+    }
+
+
+    .animal-learning__speaker-icon {
+        font-size: 22px;
+    }
+
+
+    /* HINT */
+
+    .animal-learning__hint {
+        margin: 8px 0 6px;
+
+        font-size: 16px;
+    }
+
+
+    /* CARDS */
+
+    .animal-learning__list {
         grid-template-columns:
             repeat(3, 1fr);
 
@@ -324,26 +763,258 @@
 
     .animal-card {
         padding: 7px 4px;
+
+        border-radius: 20px;
     }
 
 
     .animal-card__emoji {
-        font-size: 55px;
+        height: 55px;
+
+        margin-bottom: 3px;
+
+        font-size: 45px;
     }
 
 
-    .animal-game__hint {
-        margin: 8px 0 6px;
+    .animal-card__name {
+        font-size: 14px;
+
+        line-height: 1.05;
+
+        transform: translateY(-2px);
     }
 
 
-    .animal-game__next-button {
-        right: 12px;
-        bottom: 12px;
+    /* MESSAGE */
 
-        padding: 11px 17px;
+    .animal-learning__message {
+        bottom: 15px;
 
-        font-size: 16px;
+        padding: 10px 18px;
+
+        font-size: 17px;
+    }
+
+
+    /* NEXT */
+
+    .animal-learning__next-button {
+        right: 12px !important;
+
+        bottom: 12px !important;
+
+        padding: 11px 17px !important;
+
+        font-size: 16px !important;
+
+        gap: 9px !important;
+    }
+
+
+    .animal-learning__next-button span:last-child {
+        font-size: 22px;
+    }
+
+}
+
+
+/* ========================================
+   MOBILE LANDSCAPE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .animal-learning {
+        padding: 6px 10px;
+    }
+
+
+    /* TOP */
+
+    .animal-learning__top {
+        grid-template-columns:
+            42px
+            1fr
+            42px;
+
+        margin-bottom: 0;
+    }
+
+
+    .animal-learning__home-button {
+        width: 42px;
+
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+
+    .animal-learning__top-spacer {
+        width: 42px;
+
+        height: 42px;
+    }
+
+
+    /* TITLE */
+
+    .animal-learning__title-area {
+        margin-top: 0;
+
+        transform:
+            translateY(-3px);
+    }
+
+
+    .animal-learning__title {
+        font-size: 30px;
+
+        line-height: 1;
+
+        margin: 0;
+    }
+
+
+    .animal-learning__subtitle {
+        font-size: 15px;
+
+        line-height: 1;
+
+        margin: 2px 0 4px;
+    }
+
+
+    /* DISPLAY */
+
+    .animal-display {
+        height: 43vh;
+
+        min-height: 165px;
+    }
+
+
+    .animal-display__emoji {
+        width: min(
+            150px,
+            25vh
+        );
+
+        height: min(
+            150px,
+            25vh
+        );
+
+        font-size: 105px;
+    }
+
+
+    .animal-display__name {
+        font-size: 28px;
+
+        margin-top: 4px;
+    }
+
+
+    /* SPEAKER */
+
+    .animal-learning__speaker-button {
+        width: min(
+            360px,
+            80vw
+        );
+
+        min-height: 38px;
+
+        margin-top: 4px;
+
+        padding: 6px 14px;
+
+        gap: 8px;
+
+        font-size: 13px;
+    }
+
+
+    .animal-learning__speaker-icon {
+        font-size: 19px;
+    }
+
+
+    /* HINT */
+
+    .animal-learning__hint {
+        font-size: 13px;
+
+        margin: 3px 0 3px;
+    }
+
+
+    /* CARDS */
+
+    .animal-learning__list {
+        width: min(
+            850px,
+            96vw
+        );
+
+        gap: 6px;
+
+        transform:
+            translateY(-2px);
+    }
+
+
+    .animal-card {
+        min-height: 0;
+
+        padding: 3px 3px 4px;
+
+        border-radius: 17px;
+    }
+
+
+    .animal-card__emoji {
+        height: 38px;
+
+        margin-bottom: 1px;
+
+        font-size: 36px;
+    }
+
+
+    .animal-card__name {
+        font-size: 11px;
+
+        line-height: 1;
+
+        transform:
+            translateY(-2px);
+    }
+
+
+    /* NEXT */
+
+    .animal-learning__next-button {
+        right: 12px !important;
+
+        bottom: 10px !important;
+
+        padding: 9px 14px !important;
+
+        font-size: 14px !important;
+
+        gap: 7px !important;
+    }
+
+
+    .animal-learning__next-button span:last-child {
+        font-size: 20px;
     }
 
 }

@@ -2,45 +2,77 @@
 
 import { ref } from 'vue'
 
-import BuildingCard from '@/Components/Buildings/BuildingCard.vue'
-import BuildingDisplay from '@/Components/Buildings/BuildingDisplay.vue'
-
 
 /*
 |--------------------------------------------------------------------------
-| DATA BANGUNAN
+| DATA SOAL
 |--------------------------------------------------------------------------
 */
 
-const buildings = [
+const questions = [
     {
-        name: 'Rumah Sakit',
+        answer: 'Rumah Sakit',
+
         emoji: '🏥',
+
+        options: [
+            'Sekolah',
+            'Rumah Sakit',
+            'Bank',
+            'Kantor Polisi',
+        ],
     },
 
     {
-        name: 'Kantor Polisi',
+        answer: 'Kantor Polisi',
+
         emoji: '🚓',
+
+        options: [
+            'Kantor Polisi',
+            'Perpustakaan',
+            'Sekolah',
+            'Kantor Pemadam Kebakaran',
+        ],
     },
 
     {
-        name: 'Kantor Pemadam Kebakaran',
+        answer: 'Kantor Pemadam Kebakaran',
+
         emoji: '🚒',
+
+        options: [
+            'Bank',
+            'Rumah Sakit',
+            'Kantor Pemadam Kebakaran',
+            'Kantor Polisi',
+        ],
     },
 
     {
-        name: 'Sekolah',
+        answer: 'Sekolah',
+
         emoji: '🏫',
+
+        options: [
+            'Perpustakaan',
+            'Sekolah',
+            'Bank',
+            'Rumah Sakit',
+        ],
     },
 
     {
-        name: 'Perpustakaan',
+        answer: 'Perpustakaan',
+
         emoji: '📚',
-    },
 
-    {
-        name: 'Bank',
-        emoji: '🏦',
+        options: [
+            'Kantor Polisi',
+            'Bank',
+            'Perpustakaan',
+            'Sekolah',
+        ],
     },
 ]
 
@@ -51,79 +83,33 @@ const buildings = [
 |--------------------------------------------------------------------------
 */
 
-const currentBuilding = ref(buildings[0])
+const currentQuestionIndex = ref(0)
 
-const message = ref('')
+const selectedAnswer = ref('')
 
-let messageTimer = null
+const answerStatus = ref('')
+
+const quizFinished = ref(false)
+
+const score = ref(0)
 
 
 /*
 |--------------------------------------------------------------------------
-| PILIH BANGUNAN
+| CURRENT QUESTION
 |--------------------------------------------------------------------------
 */
 
-function selectBuilding(building) {
-
-    currentBuilding.value = building
-
-    message.value = `Ini adalah ${building.name.toLowerCase()}.`
-
-    clearTimeout(messageTimer)
-
-    messageTimer = setTimeout(() => {
-        message.value = ''
-    }, 2500)
-
-    speakBuilding(building)
-
+function currentQuestion() {
+    return questions[
+        currentQuestionIndex.value
+    ]
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| SPEECH
-|--------------------------------------------------------------------------
-*/
-
-function speakBuilding(building) {
-
-    if (!('speechSynthesis' in window)) {
-        return
-    }
-
-    window.speechSynthesis.cancel()
-
-    const speech = new SpeechSynthesisUtterance(
-        building.name
-    )
-
-    speech.lang = 'id-ID'
-    speech.rate = 0.8
-    speech.pitch = 1.15
-
-    window.speechSynthesis.speak(speech)
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| ULANGI NAMA BANGUNAN
-|--------------------------------------------------------------------------
-*/
-
-function repeatName() {
-
-    speakBuilding(currentBuilding.value)
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| NAVIGASI
+| HOME
 |--------------------------------------------------------------------------
 */
 
@@ -134,9 +120,103 @@ function goHome() {
 }
 
 
-function goToQuiz() {
+/*
+|--------------------------------------------------------------------------
+| KEMBALI KE PEMBELAJARAN
+|--------------------------------------------------------------------------
+*/
 
-    window.location.href = '/bangunan/quiz'
+function goToLearning() {
+
+    window.location.href = '/bangunan'
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| PILIH JAWABAN
+|--------------------------------------------------------------------------
+*/
+
+function selectAnswer(answer) {
+
+    // Tidak bisa memilih lagi
+    // setelah satu jawaban dipilih
+    if (selectedAnswer.value) {
+        return
+    }
+
+
+    // Simpan jawaban
+    selectedAnswer.value = answer
+
+
+    // Cek jawaban
+    if (
+        answer ===
+        currentQuestion().answer
+    ) {
+
+        answerStatus.value = 'correct'
+
+        score.value += 20
+
+    } else {
+
+        answerStatus.value = 'wrong'
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SOAL BERIKUTNYA
+|--------------------------------------------------------------------------
+*/
+
+function nextQuestion() {
+
+    if (
+        currentQuestionIndex.value
+        <
+        questions.length - 1
+    ) {
+
+        currentQuestionIndex.value++
+
+        selectedAnswer.value = ''
+
+        answerStatus.value = ''
+
+    } else {
+
+        quizFinished.value = true
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| RESTART
+|--------------------------------------------------------------------------
+*/
+
+function restartQuiz() {
+
+    currentQuestionIndex.value = 0
+
+    selectedAnswer.value = ''
+
+    answerStatus.value = ''
+
+    quizFinished.value = false
+
+    score.value = 0
 
 }
 
@@ -145,91 +225,361 @@ function goToQuiz() {
 
 <template>
 
-    <main class="building-learning">
+    <main class="building-quiz">
 
-        <!-- TOP -->
 
-        <div class="building-learning__top">
+        <!-- =====================================================
+             QUIZ
+        ====================================================== -->
 
-            <!-- HOME -->
+        <template v-if="!quizFinished">
 
-            <button
-                type="button"
-                class="building-learning__icon-button"
-                aria-label="Kembali ke menu utama"
-                @click="goHome"
-            >
-                🏠
-            </button>
+
+            <!-- =================================================
+                 TOP
+            ================================================== -->
+
+            <div class="building-quiz__top">
+
+
+                <!-- HOME -->
+
+                <button
+                    type="button"
+
+                    class="building-quiz__icon-button"
+
+                    aria-label="Kembali ke menu utama"
+
+                    @click="goHome"
+                >
+
+                    🏠
+
+                </button>
+
+
+                <!-- QUESTION NUMBER -->
+
+                <div class="building-quiz__number">
+
+                    Soal
+                    {{ currentQuestionIndex + 1 }}
+                    /
+                    {{ questions.length }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIN QUIZ CARD
+            ================================================== -->
+
+            <section class="building-quiz__card">
+
+
+                <!-- TITLE -->
+
+                <h1 class="building-quiz__title">
+
+                    Bangunan Apakah Ini? 🏢
+
+                </h1>
+
+
+                <!-- =================================================
+                     DISPLAY
+                ================================================== -->
+
+                <div class="building-quiz__display">
+
+                    <div class="building-quiz__emoji">
+
+                        {{ currentQuestion().emoji }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ANSWERS
+                ================================================== -->
+
+                <div class="building-quiz__answers">
+
+
+                    <button
+                        v-for="(
+                            option,
+                            index
+                        ) in currentQuestion().options"
+
+                        :key="option"
+
+                        type="button"
+
+                        class="building-quiz__answer"
+
+                        :class="{
+
+                            'building-quiz__answer--correct':
+                                selectedAnswer &&
+                                option ===
+                                currentQuestion().answer,
+
+                            'building-quiz__answer--wrong':
+                                selectedAnswer === option &&
+                                option !==
+                                currentQuestion().answer
+
+                        }"
+
+                        :disabled="
+                            !!selectedAnswer
+                        "
+
+                        @click="
+                            selectAnswer(option)
+                        "
+                    >
+
+
+                        <!-- LETTER -->
+
+                        <span
+                            class="
+                                building-quiz__answer-letter
+                            "
+                        >
+
+                            {{
+                                String.fromCharCode(
+                                    65 + index
+                                )
+                            }}
+
+                        </span>
+
+
+                        <!-- NAME ONLY -->
+
+                        <span
+                            class="
+                                building-quiz__answer-name
+                            "
+                        >
+
+                            {{ option }}
+
+                        </span>
+
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     FEEDBACK
+                ================================================== -->
+
+                <div
+                    v-if="selectedAnswer"
+
+                    class="building-quiz__feedback"
+
+                    :class="{
+
+                        'building-quiz__feedback--correct':
+                            answerStatus === 'correct',
+
+                        'building-quiz__feedback--wrong':
+                            answerStatus === 'wrong'
+
+                    }"
+                >
+
+                    <span
+                        v-if="
+                            answerStatus === 'correct'
+                        "
+                    >
+
+                        🎉 Benar!
+
+                    </span>
+
+
+                    <span v-else>
+
+                        😊 Belum tepat!
+
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     NEXT
+                ================================================== -->
+
+                <button
+                    v-if="selectedAnswer"
+
+                    type="button"
+
+                    class="building-quiz__next-button"
+
+                    @click="nextQuestion"
+                >
+
+                    <span>
+
+                        {{
+                            currentQuestionIndex ===
+                            questions.length - 1
+
+                                ? 'Lihat Hasil'
+
+                                : 'Soal Berikutnya'
+                        }}
+
+                    </span>
+
+
+                    <span>
+
+                        →
+
+                    </span>
+
+                </button>
+
+
+            </section>
+
+
+        </template>
+
+
+        <!-- =====================================================
+             FINISHED
+        ====================================================== -->
+
+        <section
+            v-else
+
+            class="building-quiz__finished"
+        >
+
+
+            <!-- ICON -->
+
+            <div class="building-quiz__finished-icon">
+
+                🎉
+
+            </div>
 
 
             <!-- TITLE -->
 
-            <div class="building-learning__title">
+            <h1>
 
-                <h1>
-                    Yuk Mengenal Bangunan! 🏢
-                </h1>
+                Quiz Selesai!
 
-                <p>
-                    Pilih bangunan dan dengarkan namanya.
-                </p>
+            </h1>
+
+
+            <!-- SCORE -->
+
+            <div class="building-quiz__score">
+
+                ⭐ {{ score }} / 100
 
             </div>
 
-        </div>
+
+            <!-- DESCRIPTION -->
+
+            <p>
+
+                Kamu berhasil menjawab
+                {{ score / 20 }}
+                soal dengan benar!
+
+            </p>
 
 
-        <!-- DISPLAY -->
+            <!-- =================================================
+                 FINISHED ACTIONS
+            ================================================== -->
 
-        <BuildingDisplay
-            :building="currentBuilding"
-            :message="message"
-        />
-
-
-        <!-- SPEAKER -->
-
-        <button
-            type="button"
-            class="building-learning__speaker"
-            aria-label="Dengarkan nama bangunan"
-            @click="repeatName"
-        >
-            🔊
-        </button>
+            <div class="building-quiz__finished-actions">
 
 
-        <!-- BUILDING CARDS -->
+                <!-- HOME -->
 
-        <div class="building-learning__cards">
+                <button
+                    type="button"
 
-            <BuildingCard
-                v-for="building in buildings"
-                :key="building.name"
-                :building="building"
-                @select="selectBuilding"
-            />
+                    class="building-quiz__finished-button"
 
-        </div>
+                    @click="goHome"
+                >
+
+                    <span>
+
+                        🏠
+
+                    </span>
 
 
-        <!-- QUIZ BUTTON -->
+                    <span>
 
-        <button
-            type="button"
-            class="building-learning__quiz-button"
-            @click="goToQuiz"
-        >
-            <span>
-                Mulai Quiz
-            </span>
+                        Home
 
-            <span>
-                →
-            </span>
+                    </span>
 
-        </button>
+                </button>
+
+
+                <!-- KEMBALI KE PEMBELAJARAN -->
+
+                <button
+                    type="button"
+
+                    class="building-quiz__finished-button"
+
+                    @click="goToLearning"
+                >
+
+                    <span>
+
+                    
+
+                    </span>
+
+
+                    <span>
+
+                        Kembali ke Pembelajaran
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
 
     </main>
 

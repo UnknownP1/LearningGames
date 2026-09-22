@@ -100,17 +100,11 @@ function nextQuestion() {
     }
 }
 
-function restartQuiz() {
-
-    currentQuestionIndex.value = 0
-    selectedAnswer.value = ''
-    answerStatus.value = ''
-    quizFinished.value = false
-    score.value = 0
-
+function goHome() {
+    window.location.href = '/'
 }
 
-function goBack() {
+function goToLearning() {
     window.location.href = '/bentuk'
 }
 
@@ -127,8 +121,8 @@ function goBack() {
                 <button
                     type="button"
                     class="shape-quiz__home"
-                    aria-label="Kembali ke belajar bentuk"
-                    @click="goBack"
+                    aria-label="Home"
+                    @click="goHome"
                 >
                     🏠
                 </button>
@@ -157,8 +151,12 @@ function goBack() {
                         type="button"
                         class="shape-quiz__option"
                         :class="{
+                            'shape-quiz__option--selected':
+                                selectedAnswer === option,
+
                             'shape-quiz__option--correct':
-                                selectedAnswer && option === currentQuestion().answer,
+                                selectedAnswer &&
+                                option === currentQuestion().answer,
 
                             'shape-quiz__option--wrong':
                                 selectedAnswer === option &&
@@ -207,21 +205,29 @@ function goBack() {
                     class="shape-quiz__next"
                     @click="nextQuestion"
                 >
+
                     <span>
-                        {{ currentQuestionIndex === questions.length - 1
-                            ? 'Lihat Hasil'
-                            : 'Soal Berikutnya'
+                        {{
+                            currentQuestionIndex === questions.length - 1
+                                ? 'Lihat Hasil'
+                                : 'Soal Berikutnya'
                         }}
                     </span>
 
                     <span>
                         →
                     </span>
+
                 </button>
 
             </section>
 
         </template>
+
+
+        <!-- ================================
+             FINISHED
+        ================================ -->
 
         <section
             v-else
@@ -242,16 +248,29 @@ function goBack() {
 
             <p>
                 Kamu berhasil menjawab
-                {{ score / 20 }} soal dengan benar!
+                {{ score / 20 }}
+                soal dengan benar!
             </p>
 
-            <button
-                type="button"
-                class="shape-quiz__restart-button"
-                @click="restartQuiz"
-            >
-                Coba Lagi
-            </button>
+            <div class="shape-quiz__finished-actions">
+
+                <button
+                    type="button"
+                    class="shape-quiz__finished-button"
+                    @click="goHome"
+                >
+                    🏠 Home
+                </button>
+
+                <button
+                    type="button"
+                    class="shape-quiz__finished-button"
+                    @click="goToLearning"
+                >
+                    🏠 Kembali ke Pembelajaran
+                </button>
+
+            </div>
 
         </section>
 

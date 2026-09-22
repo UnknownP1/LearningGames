@@ -13,37 +13,41 @@ import AnimalDisplay from '../Components/Animals/AnimalDisplay.vue'
 */
 
 const animals = [
-
     {
+        id: 'cat',
         name: 'Kucing',
         emoji: '🐱',
     },
 
     {
+        id: 'dog',
         name: 'Anjing',
         emoji: '🐶',
     },
 
     {
+        id: 'rabbit',
         name: 'Kelinci',
         emoji: '🐰',
     },
 
     {
+        id: 'cow',
         name: 'Sapi',
         emoji: '🐮',
     },
 
     {
+        id: 'chicken',
         name: 'Ayam',
         emoji: '🐔',
     },
 
     {
+        id: 'elephant',
         name: 'Gajah',
         emoji: '🐘',
     },
-
 ]
 
 
@@ -53,14 +57,23 @@ const animals = [
 |--------------------------------------------------------------------------
 */
 
+// Hewan yang sedang dipilih
 const currentAnimal = ref(animals[0])
 
+
+// Pesan
 const message = ref('')
 
+
+// Status pesan
 const messageVisible = ref(false)
 
+
+// Referensi display
 const displayRef = ref(null)
 
+
+// Timer pesan
 let messageTimer = null
 
 
@@ -72,15 +85,11 @@ let messageTimer = null
 
 function showAnimal(animal) {
 
+    // Ganti hewan aktif
     currentAnimal.value = animal
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | ANIMASI
-    |--------------------------------------------------------------------------
-    */
-
+    // Animasi display
     if (displayRef.value) {
 
         displayRef.value.animate(
@@ -106,31 +115,20 @@ function showAnimal(animal) {
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | PESAN
-    |--------------------------------------------------------------------------
-    */
-
+    // Tampilkan pesan
     showMessage(
-        `Ini ${animal.name}! 🐾`
+        `Ini adalah ${animal.name}! 🐾`
     )
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | SUARA
-    |--------------------------------------------------------------------------
-    */
-
+    // Bacakan nama hewan
     speak(animal.name)
-
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| PESAN
+| MESSAGE
 |--------------------------------------------------------------------------
 */
 
@@ -140,14 +138,17 @@ function showMessage(text) {
 
     messageVisible.value = true
 
+
+    // Hapus timer sebelumnya
     clearTimeout(messageTimer)
 
+
+    // Hilangkan setelah 1.8 detik
     messageTimer = setTimeout(() => {
 
         messageVisible.value = false
 
     }, 1800)
-
 }
 
 
@@ -159,80 +160,90 @@ function showMessage(text) {
 
 function speak(text) {
 
+    // Cek dukungan browser
     if (!('speechSynthesis' in window)) {
         return
     }
 
 
+    // Hentikan suara sebelumnya
     window.speechSynthesis.cancel()
 
 
+    // Buat suara
     const voice =
         new SpeechSynthesisUtterance(text)
 
 
+    // Bahasa Indonesia
     voice.lang = 'id-ID'
 
+
+    // Kecepatan suara
     voice.rate = 0.8
 
+
+    // Tinggi suara
     voice.pitch = 1.15
 
 
+    // Jalankan suara
     window.speechSynthesis.speak(voice)
-
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| TOMBOL SPEAKER
+| SPEAKER
 |--------------------------------------------------------------------------
 */
 
 function toggleSpeaker() {
 
+    // Cek dukungan browser
     if (!('speechSynthesis' in window)) {
         return
     }
 
 
+    // Kalau sedang berbicara → hentikan
     if (window.speechSynthesis.speaking) {
 
         window.speechSynthesis.cancel()
 
         return
-
     }
 
 
-    speak(currentAnimal.value.name)
-
+    // Bacakan hewan aktif
+    speak(
+        currentAnimal.value.name
+    )
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| KEMBALI KE HOME
+| HOME
 |--------------------------------------------------------------------------
 */
 
 function goHome() {
 
     window.location.href = '/'
-
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| KE QUIZ
+| QUIZ
 |--------------------------------------------------------------------------
 */
 
 function goToQuiz() {
 
-    window.location.href = '/hewan/quiz'
-
+    window.location.href =
+        '/hewan/quiz'
 }
 
 </script>
@@ -240,56 +251,68 @@ function goToQuiz() {
 
 <template>
 
-    <main class="animal-game">
+    <main class="animal-learning">
 
 
-        <!-- TOP -->
+        <!-- =====================================================
+             TOP
+        ====================================================== -->
 
-        <div class="animal-game__top">
+        <div class="animal-learning__top">
 
 
             <!-- HOME -->
 
             <button
                 type="button"
-                class="animal-game__icon-button"
+
+                class="animal-learning__home-button"
+
                 aria-label="Kembali ke halaman utama"
+
                 @click="goHome"
             >
+
                 🏠
+
             </button>
 
 
-            <!-- SPEAKER -->
+            <!-- TITLE -->
 
-            <button
-                type="button"
-                class="animal-game__icon-button"
-                aria-label="Dengarkan nama hewan"
-                @click="toggleSpeaker"
+            <div class="animal-learning__title-area">
+
+                <h1 class="animal-learning__title">
+
+                    Yuk Mengenal Hewan! 🐶
+
+                </h1>
+
+
+                <p class="animal-learning__subtitle">
+
+                    Pilih hewan dan dengarkan namanya.
+
+                </p>
+
+            </div>
+
+
+            <!-- SPACER -->
+
+            <div
+                class="animal-learning__top-spacer"
+                aria-hidden="true"
             >
-                🔊
-            </button>
+            </div>
 
 
         </div>
 
 
-        <!-- TITLE -->
-
-        <h1 class="animal-game__title">
-            Yuk Mengenal Hewan! 🐾
-        </h1>
-
-
-        <!-- SUBTITLE -->
-
-        <p class="animal-game__subtitle">
-            Pilih hewan dan dengarkan namanya.
-        </p>
-
-
-        <!-- DISPLAY -->
+        <!-- =====================================================
+             DISPLAY
+        ====================================================== -->
 
         <div ref="displayRef">
 
@@ -300,60 +323,117 @@ function goToQuiz() {
         </div>
 
 
-        <!-- HINT -->
-
-        <p class="animal-game__hint">
-            Sentuh salah satu hewan di bawah
-        </p>
-
-
-        <!-- DAFTAR HEWAN -->
-
-        <div class="animal-game__animals">
-
-            <AnimalCard
-                v-for="animal in animals"
-                :key="animal.name"
-                :animal="animal"
-                :active="
-                    currentAnimal.name === animal.name
-                "
-                @select="showAnimal"
-            />
-
-        </div>
-
-
-        <!-- NEXT -->
+        <!-- =====================================================
+             SPEAKER
+        ====================================================== -->
 
         <button
             type="button"
-            class="animal-game__next-button"
-            @click="goToQuiz"
+
+            class="animal-learning__speaker-button"
+
+            aria-label="Klik untuk mendengarkan suara"
+
+            @click="toggleSpeaker"
         >
 
-            <span>
-                Selanjutnya
+            <span class="animal-learning__speaker-icon">
+
+                🔊
+
             </span>
 
-            <span>
-                →
+
+            <span class="animal-learning__speaker-text">
+
+                Klik untuk mendengarkan suara
+
             </span>
 
         </button>
 
 
-        <!-- PESAN -->
+        <!-- =====================================================
+             HINT
+        ====================================================== -->
+
+        <p class="animal-learning__hint">
+
+            Sentuh salah satu hewan di bawah
+
+        </p>
+
+
+        <!-- =====================================================
+             ANIMAL CARDS
+        ====================================================== -->
+
+        <section class="animal-learning__list">
+
+
+            <AnimalCard
+                v-for="animal in animals"
+
+                :key="animal.id"
+
+                :animal="animal"
+
+                :active="
+                    currentAnimal.id === animal.id
+                "
+
+                @select="showAnimal"
+            />
+
+
+        </section>
+
+
+        <!-- =====================================================
+             NEXT
+        ====================================================== -->
+
+        <button
+            type="button"
+
+            class="animal-learning__next-button"
+
+            @click="goToQuiz"
+        >
+
+            <span>
+
+                Selanjutnya
+
+            </span>
+
+
+            <span>
+
+                →
+
+            </span>
+
+        </button>
+
+
+        <!-- =====================================================
+             MESSAGE
+        ====================================================== -->
 
         <div
-            class="animal-game__message"
+            class="animal-learning__message"
+
             :class="{
-                'animal-game__message--show':
+                'animal-learning__message--show':
                     messageVisible
             }"
+
             aria-live="polite"
         >
+
             {{ message }}
+
         </div>
 
 

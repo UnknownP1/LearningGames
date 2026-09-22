@@ -12,14 +12,23 @@
    BODY
 ======================================== */
 
-body {
+html,
+body,
+#app {
+    width: 100%;
+    min-height: 100%;
+
     margin: 0;
-    min-height: 100dvh;
+}
+
+body {
     font-family: Arial, sans-serif;
+
     background: linear-gradient(
         #bcefff,
         #f7fdff
     );
+
     overflow: hidden;
 }
 
@@ -30,6 +39,7 @@ body {
 
 .color-game {
     width: 100%;
+
     min-height: 100dvh;
 
     display: flex;
@@ -37,6 +47,25 @@ body {
     align-items: center;
 
     padding: 18px 18px 22px;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   TOP
+======================================== */
+
+.color-game__top {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
 }
 
 
@@ -44,19 +73,12 @@ body {
    TOP BUTTON
 ======================================== */
 
-.color-game__top {
-    width: 100%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .color-game__icon-button {
     width: 52px;
     height: 52px;
 
     border: 0;
+
     border-radius: 50%;
 
     background: #ffffff;
@@ -71,8 +93,25 @@ body {
     transition: 0.15s;
 }
 
+.color-game__icon-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px #0003;
+}
+
 .color-game__icon-button:active {
     transform: scale(0.9);
+}
+
+
+/* ========================================
+   TOP SPACER
+======================================== */
+
+.color-game__top-spacer {
+    width: 52px;
+    height: 52px;
 }
 
 
@@ -90,6 +129,10 @@ body {
         6vw,
         52px
     );
+
+    font-weight: 400;
+
+    line-height: 1.1;
 
     text-align: center;
 }
@@ -109,6 +152,8 @@ body {
         3vw,
         23px
     );
+
+    line-height: 1.2;
 
     text-align: center;
 }
@@ -189,6 +234,92 @@ body {
     font-weight: 900;
 
     color: #126b70;
+
+    line-height: 1.05;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   SPEAKER
+======================================== */
+
+.color-game__speaker-button {
+    width: min(
+        420px,
+        90vw
+    );
+
+    min-height: 54px;
+
+    margin-top: 10px;
+
+    padding: 10px 20px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #08777b;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 14px #0002;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        box-shadow .15s;
+}
+
+.color-game__speaker-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px #0003;
+}
+
+.color-game__speaker-button:active {
+    transform: scale(.96);
+}
+
+
+/* ========================================
+   SPEAKER ICON
+======================================== */
+
+.color-game__speaker-icon {
+    font-size: 27px;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   SPEAKER TEXT
+======================================== */
+
+.color-game__speaker-text {
+    line-height: 1.1;
+
+    text-align: center;
 }
 
 
@@ -197,11 +328,13 @@ body {
 ======================================== */
 
 .color-game__hint {
-    margin: 12px 0 9px;
+    margin: 10px 0 7px;
 
     color: #52777a;
 
     font-size: 18px;
+
+    line-height: 1.2;
 
     text-align: center;
 }
@@ -316,6 +449,7 @@ body {
     position: fixed;
 
     left: 50%;
+
     bottom: 18px;
 
     transform:
@@ -344,6 +478,8 @@ body {
     transition: 0.3s;
 
     pointer-events: none;
+
+    z-index: 20;
 }
 
 
@@ -359,6 +495,73 @@ body {
         );
 
     opacity: 1;
+}
+
+
+/* ========================================
+   NEXT BUTTON
+======================================== */
+
+.color-game__next-button {
+    position: fixed !important;
+
+    right: 35px !important;
+
+    bottom: 35px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    gap: 14px !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    padding: 15px 24px !important;
+
+    border: none !important;
+
+    border-radius: 999px !important;
+
+    background: #0aa5a5 !important;
+
+    color: #ffffff !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 20px !important;
+
+    font-weight: 900 !important;
+
+    box-shadow:
+        0 6px 16px #0003 !important;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.color-game__next-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 20px #0003 !important;
+}
+
+.color-game__next-button:active {
+    transform: scale(0.94);
+}
+
+.color-game__next-button span:last-child {
+    font-size: 28px;
+
+    line-height: 1;
 }
 
 
@@ -381,6 +584,24 @@ body {
     }
 
 
+    .color-game__top-spacer {
+        width: 44px;
+        height: 44px;
+    }
+
+
+    .color-game__title {
+        font-size: 28px;
+    }
+
+
+    .color-game__subtitle {
+        margin-bottom: 8px;
+
+        font-size: 16px;
+    }
+
+
     .color-display {
         height: 42vh;
 
@@ -394,6 +615,36 @@ body {
 
         max-width: 205px;
         max-height: 205px;
+    }
+
+
+    .color-display__name {
+        font-size: 30px;
+
+        margin-top: 10px;
+    }
+
+
+    .color-game__speaker-button {
+        width: min(
+            360px,
+            90vw
+        );
+
+        min-height: 46px;
+
+        margin-top: 7px;
+
+        padding: 8px 15px;
+
+        gap: 9px;
+
+        font-size: 14px;
+    }
+
+
+    .color-game__speaker-icon {
+        font-size: 22px;
     }
 
 
@@ -412,6 +663,8 @@ body {
 
     .color-card__dot {
         height: 55px;
+
+        margin-bottom: 4px;
     }
 
 
@@ -420,6 +673,25 @@ body {
 
         font-size: 16px;
     }
+
+
+    .color-game__next-button {
+        right: 12px !important;
+
+        bottom: 12px !important;
+
+        padding: 11px 17px !important;
+
+        font-size: 16px !important;
+
+        gap: 9px !important;
+    }
+
+
+    .color-game__next-button span:last-child {
+        font-size: 22px;
+    }
+
 }
 
 
@@ -434,228 +706,156 @@ body {
 ) {
 
     .color-game {
-        padding: 8px 12px;
+        padding: 6px 10px;
+    }
+
+
+    .color-game__top {
+        margin-bottom: 0;
+    }
+
+
+    .color-game__icon-button {
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+
+    .color-game__top-spacer {
+        width: 42px;
+        height: 42px;
     }
 
 
     .color-game__title {
         font-size: 30px;
 
-        margin: 2px 0;
+        line-height: 1;
+
+        margin: 0;
     }
 
 
     .color-game__subtitle {
         font-size: 15px;
 
-        margin-bottom: 6px;
+        line-height: 1;
+
+        margin: 2px 0 4px;
     }
 
 
     .color-display {
-        height: 48vh;
+        height: 43vh;
 
-        min-height: 180px;
+        min-height: 165px;
     }
 
 
     .color-display__swatch {
         width: min(
-            170px,
-            28vh
+            150px,
+            25vh
         );
 
         height: min(
-            170px,
-            28vh
+            150px,
+            25vh
         );
     }
 
 
     .color-display__name {
-        font-size: 30px;
+        font-size: 28px;
 
-        margin-top: 6px;
+        margin-top: 4px;
+    }
+
+
+    .color-game__speaker-button {
+        width: min(
+            360px,
+            80vw
+        );
+
+        min-height: 38px;
+
+        margin-top: 4px;
+
+        padding: 6px 14px;
+
+        gap: 8px;
+
+        font-size: 13px;
+    }
+
+
+    .color-game__speaker-icon {
+        font-size: 19px;
     }
 
 
     .color-game__hint {
-        font-size: 14px;
+        font-size: 13px;
 
-        margin: 5px 0;
+        margin: 3px 0 3px;
     }
 
 
     .color-game__colors {
-        gap: 7px;
+        width: min(
+            850px,
+            96vw
+        );
+
+        gap: 6px;
+
+        transform:
+            translateY(-2px);
     }
 
 
     .color-card {
-        padding: 5px;
+        padding: 3px 3px 4px;
+
+        border-radius: 17px;
     }
 
 
     .color-card__dot {
-        height: 45px;
+        height: 38px;
 
-        margin-bottom: 3px;
+        margin-bottom: 1px;
     }
-}
-
-/* ========================================
-   NEXT BUTTON
-======================================== */
-
-.color-game__next-button {
-    position: fixed !important;
-
-    right: 35px !important;
-    bottom: 35px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    gap: 14px !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    padding: 15px 24px !important;
-
-    border: none !important;
-    border-radius: 999px !important;
-
-    background: #0aa5a5 !important;
-    color: #ffffff !important;
-
-    font-family: Arial, sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-
-    box-shadow: 0 6px 16px #0003 !important;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s;
-}
-
-.color-game__next-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow: 0 9px 20px #0003 !important;
-}
-
-.color-game__next-button:active {
-    transform: scale(0.94);
-}
-
-.color-game__next-button span:last-child {
-    font-size: 28px;
-    line-height: 1;
-}
 
 
-/* ========================================
-   MOBILE LANDSCAPE
-======================================== */
+    .color-card__name {
+        font-size: 11px;
 
-@media (max-width: 900px) and (orientation: landscape) {
+        line-height: 1;
+
+        transform:
+            translateY(-2px);
+    }
+
 
     .color-game__next-button {
-        position: fixed !important;
+        right: 12px !important;
 
-        right: 15px !important;
-        bottom: 15px !important;
+        bottom: 10px !important;
 
-        padding: 10px 16px !important;
+        padding: 9px 14px !important;
 
-        font-size: 15px !important;
+        font-size: 14px !important;
 
-        gap: 8px !important;
+        gap: 7px !important;
     }
+
 
     .color-game__next-button span:last-child {
-        font-size: 22px;
-    }
-
-}
-
-/* ========================================
-   NEXT BUTTON
-======================================== */
-
-.color-game__next-button {
-    position: fixed;
-
-    right: 35px;
-    bottom: 35px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 15px 24px;
-
-    border: none;
-    border-radius: 999px;
-
-    background: #0aa5a5;
-    color: #ffffff;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 20px;
-    font-weight: 900;
-
-    box-shadow: 0 6px 16px #0003;
-
-    cursor: pointer;
-
-    transition: 0.15s;
-}
-
-.color-game__next-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow: 0 9px 20px #0003;
-}
-
-.color-game__next-button:active {
-    transform: scale(0.94);
-}
-
-.color-game__next-button span:last-child {
-    font-size: 28px;
-    line-height: 1;
-}
-
-
-/* ========================================
-   NEXT BUTTON - MOBILE LANDSCAPE
-======================================== */
-
-@media (
-    max-width: 900px
-) and (
-    orientation: landscape
-) {
-
-    .color-game__next-button {
-        right: 15px;
-        bottom: 15px;
-
-        padding: 10px 16px;
-
-        font-size: 15px;
-    }
-
-    .color-game__next-button span:last-child {
-        font-size: 22px;
+        font-size: 20px;
     }
 
 }

@@ -1,7 +1,6 @@
 <script setup>
+
 import { ref } from 'vue'
-
-
 
 import ColorCard from '../Components/Colors/ColorCard.vue'
 import ColorDisplay from '../Components/Colors/ColorDisplay.vue'
@@ -18,22 +17,27 @@ const colors = [
         name: 'Merah',
         hex: '#ef3b3b',
     },
+
     {
         name: 'Biru',
         hex: '#3199e8',
     },
+
     {
         name: 'Kuning',
         hex: '#ffd22e',
     },
+
     {
         name: 'Hijau',
         hex: '#45b94b',
     },
+
     {
         name: 'Ungu',
         hex: '#9a55d5',
     },
+
     {
         name: 'Pink',
         hex: '#f36fa5',
@@ -50,16 +54,20 @@ const colors = [
 // Warna yang sedang dipilih
 const currentColor = ref(colors[0])
 
-// Pesan yang muncul di bawah
+
+// Pesan
 const message = ref('')
 
-// Status apakah pesan sedang ditampilkan
+
+// Status pesan
 const messageVisible = ref(false)
 
-// Referensi ke bagian display
+
+// Referensi display
 const displayRef = ref(null)
 
-// Timer untuk menghilangkan pesan
+
+// Timer pesan
 let messageTimer = null
 
 
@@ -70,19 +78,24 @@ let messageTimer = null
 */
 
 function showColor(color) {
+
     // Ganti warna aktif
     currentColor.value = color
 
-    // Jalankan animasi display
+
+    // Animasi display
     if (displayRef.value) {
+
         displayRef.value.animate(
             [
                 {
                     transform: 'scale(.96)',
                 },
+
                 {
                     transform: 'scale(1.02)',
                 },
+
                 {
                     transform: 'scale(1)',
                 },
@@ -92,37 +105,43 @@ function showColor(color) {
                 easing: 'ease-out',
             }
         )
+
     }
+
 
     // Tampilkan pesan
     showMessage(
         `Ini warna ${color.name}! 🌈`
     )
 
-    // Ucapkan nama warna
+
+    // Bacakan nama warna
     speak(color.name)
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| PESAN
+| MESSAGE
 |--------------------------------------------------------------------------
 */
 
 function showMessage(text) {
-    // Isi pesan
+
     message.value = text
 
-    // Tampilkan pesan
     messageVisible.value = true
+
 
     // Hapus timer sebelumnya
     clearTimeout(messageTimer)
 
-    // Sembunyikan setelah 1.8 detik
+
+    // Hilangkan setelah 1.8 detik
     messageTimer = setTimeout(() => {
+
         messageVisible.value = false
+
     }, 1800)
 }
 
@@ -134,26 +153,33 @@ function showMessage(text) {
 */
 
 function speak(text) {
-    // Cek apakah browser mendukung speech synthesis
+
+    // Cek dukungan browser
     if (!('speechSynthesis' in window)) {
         return
     }
 
+
     // Hentikan suara sebelumnya
     window.speechSynthesis.cancel()
 
-    // Buat suara baru
+
+    // Buat suara
     const voice =
         new SpeechSynthesisUtterance(text)
+
 
     // Bahasa Indonesia
     voice.lang = 'id-ID'
 
+
     // Kecepatan suara
     voice.rate = 0.8
 
+
     // Tinggi suara
     voice.pitch = 1.15
+
 
     // Jalankan suara
     window.speechSynthesis.speak(voice)
@@ -162,94 +188,127 @@ function speak(text) {
 
 /*
 |--------------------------------------------------------------------------
-| TOMBOL SPEAKER
+| SPEAKER
 |--------------------------------------------------------------------------
 */
 
 function toggleSpeaker() {
+
     // Cek dukungan browser
     if (!('speechSynthesis' in window)) {
         return
     }
 
+
     // Kalau sedang berbicara → hentikan
     if (window.speechSynthesis.speaking) {
+
         window.speechSynthesis.cancel()
+
         return
     }
 
-    // Kalau tidak berbicara → bacakan warna aktif
-    speak(currentColor.value.name)
+
+    // Bacakan warna aktif
+    speak(
+        currentColor.value.name
+    )
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| KEMBALI KE HOME
+| HOME
 |--------------------------------------------------------------------------
 */
 
 function goHome() {
+
     window.location.href = '/'
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| KE QUIZ
+| QUIZ
 |--------------------------------------------------------------------------
 */
 
 function goToQuiz() {
-    window.location.href = '/warna/quiz'
+
+    window.location.href =
+        '/warna/quiz'
 }
+
 </script>
 
 
 <template>
+
     <main class="color-game">
 
-        <!-- TOP BUTTON -->
+
+        <!-- =====================================================
+             TOP
+        ====================================================== -->
+
         <div class="color-game__top">
 
+
             <!-- HOME -->
+
             <button
                 type="button"
+
                 class="color-game__icon-button"
+
                 aria-label="Kembali ke halaman utama"
+
                 @click="goHome"
             >
+
                 🏠
+
             </button>
 
-            <!-- SPEAKER -->
-            <button
-                type="button"
-                class="color-game__icon-button"
-                aria-label="Dengarkan nama warna"
-                @click="toggleSpeaker"
+
+            <!-- SPACER -->
+
+            <div
+                class="color-game__top-spacer"
+                aria-hidden="true"
             >
-                🔊
-            </button>
+            </div>
+
 
         </div>
 
 
-        <!-- TITLE -->
+        <!-- =====================================================
+             TITLE
+        ====================================================== -->
 
         <h1 class="color-game__title">
+
             Yuk Mengenal Warna! 🌈
+
         </h1>
 
 
-        <!-- SUBTITLE -->
+        <!-- =====================================================
+             SUBTITLE
+        ====================================================== -->
 
         <p class="color-game__subtitle">
+
             Pilih warna dan dengarkan namanya.
+
         </p>
 
 
-        <!-- DISPLAY WARNA -->
+        <!-- =====================================================
+             DISPLAY
+        ====================================================== -->
 
         <div ref="displayRef">
 
@@ -260,55 +319,120 @@ function goToQuiz() {
         </div>
 
 
-        <!-- HINT -->
+        <!-- =====================================================
+             SPEAKER
+        ====================================================== -->
+
+        <button
+            type="button"
+
+            class="color-game__speaker-button"
+
+            aria-label="Klik untuk mendengarkan suara"
+
+            @click="toggleSpeaker"
+        >
+
+            <span class="color-game__speaker-icon">
+
+                🔊
+
+            </span>
+
+
+            <span class="color-game__speaker-text">
+
+                Klik untuk mendengarkan suara
+
+            </span>
+
+        </button>
+
+
+        <!-- =====================================================
+             HINT
+        ====================================================== -->
 
         <p class="color-game__hint">
+
             Sentuh salah satu warna di bawah
+
         </p>
 
 
-        <!-- DAFTAR WARNA -->
+        <!-- =====================================================
+             COLOR CARDS
+        ====================================================== -->
 
         <div class="color-game__colors">
 
+
             <ColorCard
                 v-for="color in colors"
+
                 :key="color.name"
+
                 :color="color"
+
                 :active="
                     currentColor.name === color.name
                 "
+
                 @select="showColor"
             />
+
 
         </div>
 
 
-        <!-- TOMBOL SELANJUTNYA -->
+        <!-- =====================================================
+             NEXT
+        ====================================================== -->
 
         <button
             type="button"
+
             class="color-game__next-button"
+
             @click="goToQuiz"
         >
-            <span>Selanjutnya</span>
 
-            <span>→</span>
+            <span>
+
+                Selanjutnya
+
+            </span>
+
+
+            <span>
+
+                →
+
+            </span>
+
         </button>
 
 
-        <!-- PESAN -->
+        <!-- =====================================================
+             MESSAGE
+        ====================================================== -->
 
         <div
             class="color-game__message"
+
             :class="{
                 'color-game__message--show':
                     messageVisible
             }"
+
             aria-live="polite"
         >
+
             {{ message }}
+
         </div>
 
+
     </main>
+
 </template>
