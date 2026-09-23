@@ -7,6 +7,10 @@
 @import './animal-quiz.css';
 @import './quiz-color';
 @import './home.css';
+@import './alphabet-learning.css';
+@import './alphabet-quiz.css';
+@import './number-learning.css';
+@import './number-quiz.css';
 
 @tailwind base;
 @tailwind components;

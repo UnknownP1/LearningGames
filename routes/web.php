@@ -134,6 +134,15 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
+
+
+Route::get('/alphabet', fn () => Inertia::render('Alphabet'))->name('alphabet.learn');
+Route::get('/alphabet/quiz', fn () => Inertia::render('AlphabetQuiz'))->name('alphabet.quiz');
+
+Route::get('/angka', fn () => Inertia::render('Numbers'))->name('numbers.learn');
+Route::get('/angka/quiz', fn () => Inertia::render('NumbersQuiz'))->name('numbers.quiz');
+
 /*
 |--------------------------------------------------------------------------
 | AUTH

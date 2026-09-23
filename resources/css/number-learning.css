@@ -1,0 +1,804 @@
+/* =========================================================
+   NUMBER LEARNING
+   ========================================================= */
+
+/* CATATAN: Blok `html, body, #app { overflow: hidden }`
+   SENGAJA TIDAK DITULIS DI SINI untuk menjaga scroll Home. */
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.number-learning {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 18px 28px 22px;
+
+    background:
+        radial-gradient(circle at top left, #ffffff 0%, transparent 35%),
+        linear-gradient(135deg, #dff8f8 0%, #f3ffff 45%, #d9f3f3 100%);
+
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   TOP
+   ========================================================= */
+
+.number-learning__top {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+.number-learning__home-button {
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.number-learning__home-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.16);
+}
+
+.number-learning__home-button:active {
+    transform: scale(0.94);
+}
+
+.number-learning__title-area {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 0 16px;
+}
+
+.number-learning__title {
+    margin: 0;
+
+    color: #08777b;
+
+    font-size: clamp(24px, 4.5vw, 40px);
+    font-weight: 800;
+
+    line-height: 1.1;
+}
+
+.number-learning__subtitle {
+    margin: 4px 0 0;
+
+    color: #397477;
+
+    font-size: clamp(14px, 2.2vw, 18px);
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+.number-learning__top-spacer {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   NUMBER DISPLAY
+   ========================================================= */
+
+.number-display {
+    width: min(480px, 88vw);
+    height: min(30vh, 240px);
+
+    min-height: 140px;
+
+    margin-top: 8px;
+
+    padding: 14px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 6px solid #9ad9d9;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+    flex-shrink: 1;
+
+    overflow: hidden;
+}
+
+.number-display__value {
+    font-size: clamp(64px, 14vw, 120px);
+    font-weight: 900;
+    color: #08777b;
+
+    line-height: 1;
+
+    text-align: center;
+}
+
+.number-display__name {
+    margin: 0;
+
+    color: #397477;
+
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 800;
+
+    text-align: center;
+    line-height: 1.15;
+
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   SPEAKER BUTTON
+   ========================================================= */
+
+.number-learning__speaker-button {
+    width: min(480px, 88vw);
+
+    min-height: 48px;
+
+    margin-top: 10px;
+
+    padding: 8px 18px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    color: #08777b;
+
+    font-size: clamp(14px, 2vw, 17px);
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 17px rgba(0, 0, 0, 0.1);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.number-learning__speaker-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 21px rgba(0, 0, 0, 0.14);
+
+    background: #faffff;
+}
+
+.number-learning__speaker-button:active {
+    transform: scale(0.98);
+}
+
+.number-learning__speaker-icon {
+    font-size: 22px;
+
+    line-height: 1;
+}
+
+.number-learning__speaker-text {
+    line-height: 1.2;
+}
+
+/* =========================================================
+   HINT
+   ========================================================= */
+
+.number-learning__hint {
+    margin: 8px 0 6px;
+
+    color: #397477;
+
+    font-size: clamp(13px, 2vw, 16px);
+    font-weight: 600;
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   NUMBER LIST
+   ========================================================= */
+
+.number-learning__list {
+    width: min(880px, 100%);
+
+    margin-top: 4px;
+
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+
+    gap: 10px;
+
+    flex-shrink: 1;
+}
+
+/* =========================================================
+   NUMBER CARD
+   ========================================================= */
+
+.number-card {
+    min-width: 0;
+
+    min-height: 88px;
+
+    padding: 8px 5px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        outline 0.2s ease;
+
+    overflow: hidden;
+}
+
+.number-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+.number-card:active {
+    transform: scale(0.97);
+}
+
+.number-card--active {
+    outline: 4px solid #7dd3d3;
+    outline-offset: 0;
+}
+
+.number-card__value {
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 900;
+    color: #08777b;
+
+    line-height: 1;
+}
+
+.number-card__name {
+    width: 100%;
+
+    color: #397477;
+
+    font-size: clamp(10px, 1.3vw, 13px);
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    text-align: center;
+
+    word-break: break-word;
+
+    text-transform: lowercase;
+}
+
+/* =========================================================
+   FLOATING MESSAGE
+   ========================================================= */
+
+.number-learning__message {
+    position: fixed;
+
+    left: 50%;
+    bottom: 24px;
+
+    transform: translate(-50%, 20px);
+
+    padding: 10px 18px;
+
+    border-radius: 14px;
+
+    background: #08777bf2;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.16);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 20;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+.number-learning__message--show {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translate(-50%, 0);
+}
+
+/* =========================================================
+   NEXT BUTTON
+   ========================================================= */
+
+.number-learning__next-button {
+    position: fixed;
+
+    right: 28px;
+    bottom: 22px;
+
+    min-width: 150px;
+    min-height: 48px;
+
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #08777b;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.16);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+    z-index: 15;
+}
+
+.number-learning__next-button:hover {
+    transform: translateY(-3px);
+
+    background: #076a6d;
+
+    box-shadow: 0 9px 23px rgba(0, 0, 0, 0.19);
+}
+
+.number-learning__next-button:active {
+    transform: scale(0.96);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .number-learning {
+        padding: 12px 14px 16px;
+    }
+
+    .number-learning__home-button {
+        width: 42px;
+        height: 42px;
+
+        font-size: 21px;
+    }
+
+    .number-learning__top-spacer {
+        width: 42px;
+        height: 42px;
+    }
+
+    .number-learning__title-area {
+        padding: 0 8px;
+    }
+
+    .number-learning__title {
+        font-size: clamp(22px, 6vw, 32px);
+    }
+
+    .number-learning__subtitle {
+        font-size: clamp(12px, 3vw, 15px);
+    }
+
+    .number-display {
+        width: 92vw;
+
+        height: min(28vh, 220px);
+
+        min-height: 130px;
+
+        padding: 12px;
+
+        border-width: 5px;
+        border-radius: 24px;
+    }
+
+    .number-display__value {
+        font-size: clamp(56px, 18vw, 100px);
+    }
+
+    .number-display__name {
+        font-size: clamp(16px, 4.5vw, 22px);
+    }
+
+    .number-learning__speaker-button {
+        min-height: 44px;
+
+        margin-top: 8px;
+
+        padding: 8px 14px;
+
+        border-radius: 13px;
+
+        font-size: 14px;
+    }
+
+    .number-learning__speaker-icon {
+        font-size: 19px;
+    }
+
+    .number-learning__hint {
+        margin: 6px 0 5px;
+
+        font-size: 13px;
+    }
+
+    .number-learning__list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        gap: 8px;
+
+        width: 100%;
+    }
+
+    .number-card {
+        min-height: 74px;
+
+        padding: 7px 4px;
+
+        border-radius: 13px;
+
+        gap: 2px;
+    }
+
+    .number-card__value {
+        font-size: 22px;
+    }
+
+    .number-card__name {
+        font-size: 11px;
+    }
+
+    .number-learning__message {
+        bottom: 16px;
+
+        max-width: 78vw;
+
+        white-space: normal;
+
+        font-size: 13px;
+    }
+
+    .number-learning__next-button {
+        right: 14px;
+        bottom: 14px;
+
+        min-width: 130px;
+        min-height: 44px;
+
+        padding: 9px 13px;
+
+        border-radius: 14px;
+
+        font-size: 14px;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .number-learning {
+        padding: 10px 10px 14px;
+    }
+
+    .number-learning__home-button {
+        width: 38px;
+        height: 38px;
+
+        font-size: 19px;
+    }
+
+    .number-learning__top-spacer {
+        width: 38px;
+        height: 38px;
+    }
+
+    .number-learning__title-area {
+        padding: 0 4px;
+    }
+
+    .number-learning__title {
+        font-size: clamp(20px, 6vw, 26px);
+    }
+
+    .number-learning__subtitle {
+        font-size: 12px;
+    }
+
+    .number-display {
+        height: min(26vh, 190px);
+
+        min-height: 115px;
+
+        padding: 10px;
+
+        border-width: 4px;
+        border-radius: 20px;
+    }
+
+    .number-display__value {
+        font-size: clamp(48px, 16vw, 80px);
+    }
+
+    .number-display__name {
+        font-size: 15px;
+    }
+
+    .number-learning__speaker-button {
+        min-height: 40px;
+
+        margin-top: 6px;
+
+        font-size: 12px;
+    }
+
+    .number-learning__speaker-icon {
+        font-size: 17px;
+    }
+
+    .number-learning__hint {
+        font-size: 11px;
+
+        margin: 5px 0 4px;
+    }
+
+    .number-learning__list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        gap: 6px;
+    }
+
+    .number-card {
+        min-height: 64px;
+
+        border-radius: 11px;
+    }
+
+    .number-card__value {
+        font-size: 18px;
+    }
+
+    .number-card__name {
+        font-size: 10px;
+    }
+
+    .number-learning__next-button {
+        right: 10px;
+        bottom: 10px;
+
+        min-width: 110px;
+        min-height: 40px;
+
+        padding: 7px 11px;
+
+        font-size: 12px;
+
+        border-radius: 12px;
+    }
+}
+
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .number-learning {
+        padding: 8px 18px 10px;
+    }
+
+    .number-learning__home-button {
+        width: 38px;
+        height: 38px;
+
+        font-size: 19px;
+    }
+
+    .number-learning__top-spacer {
+        width: 38px;
+        height: 38px;
+    }
+
+    .number-learning__title {
+        font-size: clamp(20px, 4.5vw, 28px);
+    }
+
+    .number-learning__subtitle {
+        margin-top: 2px;
+
+        font-size: 12px;
+    }
+
+    .number-display {
+        width: min(420px, 60vw);
+
+        height: min(26vh, 150px);
+
+        min-height: 100px;
+
+        padding: 8px;
+
+        border-width: 4px;
+        border-radius: 18px;
+    }
+
+    .number-display__value {
+        font-size: clamp(44px, 11vw, 75px);
+    }
+
+    .number-display__name {
+        font-size: clamp(13px, 2.5vw, 18px);
+    }
+
+    .number-learning__speaker-button {
+        min-height: 36px;
+
+        margin-top: 5px;
+
+        padding: 6px 12px;
+
+        font-size: 12px;
+
+        border-radius: 11px;
+    }
+
+    .number-learning__speaker-icon {
+        font-size: 16px;
+    }
+
+    .number-learning__hint {
+        margin: 4px 0 4px;
+
+        font-size: 11px;
+    }
+
+    .number-learning__list {
+        width: min(820px, 80vw);
+
+        gap: 6px;
+    }
+
+    .number-card {
+        min-height: 58px;
+
+        padding: 4px;
+
+        border-radius: 11px;
+
+        gap: 2px;
+    }
+
+    .number-card__value {
+        font-size: 18px;
+    }
+
+    .number-card__name {
+        font-size: 10px;
+    }
+
+    .number-learning__message {
+        bottom: 8px;
+
+        font-size: 11px;
+
+        padding: 6px 11px;
+    }
+
+    .number-learning__next-button {
+        right: 16px;
+        bottom: 12px;
+
+        min-width: 120px;
+        min-height: 38px;
+
+        padding: 7px 12px;
+
+        border-radius: 11px;
+
+        font-size: 12px;
+    }
+}

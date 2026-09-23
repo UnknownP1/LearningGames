@@ -1,0 +1,158 @@
+.alphabet-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+}
+
+.alphabet-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.alphabet-header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.alphabet-header p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: #4b5563;
+}
+
+/* Grid: auto-fit agar otomatis menyesuaikan lebar layar */
+.alphabet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) {
+    .alphabet-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .alphabet-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+.alphabet-card {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.1em;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+    background: #ffffff;
+    border: 3px solid #e5e7eb;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    transition: transform 0.15s ease, border-color 0.15s ease,
+                box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.alphabet-card:hover {
+    transform: translateY(-3px);
+    border-color: #93c5fd;
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.15);
+}
+
+.alphabet-card:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.alphabet-card.is-active {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    transform: scale(1.08);
+}
+
+.letter-upper,
+.letter-lower {
+    font-weight: 800;
+}
+
+.letter-upper {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: #1f2937;
+}
+
+.letter-lower {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #6b7280;
+}
+
+/* Floating home button (pola sama dengan animal-learning) */
+.alphabet-learning__home-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 50%;
+    background: #ffffff;
+
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    z-index: 50;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.alphabet-learning__home-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.alphabet-learning__home-button:active {
+    transform: scale(0.95);
+}
+
+.alphabet-learning__home-button:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.alphabet-actions { text-align: center; margin-top: 1rem; }
+.alphabet-quiz-start {
+    padding: 1rem 2.5rem;
+    border: 0; border-radius: 999px;
+    background: #08777b ; color: #fff;
+    font-size: 1.15rem; font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(37,99,235,.35);
+    transition: transform .15s, background .15s;
+}
+.alphabet-quiz-start:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+    .alphabet-learning__home-button {
+        top: 14px;
+        left: 14px;
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+}
