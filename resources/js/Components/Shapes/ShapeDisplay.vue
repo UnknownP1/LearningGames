@@ -1,11 +1,12 @@
 <script setup>
 
+import ShapeVisual from './ShapeVisual.vue'
+
 defineProps({
     shape: {
         type: Object,
         required: true,
     },
-
     message: {
         type: String,
         default: '',
@@ -18,8 +19,8 @@ defineProps({
 
     <section class="shape-display">
 
-        <div class="shape-display__emoji">
-            {{ shape.emoji }}
+        <div class="shape-display__visual">
+            <ShapeVisual :shape-id="shape.id" />
         </div>
 
         <h2 class="shape-display__name">

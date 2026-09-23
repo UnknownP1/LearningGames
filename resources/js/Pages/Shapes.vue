@@ -13,41 +13,12 @@ import ShapeDisplay from '@/Components/Shapes/ShapeDisplay.vue'
 */
 
 const shapes = [
-    {
-        id: 'circle',
-        name: 'Lingkaran',
-        emoji: '🔴',
-    },
-
-    {
-        id: 'square',
-        name: 'Persegi',
-        emoji: '🟦',
-    },
-
-    {
-        id: 'triangle',
-        name: 'Segitiga',
-        emoji: '🔺',
-    },
-
-    {
-        id: 'rectangle',
-        name: 'Persegi Panjang',
-        emoji: '🟨',
-    },
-
-    {
-        id: 'star',
-        name: 'Bintang',
-        emoji: '⭐',
-    },
-
-    {
-        id: 'heart',
-        name: 'Hati',
-        emoji: '❤️',
-    },
+    { id: 'circle',    name: 'Lingkaran' },
+    { id: 'square',    name: 'Persegi' },
+    { id: 'triangle',  name: 'Segitiga' },
+    { id: 'rectangle', name: 'Persegi Panjang' },
+    { id: 'star',      name: 'Bintang' },
+    { id: 'heart',     name: 'Hati' },
 ]
 
 
@@ -57,23 +28,14 @@ const shapes = [
 |--------------------------------------------------------------------------
 */
 
-// Bentuk yang sedang dipilih
 const currentShape = ref(shapes[0])
 
-
-// Pesan
 const message = ref('')
 
-
-// Status pesan
 const messageVisible = ref(false)
 
-
-// Referensi display
 const displayRef = ref(null)
 
-
-// Timer pesan
 let messageTimer = null
 
 
@@ -85,26 +47,16 @@ let messageTimer = null
 
 function showShape(shape) {
 
-    // Ganti bentuk aktif
     currentShape.value = shape
 
 
-    // Animasi display
     if (displayRef.value) {
 
         displayRef.value.animate(
             [
-                {
-                    transform: 'scale(.96)',
-                },
-
-                {
-                    transform: 'scale(1.02)',
-                },
-
-                {
-                    transform: 'scale(1)',
-                },
+                { transform: 'scale(.96)' },
+                { transform: 'scale(1.02)' },
+                { transform: 'scale(1)' },
             ],
             {
                 duration: 350,
@@ -115,13 +67,11 @@ function showShape(shape) {
     }
 
 
-    // Tampilkan pesan
     showMessage(
         `Ini adalah ${shape.name.toLowerCase()}! 🔷`
     )
 
 
-    // Bacakan nama bentuk
     speak(shape.name)
 }
 
@@ -138,12 +88,8 @@ function showMessage(text) {
 
     messageVisible.value = true
 
-
-    // Hapus timer sebelumnya
     clearTimeout(messageTimer)
 
-
-    // Hilangkan setelah 1.8 detik
     messageTimer = setTimeout(() => {
 
         messageVisible.value = false
@@ -165,7 +111,6 @@ function speak(text) {
     }
 
 
-    // Hentikan suara sebelumnya
     window.speechSynthesis.cancel()
 
 
@@ -197,7 +142,6 @@ function toggleSpeaker() {
     }
 
 
-    // Kalau sedang berbicara → hentikan
     if (window.speechSynthesis.speaking) {
 
         window.speechSynthesis.cancel()
@@ -206,10 +150,7 @@ function toggleSpeaker() {
     }
 
 
-    // Bacakan bentuk yang sedang aktif
-    speak(
-        currentShape.value.name
-    )
+    speak(currentShape.value.name)
 }
 
 
@@ -233,8 +174,7 @@ function goHome() {
 
 function goToQuiz() {
 
-    window.location.href =
-        '/bentuk/quiz'
+    window.location.href = '/bentuk/quiz'
 }
 
 </script>
@@ -251,52 +191,33 @@ function goToQuiz() {
 
         <div class="shape-learning__top">
 
-
-            <!-- HOME -->
-
             <button
                 type="button"
-
                 class="shape-learning__home-button"
-
                 aria-label="Kembali ke halaman utama"
-
                 @click="goHome"
             >
-
                 🏠
-
             </button>
 
-
-            <!-- TITLE -->
 
             <div class="shape-learning__title-area">
 
                 <h1 class="shape-learning__title">
-
                     Yuk Mengenal Bentuk! 🔷
-
                 </h1>
 
-
                 <p class="shape-learning__subtitle">
-
                     Pilih bentuk dan dengarkan namanya.
-
                 </p>
 
             </div>
 
 
-            <!-- SPACER -->
-
             <div
                 class="shape-learning__top-spacer"
                 aria-hidden="true"
-            >
-            </div>
-
+            ></div>
 
         </div>
 
@@ -305,12 +226,11 @@ function goToQuiz() {
              DISPLAY
         ====================================================== -->
 
-        <div ref="displayRef">
-
-            <ShapeDisplay
-                :shape="currentShape"
-            />
-
+        <div
+            ref="displayRef"
+            class="shape-learning__display-wrapper"
+        >
+            <ShapeDisplay :shape="currentShape" />
         </div>
 
 
@@ -320,27 +240,17 @@ function goToQuiz() {
 
         <button
             type="button"
-
             class="shape-learning__speaker-button"
-
             aria-label="Klik untuk mendengarkan suara"
-
             @click="toggleSpeaker"
         >
-
             <span class="shape-learning__speaker-icon">
-
                 🔊
-
             </span>
-
 
             <span class="shape-learning__speaker-text">
-
                 Klik untuk mendengarkan suara
-
             </span>
-
         </button>
 
 
@@ -349,9 +259,7 @@ function goToQuiz() {
         ====================================================== -->
 
         <p class="shape-learning__hint">
-
             Sentuh salah satu bentuk di bawah
-
         </p>
 
 
@@ -361,21 +269,13 @@ function goToQuiz() {
 
         <section class="shape-learning__list">
 
-
             <ShapeCard
                 v-for="shape in shapes"
-
                 :key="shape.id"
-
                 :shape="shape"
-
-                :active="
-                    currentShape.id === shape.id
-                "
-
+                :active="currentShape.id === shape.id"
                 @select="showShape"
             />
-
 
         </section>
 
@@ -386,25 +286,11 @@ function goToQuiz() {
 
         <button
             type="button"
-
             class="shape-learning__next-button"
-
             @click="goToQuiz"
         >
-
-            <span>
-
-                Selanjutnya
-
-            </span>
-
-
-            <span>
-
-                →
-
-            </span>
-
+            <span>Selanjutnya</span>
+            <span>→</span>
         </button>
 
 
@@ -414,20 +300,14 @@ function goToQuiz() {
 
         <div
             class="shape-learning__message"
-
             :class="{
-                'shape-learning__message--show':
-                    messageVisible
+                'shape-learning__message--show': messageVisible
             }"
-
             aria-live="polite"
         >
-
             {{ message }}
-
         </div>
-
 
     </main>
 
-</template> 
+</template>

@@ -1,6 +1,10 @@
-/* ========================================
-   SHAPE LEARNING
-======================================== */
+/* =========================================================
+   SHAPE LEARNING - FULL REBUILD
+   ========================================================= */
+
+/* CATATAN PENTING:
+   Blok `html, body, #app { overflow: hidden }` SENGAJA TIDAK DITULIS
+   di sini untuk menjaga scroll Home tetap berfungsi. */
 
 * {
     box-sizing: border-box;
@@ -8,476 +12,341 @@
 }
 
 
-/* ========================================
-   BODY
-======================================== */
-
-body {
-    margin: 0;
-
-    min-height: 100dvh;
-
-    font-family: Arial, sans-serif;
-
-    background: linear-gradient(
-        #bcefff,
-        #f7fdff
-    );
-
-    overflow: hidden;
-}
-
-
-/* ========================================
-   MAIN GAME
-======================================== */
+/* =========================================================
+   MAIN
+========================================================= */
 
 .shape-learning {
     width: 100%;
-
     min-height: 100dvh;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
-    padding: 18px 18px 22px;
+    padding: 16px 22px 22px;
 
     font-family: Arial, sans-serif;
+
+    background: linear-gradient(#bcefff, #f7fdff);
+
+    overflow-x: hidden;
 }
 
 
-/* ========================================
-   TOP
-======================================== */
+/* =========================================================
+   TOP (HOME + TITLE)
+========================================================= */
 
 .shape-learning__top {
     width: 100%;
 
     display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: start;
 
-    grid-template-columns:
-        52px
-        1fr
-        52px;
-
-    grid-template-rows:
-        auto
-        auto;
-
-    align-items: center;
-
-    margin-bottom: 5px;
+    flex-shrink: 0;
 }
 
 
-/* ========================================
-   HOME BUTTON
-======================================== */
+/* HOME BUTTON */
 
 .shape-learning__home-button {
-    grid-column: 1;
+    width: 48px;
+    height: 48px;
 
-    grid-row: 1;
-
-    width: 52px;
-
-    height: 52px;
-
-    border: 0;
-
+    border: none;
     border-radius: 50%;
 
     background: #ffffff;
 
-    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    box-shadow:
-        0 4px 12px #0002;
+    font-size: 24px;
+    line-height: 1;
 
     cursor: pointer;
 
-    transition: 0.15s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: transform .15s, box-shadow .15s;
 }
 
 .shape-learning__home-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 16px #0003;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.18);
 }
 
 .shape-learning__home-button:active {
-    transform: scale(0.9);
+    transform: scale(0.92);
+}
+
+.shape-learning__home-button:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
 }
 
 
-/* ========================================
-   TITLE AREA
-======================================== */
+/* TITLE AREA */
 
 .shape-learning__title-area {
-    grid-column: 2;
-
-    grid-row: 2;
-
-    width: 100%;
-
+    padding: 0 8px;
     text-align: center;
-
-    margin-top: 2px;
 }
 
-
-/* ========================================
-   TITLE
-======================================== */
-
 .shape-learning__title {
-    margin: 0;
+    margin: 4px 0 0;
 
     color: #08777b;
 
-    font-size: clamp(
-        28px,
-        6vw,
-        52px
-    );
-
-    font-weight: 400;
-
+    font-size: clamp(22px, 4.2vw, 40px);
+    font-weight: 800;
     line-height: 1.1;
-
-    text-align: center;
 }
 
-
-/* ========================================
-   SUBTITLE
-======================================== */
-
 .shape-learning__subtitle {
-    margin: 5px 0 12px;
+    margin: 3px 0 0;
 
     color: #397477;
 
-    font-size: clamp(
-        16px,
-        3vw,
-        23px
-    );
-
-    line-height: 1.2;
-
-    text-align: center;
+    font-size: clamp(13px, 2vw, 17px);
+    font-weight: 600;
+    line-height: 1.25;
 }
-
-
-/* ========================================
-   TOP SPACER
-======================================== */
 
 .shape-learning__top-spacer {
-    grid-column: 3;
-
-    grid-row: 1;
-
-    width: 52px;
-
-    height: 52px;
+    width: 48px;
+    height: 48px;
 }
 
 
-/* ========================================
-   SHAPE DISPLAY
-======================================== */
+/* =========================================================
+   DISPLAY
+========================================================= */
 
-.shape-display {
-    width: min(
-        560px,
-        92vw
-    );
-
-    height: min(
-        39vh,
-        350px
-    );
-
-    background: #ffffff;
-
-    border: 7px solid #9ad9d9;
-
-    border-radius: 35px;
+.shape-learning__display-wrapper {
+    width: 100%;
 
     display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
     justify-content: center;
-
-    box-shadow:
-        0 8px 25px #0002;
-
-    transition: 0.25s;
-}
-
-
-/* ========================================
-   SHAPE EMOJI
-======================================== */
-
-.shape-display__emoji {
-    width: min(
-        230px,
-        45vw
-    );
-
-    height: min(
-        230px,
-        45vw
-    );
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: min(
-        180px,
-        30vw
-    );
-
-    line-height: 1;
-}
-
-
-/* ========================================
-   SHAPE NAME
-======================================== */
-
-.shape-display__name {
-    margin-top: 14px;
-
-    color: #126b70;
-
-    font-size: clamp(
-        28px,
-        6vw,
-        48px
-    );
-
-    font-weight: 900;
-
-    line-height: 1.05;
-
-    text-align: center;
-}
-
-
-/* ========================================
-   SPEAKER BUTTON
-======================================== */
-
-.shape-learning__speaker-button {
-    width: min(
-        420px,
-        90vw
-    );
-
-    min-height: 54px;
 
     margin-top: 10px;
 
-    padding: 10px 20px;
+    flex-shrink: 1;
+    min-height: 0;
+}
 
-    border: 0;
+.shape-display {
+    width: min(480px, 88vw);
+    height: min(34vh, 280px);
+    min-height: 150px;
 
+    padding: 14px;
+
+    background: #ffffff;
+
+    border: 6px solid #9ad9d9;
+    border-radius: 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+}
+
+.shape-display__visual {
+    flex: 1;
+    min-height: 0;
+
+    width: 100%;
+    max-width: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px;
+}
+
+.shape-visual {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.shape-display__name {
+    margin: 6px 0 0;
+
+    color: #126b70;
+
+    font-size: clamp(20px, 3.6vw, 30px);
+    font-weight: 900;
+    line-height: 1.05;
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SPEAKER BUTTON
+========================================================= */
+
+.shape-learning__speaker-button {
+    width: min(400px, 88vw);
+    min-height: 46px;
+
+    margin-top: 10px;
+    padding: 8px 18px;
+
+    border: none;
     border-radius: 999px;
 
     background: #ffffff;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    gap: 12px;
+    gap: 10px;
 
     color: #08777b;
 
-    font-family: Arial, sans-serif;
-
-    font-size: 17px;
-
-    font-weight: 900;
-
-    box-shadow:
-        0 5px 14px #0002;
+    font-family: inherit;
+    font-size: clamp(13px, 1.8vw, 16px);
+    font-weight: 700;
 
     cursor: pointer;
 
-    transition:
-        transform .15s,
-        box-shadow .15s;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+
+    transition: transform .15s, box-shadow .15s;
+
+    flex-shrink: 0;
 }
 
 .shape-learning__speaker-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 18px #0003;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .shape-learning__speaker-button:active {
-    transform: scale(.96);
+    transform: scale(0.97);
 }
 
-
-/* ========================================
-   SPEAKER ICON
-======================================== */
+.shape-learning__speaker-button:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
 
 .shape-learning__speaker-icon {
-    font-size: 27px;
-
+    font-size: 20px;
     line-height: 1;
 }
 
-
-/* ========================================
-   SPEAKER TEXT
-======================================== */
-
 .shape-learning__speaker-text {
-    line-height: 1.1;
-
+    line-height: 1.15;
     text-align: center;
 }
 
 
-/* ========================================
+/* =========================================================
    HINT
-======================================== */
+========================================================= */
 
 .shape-learning__hint {
-    margin: 10px 0 7px;
+    margin: 8px 0 6px;
 
     color: #52777a;
 
-    font-size: 18px;
-
-    line-height: 1.2;
+    font-size: clamp(12px, 1.8vw, 15px);
+    font-weight: 600;
 
     text-align: center;
+
+    flex-shrink: 0;
 }
 
 
-/* ========================================
-   SHAPE CARDS
-======================================== */
+/* =========================================================
+   SHAPE CARDS GRID
+========================================================= */
 
 .shape-learning__list {
-    width: min(
-        850px,
-        96vw
-    );
+    width: min(820px, 100%);
 
     display: grid;
-
-    grid-template-columns:
-        repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
 
     gap: 10px;
+
+    flex-shrink: 0;
 }
 
 
-/* ========================================
+/* =========================================================
    SHAPE CARD
-======================================== */
+========================================================= */
 
 .shape-card {
-    border: 0;
+    min-width: 0;
+    min-height: 96px;
+
+    padding: 8px 6px 7px;
+
+    border: none;
+    border-radius: 16px;
 
     background: #ffffff;
 
-    border-radius: 20px;
-
-    padding: 9px 5px 7px;
-
-    box-shadow:
-        0 5px 12px #0002;
-
-    font-weight: 800;
-
-    color: #276568;
-
-    font-size: clamp(
-        12px,
-        2vw,
-        17px
-    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 
     cursor: pointer;
 
-    transition: 0.15s;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+
+    transition: transform .15s, box-shadow .15s, outline .15s;
 
     overflow: hidden;
 }
 
 .shape-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
 .shape-card:active {
-    transform: scale(0.94);
+    transform: scale(0.96);
 }
 
-
-/* ========================================
-   ACTIVE SHAPE
-======================================== */
+.shape-card:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
 
 .shape-card--active {
-    outline: 4px solid #7dd3d3;
+    outline: 3px solid #7dd3d3;
+    outline-offset: 0;
 }
 
-
-/* ========================================
-   SHAPE EMOJI ON CARD
-======================================== */
-
-.shape-card__emoji {
+.shape-card__visual {
     display: block;
 
-    height: clamp(
-        45px,
-        8vw,
-        75px
-    );
+    width: 100%;
+    height: clamp(34px, 5.5vw, 48px);
 
-    margin-bottom: 4px;
-
-    font-size: clamp(
-        38px,
-        6vw,
-        60px
-    );
-
-    line-height: 1;
-
-    text-align: center;
+    padding: 0 4px;
 }
-
-
-/* ========================================
-   SHAPE NAME ON CARD
-======================================== */
 
 .shape-card__name {
     display: block;
@@ -486,535 +355,402 @@ body {
 
     color: #276568;
 
-    font-size: clamp(
-        12px,
-        1.9vw,
-        17px
-    );
-
-    font-weight: 900;
-
+    font-size: clamp(10px, 1.3vw, 13px);
+    font-weight: 800;
     line-height: 1.05;
 
     text-align: center;
 
-    transform: translateY(-2px);
-
     overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 
-/* ========================================
-   MESSAGE
-======================================== */
+/* =========================================================
+   FLOATING MESSAGE
+========================================================= */
 
 .shape-learning__message {
     position: fixed;
 
     left: 50%;
+    bottom: 22px;
 
-    bottom: 18px;
+    transform: translate(-50%, 100px);
 
-    transform:
-        translate(
-            -50%,
-            120px
-        );
-
-    background: #ffffff;
-
-    padding: 13px 24px;
+    padding: 10px 20px;
 
     border-radius: 999px;
 
+    background: #ffffff;
+
     color: #08777b;
 
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: 800;
 
-    font-weight: 900;
-
-    box-shadow:
-        0 7px 20px #0003;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.18);
 
     opacity: 0;
 
-    transition: 0.3s;
+    transition: transform .3s ease, opacity .3s ease;
 
     pointer-events: none;
 
     z-index: 20;
+
+    text-align: center;
+
+    max-width: 84vw;
 }
 
-
-/* ========================================
-   MESSAGE SHOW
-======================================== */
-
 .shape-learning__message--show {
-    transform:
-        translate(
-            -50%,
-            0
-        );
-
+    transform: translate(-50%, 0);
     opacity: 1;
 }
 
 
-/* ========================================
-   NEXT BUTTON
-======================================== */
+/* =========================================================
+   NEXT BUTTON (FIXED)
+========================================================= */
 
 .shape-learning__next-button {
-    position: fixed !important;
+    position: fixed;
 
-    right: 35px !important;
+    right: 22px;
+    bottom: 22px;
 
-    bottom: 35px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 
-    display: flex !important;
+    padding: 12px 20px;
 
-    align-items: center !important;
+    border: none;
+    border-radius: 999px;
 
-    justify-content: center !important;
+    background: #0aa5a5;
+    color: #ffffff;
 
-    gap: 14px !important;
-
-    width: auto !important;
-
-    height: auto !important;
-
-    padding: 15px 24px !important;
-
-    border: none !important;
-
-    border-radius: 999px !important;
-
-    background: #0aa5a5 !important;
-
-    color: #ffffff !important;
-
-    font-family: Arial, sans-serif !important;
-
-    font-size: 20px !important;
-
-    font-weight: 900 !important;
-
-    box-shadow:
-        0 6px 16px #0003 !important;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 900;
 
     cursor: pointer;
 
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+
+    transition: transform .15s, box-shadow .15s, background .15s;
+
+    z-index: 15;
 }
 
 .shape-learning__next-button:hover {
     transform: translateY(-3px);
-
-    box-shadow:
-        0 9px 20px #0003 !important;
+    background: #088f8f;
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.25);
 }
 
 .shape-learning__next-button:active {
-    transform: scale(0.94);
+    transform: scale(0.95);
+}
+
+.shape-learning__next-button:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
 }
 
 .shape-learning__next-button span:last-child {
-    font-size: 28px;
-
+    font-size: 20px;
     line-height: 1;
 }
 
 
-/* ========================================
-   MOBILE
-======================================== */
+/* =========================================================
+   TABLET / MOBILE <= 768px
+========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
     .shape-learning {
-        padding: 10px 9px;
+        padding: 12px 14px 18px;
     }
-
-
-    /* TOP */
 
     .shape-learning__top {
-        grid-template-columns:
-            44px
-            1fr
-            44px;
-
-        margin-bottom: 2px;
+        grid-template-columns: 42px 1fr 42px;
     }
 
+    .shape-learning__home-button,
+    .shape-learning__top-spacer {
+        width: 42px;
+        height: 42px;
+    }
 
     .shape-learning__home-button {
-        width: 44px;
-
-        height: 44px;
-
         font-size: 21px;
     }
 
-
-    .shape-learning__top-spacer {
-        width: 44px;
-
-        height: 44px;
-    }
-
-
-    /* TITLE */
-
-    .shape-learning__title-area {
-        margin-top: 2px;
-    }
-
-
-    .shape-learning__title {
-        font-size: 28px;
-
-        line-height: 1.08;
-    }
-
-
-    .shape-learning__subtitle {
-        margin: 4px 0 8px;
-
-        font-size: 16px;
-    }
-
-
-    /* DISPLAY */
-
     .shape-display {
-        height: 42vh;
-
+        width: min(420px, 90vw);
+        height: min(32vh, 240px);
+        min-height: 140px;
         border-width: 5px;
+        border-radius: 24px;
     }
 
-
-    .shape-display__emoji {
-        width: 48vw;
-
-        height: 48vw;
-
-        max-width: 205px;
-
-        max-height: 205px;
-
-        font-size: 110px;
+    .shape-display__visual {
+        max-width: 170px;
     }
-
 
     .shape-display__name {
-        font-size: 30px;
-
-        margin-top: 10px;
+        font-size: clamp(18px, 4vw, 24px);
     }
 
-
-    /* SPEAKER */
-
     .shape-learning__speaker-button {
-        width: min(
-            360px,
-            90vw
-        );
+        min-height: 42px;
+        margin-top: 8px;
+        padding: 7px 15px;
+        gap: 8px;
+    }
 
-        min-height: 46px;
+    .shape-learning__speaker-icon {
+        font-size: 18px;
+    }
 
-        margin-top: 7px;
+    .shape-learning__hint {
+        margin: 6px 0 5px;
+    }
 
-        padding: 8px 15px;
-
+    .shape-learning__list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 9px;
-
-        font-size: 14px;
     }
-
-
-    .shape-learning__speaker-icon {
-        font-size: 22px;
-    }
-
-
-    /* HINT */
-
-    .shape-learning__hint {
-        margin: 8px 0 6px;
-
-        font-size: 16px;
-    }
-
-
-    /* CARDS */
-
-    .shape-learning__list {
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap: 8px;
-    }
-
 
     .shape-card {
-        padding: 7px 4px;
-
-        border-radius: 20px;
+        min-height: 88px;
+        padding: 7px 5px 6px;
+        border-radius: 14px;
     }
 
-
-    .shape-card__emoji {
-        height: 55px;
-
-        margin-bottom: 3px;
-
-        font-size: 45px;
+    .shape-card__visual {
+        height: 40px;
     }
-
-
-    .shape-card__name {
-        font-size: 14px;
-
-        line-height: 1.05;
-
-        transform: translateY(-2px);
-    }
-
-
-    /* MESSAGE */
-
-    .shape-learning__message {
-        bottom: 15px;
-
-        padding: 10px 18px;
-
-        font-size: 17px;
-    }
-
-
-    /* NEXT */
-
-    .shape-learning__next-button {
-        right: 12px !important;
-
-        bottom: 12px !important;
-
-        padding: 11px 17px !important;
-
-        font-size: 16px !important;
-
-        gap: 9px !important;
-    }
-
-
-    .shape-learning__next-button span:last-child {
-        font-size: 22px;
-    }
-
-}
-
-
-/* ========================================
-   MOBILE LANDSCAPE
-======================================== */
-
-@media (
-    max-width: 900px
-) and (
-    orientation: landscape
-) {
-
-    .shape-learning {
-        padding: 6px 10px;
-    }
-
-
-    /* TOP */
-
-    .shape-learning__top {
-        grid-template-columns:
-            42px
-            1fr
-            42px;
-
-        margin-bottom: 0;
-    }
-
-
-    .shape-learning__home-button {
-        width: 42px;
-
-        height: 42px;
-
-        font-size: 20px;
-    }
-
-
-    .shape-learning__top-spacer {
-        width: 42px;
-
-        height: 42px;
-    }
-
-
-    /* TITLE */
-
-    .shape-learning__title-area {
-        margin-top: 0;
-
-        transform:
-            translateY(-3px);
-    }
-
-
-    .shape-learning__title {
-        font-size: 30px;
-
-        line-height: 1;
-
-        margin: 0;
-    }
-
-
-    .shape-learning__subtitle {
-        font-size: 15px;
-
-        line-height: 1;
-
-        margin: 2px 0 4px;
-    }
-
-
-    /* DISPLAY */
-
-    .shape-display {
-        height: 43vh;
-
-        min-height: 165px;
-    }
-
-
-    .shape-display__emoji {
-        width: min(
-            150px,
-            25vh
-        );
-
-        height: min(
-            150px,
-            25vh
-        );
-
-        font-size: 105px;
-    }
-
-
-    .shape-display__name {
-        font-size: 28px;
-
-        margin-top: 4px;
-    }
-
-
-    /* SPEAKER */
-
-    .shape-learning__speaker-button {
-        width: min(
-            360px,
-            80vw
-        );
-
-        min-height: 38px;
-
-        margin-top: 4px;
-
-        padding: 6px 14px;
-
-        gap: 8px;
-
-        font-size: 13px;
-    }
-
-
-    .shape-learning__speaker-icon {
-        font-size: 19px;
-    }
-
-
-    /* HINT */
-
-    .shape-learning__hint {
-        font-size: 13px;
-
-        margin: 3px 0 3px;
-    }
-
-
-    /* CARDS */
-
-    .shape-learning__list {
-        width: min(
-            850px,
-            96vw
-        );
-
-        gap: 6px;
-
-        transform:
-            translateY(-2px);
-    }
-
-
-    .shape-card {
-        min-height: 0;
-
-        padding: 3px 3px 4px;
-
-        border-radius: 17px;
-    }
-
-
-    .shape-card__emoji {
-        height: 38px;
-
-        margin-bottom: 1px;
-
-        font-size: 36px;
-    }
-
 
     .shape-card__name {
         font-size: 11px;
-
-        line-height: 1;
-
-        transform:
-            translateY(-2px);
     }
-
-
-    /* NEXT */
 
     .shape-learning__next-button {
-        right: 12px !important;
-
-        bottom: 10px !important;
-
-        padding: 9px 14px !important;
-
-        font-size: 14px !important;
-
-        gap: 7px !important;
+        right: 14px;
+        bottom: 14px;
+        padding: 10px 16px;
+        font-size: 14px;
+        gap: 8px;
     }
 
-
     .shape-learning__next-button span:last-child {
+        font-size: 17px;
+    }
+
+    .shape-learning__message {
+        bottom: 16px;
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE <= 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .shape-learning {
+        padding: 10px 10px 14px;
+    }
+
+    .shape-learning__top {
+        grid-template-columns: 38px 1fr 38px;
+    }
+
+    .shape-learning__home-button,
+    .shape-learning__top-spacer {
+        width: 38px;
+        height: 38px;
+    }
+
+    .shape-learning__home-button {
+        font-size: 19px;
+    }
+
+    .shape-learning__title {
         font-size: 20px;
     }
 
+    .shape-learning__subtitle {
+        font-size: 12px;
+    }
+
+    .shape-display {
+        height: min(30vh, 200px);
+        min-height: 120px;
+        padding: 10px;
+        border-width: 4px;
+        border-radius: 20px;
+    }
+
+    .shape-display__visual {
+        max-width: 140px;
+    }
+
+    .shape-display__name {
+        font-size: 17px;
+        margin-top: 4px;
+    }
+
+    .shape-learning__speaker-button {
+        min-height: 38px;
+        font-size: 12px;
+    }
+
+    .shape-learning__speaker-icon {
+        font-size: 16px;
+    }
+
+    .shape-learning__hint {
+        font-size: 11px;
+    }
+
+    .shape-learning__list {
+        gap: 7px;
+    }
+
+    .shape-card {
+        min-height: 78px;
+        padding: 5px 4px 4px;
+        border-radius: 12px;
+    }
+
+    .shape-card__visual {
+        height: 34px;
+    }
+
+    .shape-card__name {
+        font-size: 10px;
+    }
+
+    .shape-learning__next-button {
+        right: 10px;
+        bottom: 10px;
+        padding: 8px 13px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .shape-learning__next-button span:last-child {
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE (max-height: 600px)
+========================================================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .shape-learning {
+        padding: 8px 14px 10px;
+    }
+
+    .shape-learning__top {
+        grid-template-columns: 38px 1fr 38px;
+    }
+
+    .shape-learning__home-button,
+    .shape-learning__top-spacer {
+        width: 38px;
+        height: 38px;
+    }
+
+    .shape-learning__home-button {
+        font-size: 19px;
+    }
+
+    .shape-learning__title {
+        font-size: 20px;
+        margin-top: 0;
+    }
+
+    .shape-learning__subtitle {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    .shape-display {
+        width: min(360px, 60vw);
+        height: min(30vh, 150px);
+        min-height: 100px;
+        padding: 8px;
+        border-width: 4px;
+        border-radius: 18px;
+    }
+
+    .shape-display__visual {
+        max-width: 130px;
+    }
+
+    .shape-display__name {
+        font-size: 16px;
+        margin-top: 3px;
+    }
+
+    .shape-learning__speaker-button {
+        min-height: 34px;
+        margin-top: 5px;
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+
+    .shape-learning__speaker-icon {
+        font-size: 15px;
+    }
+
+    .shape-learning__hint {
+        margin: 4px 0 4px;
+        font-size: 11px;
+    }
+
+    .shape-learning__list {
+        gap: 6px;
+        width: min(820px, 88vw);
+    }
+
+    .shape-card {
+        min-height: 70px;
+        padding: 4px 3px 4px;
+        border-radius: 12px;
+    }
+
+    .shape-card__visual {
+        height: 30px;
+    }
+
+    .shape-card__name {
+        font-size: 10px;
+    }
+
+    .shape-learning__next-button {
+        right: 12px;
+        bottom: 10px;
+        padding: 7px 12px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .shape-learning__next-button span:last-child {
+        font-size: 14px;
+    }
 }

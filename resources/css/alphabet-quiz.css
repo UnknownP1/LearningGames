@@ -1,6 +1,9 @@
-/* ========================================
+/* =========================================================
    ALPHABET QUIZ
-======================================== */
+========================================================= */
+
+/* CATATAN: Blok `html, body, #app { overflow: hidden }`
+   SENGAJA TIDAK DITULIS agar scroll Home & halaman lain tetap jalan. */
 
 * {
     box-sizing: border-box;
@@ -8,263 +11,181 @@
 }
 
 
-/* ========================================
-   BODY
-======================================== */
-
-body {
-    font-family: Arial, sans-serif;
-
-    background: linear-gradient(
-        #bcefff,
-        #f7fdff
-    );
-}
-
-/* ========================================
-   MAIN QUIZ
-======================================== */
+/* =========================================================
+   MAIN QUIZ (scrollable kalau konten lebih tinggi)
+========================================================= */
 
 .alphabet-quiz {
     position: relative;
 
     width: 100%;
-
-    height: 100dvh;
-
-    min-height: 0;
+    min-height: 100dvh;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     padding: 18px;
 
     font-family: Arial, sans-serif;
 
-    overflow: hidden;
+    background: linear-gradient(#bcefff, #f7fdff);
+
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
-/* ========================================
+/* =========================================================
    TOP
-======================================== */
+========================================================= */
 
 .alphabet-quiz__top {
     flex-shrink: 0;
 
     width: 100%;
+    max-width: 1000px;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 }
 
-
-/* ========================================
-   HOME BUTTON
-======================================== */
-
 .alphabet-quiz__icon-button {
     width: 52px;
-
     height: 52px;
 
     flex-shrink: 0;
 
     border: 0;
-
     border-radius: 50%;
 
     background: #ffffff;
 
     font-size: 26px;
+    line-height: 1;
 
-    box-shadow:
-        0 4px 12px #0002;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
 
     cursor: pointer;
 
-    transition: 0.15s;
+    transition: transform .15s, box-shadow .15s;
 }
 
 .alphabet-quiz__icon-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 16px #0003;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.2);
 }
 
 .alphabet-quiz__icon-button:active {
     transform: scale(.9);
 }
 
-
-/* ========================================
-   QUESTION NUMBER
-======================================== */
-
 .alphabet-quiz__number {
     padding: 9px 15px;
 
     background: #ffffff;
-
     border-radius: 999px;
 
     color: #08777b;
 
     font-size: 18px;
-
     font-weight: 900;
 
-    box-shadow:
-        0 4px 12px #0002;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
 }
 
 
-/* ========================================
-   MAIN CARD
-======================================== */
+/* =========================================================
+   CARD
+========================================================= */
 
 .alphabet-quiz__card {
-    width: min(
-        1000px,
-        94vw
-    );
-
-    flex: 1;
-
-    min-height: 0;
+    width: min(1000px, 94vw);
 
     margin-top: 18px;
 
-    padding:
-        28px
-        30px
-        20px;
+    padding: 28px 30px 20px;
 
     background: #ffffff;
-
     border-radius: 35px;
 
-    box-shadow:
-        0 10px 28px #0002;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.13);
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
-    overflow: hidden;
+    flex-shrink: 0;
 }
 
 
-/* ========================================
+/* =========================================================
    TITLE
-======================================== */
+========================================================= */
 
 .alphabet-quiz__title {
-    flex-shrink: 0;
-
     margin: 0 0 22px;
 
     color: #126b70;
 
-    font-size: clamp(
-        30px,
-        5vw,
-        48px
-    );
-
+    font-size: clamp(28px, 5vw, 44px);
     font-weight: 900;
 
     text-align: center;
+
+    flex-shrink: 0;
 }
 
 
-/* ========================================
+/* =========================================================
    DISPLAY (SPEAKER)
-======================================== */
+========================================================= */
 
 .alphabet-quiz__display {
-    flex-shrink: 1;
-
-    width: 210px;
-
-    height: 210px;
+    width: 180px;
+    height: 180px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     background: #f1fbfc;
-
     border: 5px solid #d8eff0;
-
-    border-radius: 30px;
+    border-radius: 28px;
 
     margin-bottom: 20px;
+
+    flex-shrink: 0;
 }
 
 .alphabet-quiz__speaker {
-    width: 160px;
-
-    height: 160px;
+    width: 130px;
+    height: 130px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border: 0;
-
     border-radius: 50%;
 
-    background: linear-gradient(
-        135deg,
-        #34d399,
-        #10b981
-    );
+    background: linear-gradient(135deg, #34d399, #10b981);
 
     color: #ffffff;
-
-    font-size: 80px;
-
+    font-size: 68px;
     line-height: 1;
 
     cursor: pointer;
 
-    box-shadow:
-        0 10px 25px rgba(
-            16,
-            185,
-            129,
-            .35
-        );
+    box-shadow: 0 10px 25px rgba(16, 185, 129, .35);
 
-    transition:
-        transform .15s,
-        box-shadow .15s;
+    transition: transform .15s, box-shadow .15s;
 }
 
 .alphabet-quiz__speaker:hover {
     transform: scale(1.05);
-
-    box-shadow:
-        0 14px 30px rgba(
-            16,
-            185,
-            129,
-            .45
-        );
+    box-shadow: 0 14px 30px rgba(16, 185, 129, .45);
 }
 
 .alphabet-quiz__speaker:active {
@@ -273,32 +194,23 @@ body {
 
 .alphabet-quiz__speaker:focus-visible {
     outline: 4px solid #2563eb;
-
     outline-offset: 4px;
 }
 
 
-/* ========================================
+/* =========================================================
    ANSWERS
-======================================== */
+========================================================= */
 
 .alphabet-quiz__answers {
     width: 100%;
 
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 
     flex-shrink: 0;
 }
-
-
-/* ========================================
-   ANSWER BUTTON
-======================================== */
 
 .alphabet-quiz__answer {
     min-height: 70px;
@@ -306,138 +218,96 @@ body {
     padding: 9px 16px;
 
     border: 3px solid #d8eff0;
-
     border-radius: 20px;
 
     background: #ffffff;
 
     display: flex;
-
     align-items: center;
-
     gap: 14px;
 
     color: #126b70;
 
-    font-family: Arial, sans-serif;
-
+    font-family: inherit;
     font-size: 18px;
-
     font-weight: 900;
-
     text-align: left;
 
     cursor: pointer;
 
-    transition:
-        transform .15s,
-        border-color .15s,
-        box-shadow .15s;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
 }
 
-.alphabet-quiz__answer:hover {
+.alphabet-quiz__answer:hover:not(:disabled) {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 12px #0002;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.13);
 }
 
-.alphabet-quiz__answer:active {
+.alphabet-quiz__answer:active:not(:disabled) {
     transform: scale(.97);
 }
 
-
-/* ========================================
-   ANSWER LETTER (INDEX BADGE)
-======================================== */
+.alphabet-quiz__answer:disabled {
+    cursor: not-allowed;
+}
 
 .alphabet-quiz__answer-letter {
     width: 40px;
-
     height: 40px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 13px;
 
     background: #dff6f7;
-
     color: #08777b;
 
     font-size: 20px;
-
     font-weight: 900;
 }
-
-
-/* ========================================
-   ANSWER NAME (LETTER PAIR)
-======================================== */
 
 .alphabet-quiz__answer-name {
     flex: 1;
 
-    line-height: 1.1;
-
     display: flex;
-
     align-items: baseline;
-
     gap: .15em;
+
+    line-height: 1.1;
 }
 
 .alphabet-quiz__answer-upper {
     font-size: 22px;
-
     font-weight: 900;
-
     color: #126b70;
 }
 
 .alphabet-quiz__answer-lower {
     font-size: 18px;
-
     font-weight: 800;
-
     color: #52777a;
 }
 
-
-/* ========================================
-   CORRECT
-======================================== */
-
 .alphabet-quiz__answer--correct {
     border-color: #45b94b;
-
     background: #effdf3;
-
     outline: 2px solid #45b94b;
 }
 
-
-/* ========================================
-   WRONG
-======================================== */
-
 .alphabet-quiz__answer--wrong {
     border-color: #ef3b3b;
-
     background: #fff2f2;
-
     outline: 2px solid #ef3b3b;
 }
 
 
-/* ========================================
+/* =========================================================
    FEEDBACK
-======================================== */
+========================================================= */
 
 .alphabet-quiz__feedback {
     flex-shrink: 0;
@@ -451,25 +321,18 @@ body {
     background: #ffffff;
 
     font-size: 16px;
-
     font-weight: 900;
 
-    box-shadow:
-        0 4px 12px #0002;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
 }
 
-.alphabet-quiz__feedback--correct {
-    color: #45a84b;
-}
-
-.alphabet-quiz__feedback--wrong {
-    color: #ef3b3b;
-}
+.alphabet-quiz__feedback--correct { color: #45a84b; }
+.alphabet-quiz__feedback--wrong   { color: #ef3b3b; }
 
 
-/* ========================================
-   NEXT BUTTON
-======================================== */
+/* =========================================================
+   NEXT
+========================================================= */
 
 .alphabet-quiz__next-button {
     width: 100%;
@@ -479,40 +342,31 @@ body {
     padding: 11px 15px;
 
     border: 0;
-
     border-radius: 13px;
 
     background: #08777b;
-
     color: #ffffff;
 
-    font-family: Arial, sans-serif;
-
+    font-family: inherit;
     font-size: 15px;
-
     font-weight: 900;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    box-shadow:
-        0 5px 12px #0002;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.13);
 
     cursor: pointer;
 
-    transition:
-        transform .15s,
-        box-shadow .15s;
+    transition: transform .15s, box-shadow .15s;
+
+    flex-shrink: 0;
 }
 
 .alphabet-quiz__next-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 15px #0003;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
 }
 
 .alphabet-quiz__next-button:active {
@@ -521,20 +375,16 @@ body {
 
 .alphabet-quiz__next-button span:last-child {
     font-size: 21px;
-
     line-height: 1;
 }
 
 
-/* ========================================
+/* =========================================================
    FINISHED
-======================================== */
+========================================================= */
 
 .alphabet-quiz__finished {
-    width: min(
-        600px,
-        92vw
-    );
+    width: min(600px, 92vw);
 
     margin: auto;
 
@@ -545,57 +395,41 @@ body {
     background: #ffffff;
 
     border: 7px solid #9ad9d9;
-
     border-radius: 35px;
 
-    box-shadow:
-        0 8px 25px #0002;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.13);
+
+    flex-shrink: 0;
 }
 
 .alphabet-quiz__finished-icon {
     font-size: 70px;
-
     margin-bottom: 8px;
 }
 
 .alphabet-quiz__finished h1 {
     margin: 0;
-
     color: #08777b;
-
     font-size: 38px;
 }
 
 .alphabet-quiz__score {
     margin: 14px 0;
-
     color: #08777b;
-
     font-size: 40px;
-
     font-weight: 900;
 }
 
 .alphabet-quiz__finished p {
     color: #52777a;
-
     font-size: 18px;
-
     line-height: 1.5;
 }
 
-
-/* ========================================
-   FINISHED ACTIONS
-======================================== */
-
 .alphabet-quiz__finished-actions {
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 10px;
 
     margin-top: 18px;
@@ -605,40 +439,30 @@ body {
     border: 0;
 
     padding: 13px 20px;
-
     border-radius: 999px;
 
     background: #08777b;
-
     color: #ffffff;
 
+    font-family: inherit;
     font-size: 17px;
-
     font-weight: 900;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 8px;
 
-    box-shadow:
-        0 6px 16px #0003;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 
     cursor: pointer;
 
-    transition:
-        transform .15s,
-        box-shadow .15s;
+    transition: transform .15s, box-shadow .15s;
 }
 
 .alphabet-quiz__finished-button:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 18px #0003;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
 .alphabet-quiz__finished-button:active {
@@ -646,9 +470,9 @@ body {
 }
 
 
-/* ========================================
+/* =========================================================
    MOBILE
-======================================== */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -656,315 +480,187 @@ body {
         padding: 10px 9px;
     }
 
-
     .alphabet-quiz__icon-button {
         width: 44px;
-
         height: 44px;
-
         font-size: 21px;
     }
 
-
     .alphabet-quiz__number {
         padding: 8px 12px;
-
         font-size: 14px;
     }
 
-
     .alphabet-quiz__card {
         width: 96vw;
-
         margin-top: 12px;
-
-        padding:
-            22px
-            14px
-            15px;
-
+        padding: 22px 14px 15px;
         border-radius: 28px;
     }
 
-
     .alphabet-quiz__title {
-        font-size: 27px;
-
+        font-size: 26px;
         margin-bottom: 15px;
     }
-
 
     .alphabet-quiz__display {
-        width: 165px;
-
-        height: 165px;
-
+        width: 150px;
+        height: 150px;
         margin-bottom: 15px;
-
         border-width: 4px;
-
-        border-radius: 25px;
+        border-radius: 22px;
     }
-
 
     .alphabet-quiz__speaker {
-        width: 125px;
-
-        height: 125px;
-
-        font-size: 62px;
+        width: 108px;
+        height: 108px;
+        font-size: 56px;
     }
-
 
     .alphabet-quiz__answers {
         gap: 8px;
     }
 
-
     .alphabet-quiz__answer {
         min-height: 60px;
-
         padding: 7px 9px;
-
         border-radius: 15px;
-
         gap: 8px;
-
         font-size: 15px;
     }
-
 
     .alphabet-quiz__answer-letter {
         width: 32px;
-
         height: 32px;
-
         border-radius: 10px;
-
         font-size: 16px;
     }
 
-
-    .alphabet-quiz__answer-upper {
-        font-size: 18px;
-    }
-
-
-    .alphabet-quiz__answer-lower {
-        font-size: 15px;
-    }
-
+    .alphabet-quiz__answer-upper { font-size: 18px; }
+    .alphabet-quiz__answer-lower { font-size: 15px; }
 
     .alphabet-quiz__feedback {
         margin-top: 8px;
-
         padding: 7px 14px;
-
         font-size: 15px;
     }
 
-
     .alphabet-quiz__next-button {
         margin-top: 8px;
-
         padding: 10px 13px;
-
         border-radius: 12px;
-
         font-size: 14px;
     }
-
 
     .alphabet-quiz__next-button span:last-child {
         font-size: 20px;
     }
 
-
     .alphabet-quiz__finished {
         width: 92vw;
-
         padding: 30px 18px;
     }
 
-
-    .alphabet-quiz__finished-icon {
-        font-size: 65px;
-    }
-
-
-    .alphabet-quiz__finished h1 {
-        font-size: 34px;
-    }
-
-
-    .alphabet-quiz__score {
-        font-size: 36px;
-    }
-
-
-    .alphabet-quiz__finished p {
-        font-size: 17px;
-    }
-
+    .alphabet-quiz__finished-icon { font-size: 65px; }
+    .alphabet-quiz__finished h1   { font-size: 34px; }
+    .alphabet-quiz__score         { font-size: 36px; }
+    .alphabet-quiz__finished p    { font-size: 17px; }
 
     .alphabet-quiz__finished-actions {
         width: 100%;
-
         gap: 8px;
     }
 
-
     .alphabet-quiz__finished-button {
         flex: 1;
-
         padding: 12px 10px;
-
         font-size: 15px;
     }
-
 }
 
 
-/* ========================================
-   MOBILE LANDSCAPE
-======================================== */
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
 
-@media (
-    max-width: 900px
-) and (
-    orientation: landscape
-) {
+@media (max-width: 900px) and (orientation: landscape) {
 
     .alphabet-quiz {
         padding: 6px 10px;
     }
 
-
     .alphabet-quiz__icon-button {
         width: 42px;
-
         height: 42px;
-
         font-size: 20px;
     }
 
-
     .alphabet-quiz__number {
         padding: 7px 11px;
-
         font-size: 14px;
     }
 
-
     .alphabet-quiz__card {
-        width: min(
-            96vw,
-            620px
-        );
-
+        width: min(96vw, 620px);
         margin-top: 6px;
-
-        padding:
-            12px
-            18px
-            10px;
-
+        padding: 12px 18px 10px;
         border-radius: 24px;
     }
 
-
     .alphabet-quiz__title {
-        font-size: 24px;
-
+        font-size: 22px;
         margin-bottom: 8px;
     }
-
 
     .alphabet-quiz__display {
-        width: 105px;
-
-        height: 105px;
-
+        width: 95px;
+        height: 95px;
         margin-bottom: 8px;
-
         border-width: 3px;
-
-        border-radius: 20px;
+        border-radius: 18px;
     }
-
 
     .alphabet-quiz__speaker {
-        width: 80px;
-
-        height: 80px;
-
-        font-size: 42px;
+        width: 70px;
+        height: 70px;
+        font-size: 36px;
     }
 
-
-    .alphabet-quiz__answers {
-        gap: 6px;
-    }
-
+    .alphabet-quiz__answers { gap: 6px; }
 
     .alphabet-quiz__answer {
         min-height: 40px;
-
         padding: 5px 9px;
-
         border-width: 2px;
-
         border-radius: 12px;
-
         gap: 7px;
-
         font-size: 13px;
     }
-
 
     .alphabet-quiz__answer-letter {
         width: 26px;
-
         height: 26px;
-
         border-radius: 8px;
-
         font-size: 13px;
     }
 
-
-    .alphabet-quiz__answer-upper {
-        font-size: 15px;
-    }
-
-
-    .alphabet-quiz__answer-lower {
-        font-size: 13px;
-    }
-
+    .alphabet-quiz__answer-upper { font-size: 15px; }
+    .alphabet-quiz__answer-lower { font-size: 13px; }
 
     .alphabet-quiz__feedback {
         margin-top: 5px;
-
         padding: 5px 12px;
-
         font-size: 13px;
     }
-
 
     .alphabet-quiz__next-button {
         margin-top: 5px;
-
         padding: 7px 10px;
-
         font-size: 13px;
-
         border-radius: 10px;
     }
-
 
     .alphabet-quiz__next-button span:last-child {
         font-size: 18px;
     }
-
 }
