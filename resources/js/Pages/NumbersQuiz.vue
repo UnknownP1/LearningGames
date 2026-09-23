@@ -298,10 +298,10 @@ onMounted(() => {
                 <button
                     type="button"
                     class="number-quiz__finished-button"
-                    @click="restartQuiz"
+                    @click="goHome"
                 >
-                    <span>🔁</span>
-                    <span>Main Lagi</span>
+                    <span>🏠</span>
+                    <span>Home</span>
                 </button>
 
                 <button
@@ -314,8 +314,7 @@ onMounted(() => {
 
             </div>
 
-        </section>
-
+</section>
     </main>
 
 </template>

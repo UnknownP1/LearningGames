@@ -350,49 +350,49 @@ onBeforeUnmount(() => {
              FINISHED
         ====================================================== -->
 
-        <section
-            v-else
-            class="alphabet-quiz__finished"
-        >
+            <section
+                v-else
+                class="number-quiz__finished"
+            >
 
-            <div class="alphabet-quiz__finished-icon">🎉</div>
+                <div class="number-quiz__finished-icon">🎉</div>
 
-            <h1>Quiz Selesai!</h1>
+                <h1>Quiz Selesai!</h1>
 
-            <div class="alphabet-quiz__score">
-                ⭐ {{ score }} / 100
-            </div>
+                <div class="number-quiz__score">
+                    ⭐ {{ score }} / 100
+                </div>
 
-            <p>
-                Kamu berhasil menjawab
-                {{ correctCount }}
-                dari
-                {{ questions.length }}
-                soal dengan benar!
-            </p>
+                <p>
+                    Kamu berhasil menjawab
+                    {{ correctCount }}
+                    dari
+                    {{ questions.length }}
+                    soal dengan benar!
+                </p>
 
-            <div class="alphabet-quiz__finished-actions">
+                <div class="number-quiz__finished-actions">
 
-                <button
-                    type="button"
-                    class="alphabet-quiz__finished-button"
-                    @click="restartQuiz"
-                >
-                    <span>🔁</span>
-                    <span>Main Lagi</span>
-                </button>
+                    <button
+                        type="button"
+                        class="number-quiz__finished-button"
+                        @click="goHome"
+                    >
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </button>
 
-                <button
-                    type="button"
-                    class="alphabet-quiz__finished-button"
-                    @click="goToLearning"
-                >
-                    <span>Kembali ke Pembelajaran</span>
-                </button>
+                    <button
+                        type="button"
+                        class="number-quiz__finished-button"
+                        @click="goToLearning"
+                    >
+                        <span>Kembali ke Pembelajaran</span>
+                    </button>
 
-            </div>
+                </div>
 
-        </section>
+</section>
 
     </main>
 
