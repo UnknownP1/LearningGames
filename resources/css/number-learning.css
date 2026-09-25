@@ -1112,33 +1112,43 @@
     ========================= */
 
     .number-learning__next-button {
-        position: absolute !important;
+    position: absolute !important;
 
-        top: auto !important;
+    top: auto !important;
+    right: 10px !important;
+    bottom: 43px !important;
+    left: auto !important;
 
-        right: 10px !important;
-        bottom: 43px !important;
-        left: auto !important;
+    width: calc(50% - 18px) !important;
+    height: 32px !important;
+    min-height: 32px !important;
 
-        width: calc(50% - 18px) !important;
+    margin: 0 !important;
+    padding: 5px 9px !important;
 
-        min-height: 34px !important;
+    border-radius: 12px;
 
-        margin: 0 !important;
-        padding: 7px 12px !important;
+    font-size: clamp(11px, 1.6vw, 13px) !important;
 
-        border-radius: 13px;
+    gap: 6px;
 
-        font-size: 12px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        gap: 7px;
+    box-sizing: border-box;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    z-index: 100;
+}
 
-        z-index: 100;
-    }
+.number-learning__next-button span:last-child {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.number-learning__next-button span:last-child {
+    font-size: 16px;
+}
 
     .number-learning__next-button span:last-child {
         font-size: 18px;
