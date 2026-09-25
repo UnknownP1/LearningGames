@@ -15,7 +15,7 @@ const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const LETTER_SPEECH = {
     A: 'a',                C: 'ce',   D: 'de',
     E: 'e',    F: 'ef',   G: 'ge',   H: 'ha',
-    I: 'iii',  J: 'je',   K: 'ka',   L: 'el',
+    I: 'i',  J: 'je',   K: 'ka',   L: 'el',
     M: 'em',   N: 'en',   O: 'o',
     Q: 'kiu',  R: 'er',   S: 'es',   T: 'te',
     U: 'u',    V: 've',              X: 'eks',

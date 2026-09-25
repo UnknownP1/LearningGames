@@ -580,87 +580,432 @@
 
 
 /* =========================================================
-   LANDSCAPE MOBILE
+   MOBILE LANDSCAPE
 ========================================================= */
 
-@media (max-width: 900px) and (orientation: landscape) {
-
+@media (orientation: landscape) and (max-height: 600px) {np
     .alphabet-quiz {
+        width: 100%;
+        height: 100dvh;
+
         padding: 6px 10px;
+
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+
+    /* =========================
+       TOP
+    ========================= */
+
+    .alphabet-quiz__top {
+        width: 100%;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
     }
 
     .alphabet-quiz__icon-button {
         width: 42px;
         height: 42px;
+
         font-size: 20px;
     }
 
     .alphabet-quiz__number {
         padding: 7px 11px;
+
         font-size: 14px;
     }
 
+
+    /* =========================
+       QUIZ CARD
+    ========================= */
+
     .alphabet-quiz__card {
-        width: min(96vw, 620px);
+        position: relative;
+
+        width: 100%;
+        height: calc(100dvh - 56px);
+
+        flex: none;
+
+        min-height: 0;
+
         margin-top: 6px;
-        padding: 12px 18px 10px;
-        border-radius: 24px;
+
+        padding: 4px 8px 4px;
+
+        background: transparent;
+
+        border-radius: 0;
+
+        box-shadow: none;
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1.05fr)
+            minmax(0, 1fr);
+
+        grid-template-rows:
+            42px
+            minmax(0, 1fr);
+
+        column-gap: 24px;
+
+        overflow: hidden;
+
+        box-sizing: border-box;
     }
+
+
+    /* =========================
+       QUESTION TITLE
+    ========================= */
 
     .alphabet-quiz__title {
-        font-size: 22px;
-        margin-bottom: 8px;
+        grid-column: 1 / -1;
+        grid-row: 1;
+
+        width: 100%;
+
+        min-height: 0;
+
+        margin: 0;
+
+        color: #126b70;
+
+        font-size: clamp(22px, 5vw, 36px);
+
+        font-weight: 900;
+
+        line-height: 1;
+
+        text-align: center;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        transform: translateY(-7px);
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
     }
+
+
+    /* =========================
+       DISPLAY
+    ========================= */
 
     .alphabet-quiz__display {
-        width: 95px;
-        height: 95px;
-        margin-bottom: 8px;
-        border-width: 3px;
-        border-radius: 18px;
+        grid-column: 1;
+        grid-row: 2;
+
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        margin: 0;
+        padding: 8px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #fff;
+
+        border: 5px solid #9ad9d9;
+
+        border-radius: 30px;
+
+        box-shadow: 0 7px 18px #0002;
+
+        justify-self: stretch;
+        align-self: stretch;
+
+        overflow: hidden;
+
+        box-sizing: border-box;
     }
+
+
+    /* =========================
+       SPEAKER
+    ========================= */
 
     .alphabet-quiz__speaker {
-        width: 70px;
-        height: 70px;
-        font-size: 36px;
+        width: min(70px, 14vh);
+        height: min(70px, 14vh);
+
+        min-width: 40px;
+        min-height: 40px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: clamp(22px, 5vh, 36px);
     }
 
-    .alphabet-quiz__answers { gap: 6px; }
+
+    /* =========================
+       ANSWERS
+    ========================= */
+
+    .alphabet-quiz__answers {
+        grid-column: 2;
+        grid-row: 2;
+
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        grid-template-rows:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        align-self: stretch;
+
+        overflow: hidden;
+    }
 
     .alphabet-quiz__answer {
-        min-height: 40px;
-        padding: 5px 9px;
-        border-width: 2px;
-        border-radius: 12px;
-        gap: 7px;
-        font-size: 13px;
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding: 8px;
+
+        border: 2px solid #d8eff0;
+
+        border-radius: 18px;
+
+        background: #fff;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        color: #126b70;
+
+        font-family: Arial, sans-serif;
+
+        font-size: clamp(15px, 2.5vw, 21px);
+
+        font-weight: 900;
+
+        text-align: center;
+
+        cursor: pointer;
+
+        overflow: hidden;
+
+        box-sizing: border-box;
+
+        transition:
+            transform .15s,
+            border-color .15s,
+            box-shadow .15s;
     }
+
+
+    /* =========================
+       ANSWER LETTER
+    ========================= */
 
     .alphabet-quiz__answer-letter {
-        width: 26px;
-        height: 26px;
-        border-radius: 8px;
-        font-size: 13px;
+        width: 38px;
+        height: 38px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 11px;
+
+        background: #dff6f7;
+
+        color: #08777b;
+
+        font-size: 18px;
+
+        font-weight: 900;
     }
 
-    .alphabet-quiz__answer-upper { font-size: 15px; }
-    .alphabet-quiz__answer-lower { font-size: 13px; }
+
+    /* =========================
+       ANSWER NAME
+    ========================= */
+
+    .alphabet-quiz__answer-name {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 3px;
+
+        min-width: 0;
+
+        max-width: 100%;
+
+        line-height: 1;
+    }
+
+    .alphabet-quiz__answer-upper {
+        font-size: 15px;
+
+        line-height: 1;
+    }
+
+    .alphabet-quiz__answer-lower {
+        font-size: 13px;
+
+        line-height: 1;
+    }
+
+
+    /* =========================
+       CORRECT / WRONG
+    ========================= */
+
+    .alphabet-quiz__answer--correct {
+        border-color: #45b94b;
+
+        background: #effdf3;
+
+        outline: 2px solid #45b94b;
+    }
+
+    .alphabet-quiz__answer--wrong {
+        border-color: #ef3b3b;
+
+        background: #fff2f2;
+
+        outline: 2px solid #ef3b3b;
+    }
+
+
+    /* =========================
+       FEEDBACK
+    ========================= */
 
     .alphabet-quiz__feedback {
-        margin-top: 5px;
+        position: absolute;
+
+        left: 50%;
+        bottom: 5px;
+
+        transform: translateX(-50%);
+
+        margin: 0;
+
         padding: 5px 12px;
-        font-size: 13px;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        font-size: 12px;
+
+        font-weight: 900;
+
+        box-shadow: 0 4px 12px #0002;
+
+        z-index: 10;
+
+        white-space: nowrap;
     }
 
+
+    /* =========================
+       NEXT
+    ========================= */
+
     .alphabet-quiz__next-button {
-        margin-top: 5px;
-        padding: 7px 10px;
-        font-size: 13px;
-        border-radius: 10px;
+        position: absolute;
+
+        right: 8px;
+        bottom: 5px;
+
+        width: auto;
+
+        min-width: 145px;
+
+        margin: 0;
+
+        padding: 8px 12px;
+
+        border: 0;
+
+        border-radius: 12px;
+
+        background: #08777b;
+
+        color: #fff;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 12px;
+
+        font-weight: 900;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 8px;
+
+        box-shadow: 0 5px 12px #0002;
+
+        cursor: pointer;
+
+        z-index: 10;
     }
 
     .alphabet-quiz__next-button span:last-child {
         font-size: 18px;
+
+        line-height: 1;
     }
+
 }
