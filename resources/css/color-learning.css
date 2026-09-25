@@ -697,6 +697,7 @@ body {
 
 /* ========================================
    MOBILE LANDSCAPE
+   KHUSUS HP LANDSCAPE
 ======================================== */
 
 @media (
@@ -705,19 +706,54 @@ body {
     orientation: landscape
 ) {
 
+    /* ====================================
+       MAIN
+    ==================================== */
+
     .color-game {
-        padding: 6px 10px;
+        position: relative;
+
+        width: 100%;
+        height: 100dvh;
+
+        min-height: 0;
+
+        padding: 7px 10px;
+
+        overflow: hidden;
     }
 
 
+    /* ====================================
+       TOP
+    ==================================== */
+
     .color-game__top {
-        margin-bottom: 0;
+        position: absolute;
+
+        top: 7px;
+        left: 10px;
+
+        width: calc(100% - 20px);
+
+        height: 42px;
+
+        margin: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        z-index: 50;
     }
 
 
     .color-game__icon-button {
         width: 42px;
         height: 42px;
+
+        flex-shrink: 0;
 
         font-size: 20px;
     }
@@ -726,136 +762,503 @@ body {
     .color-game__top-spacer {
         width: 42px;
         height: 42px;
+
+        flex-shrink: 0;
+    }
+
+
+    /* ====================================
+       TITLE AREA
+    ==================================== */
+
+    .color-game__title-area {
+        position: absolute;
+
+        top: 48px;
+        left: 10px;
+
+        width: calc(50% - 18px);
+
+        padding: 0;
+        margin: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: flex-start;
+
+        text-align: center;
+
+        z-index: 20;
     }
 
 
     .color-game__title {
-        font-size: 30px;
-
-        line-height: 1;
+        width: 100%;
 
         margin: 0;
+
+        color: #08777b;
+
+        font-size: clamp(
+            22px,
+            4.1vw,
+            32px
+        );
+
+        font-weight: 800;
+
+        line-height: 1.05;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
     }
 
 
     .color-game__subtitle {
-        font-size: 15px;
+        width: 100%;
 
-        line-height: 1;
+        margin: 4px 0 0;
 
-        margin: 2px 0 4px;
+        color: #397477;
+
+        font-size: clamp(
+            11px,
+            1.7vw,
+            14px
+        );
+
+        line-height: 1.05;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
     }
 
+
+    /* ====================================
+       DISPLAY
+       KIRI
+    ==================================== */
 
     .color-display {
-        height: 43vh;
+        position: absolute;
 
-        min-height: 165px;
+        top: 93px;
+        left: 10px;
+
+        width: calc(50% - 18px);
+
+        /*
+         * Display dibuat lebih pendek agar
+         * mempunyai jarak dengan speaker.
+         */
+        height: calc(
+            100dvh - 205px
+        );
+
+        min-width: 0;
+        min-height: 0;
+
+        margin: 0;
+
+        padding: 8px;
+
+        background: #ffffff;
+
+        border: 5px solid #9ad9d9;
+
+        border-radius: 26px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        z-index: 2;
     }
 
+
+    /* ====================================
+       DISPLAY COLOR
+    ==================================== */
 
     .color-display__swatch {
         width: min(
-            150px,
-            25vh
+            25vh,
+            135px
         );
 
         height: min(
-            150px,
-            25vh
+            25vh,
+            135px
         );
+
+        min-width: 75px;
+        min-height: 75px;
+
+        max-width: 135px;
+        max-height: 135px;
+
+        flex-shrink: 1;
     }
 
+
+    /* ====================================
+       DISPLAY NAME
+    ==================================== */
 
     .color-display__name {
-        font-size: 28px;
-
         margin-top: 4px;
+
+        color: #08777b;
+
+        font-size: clamp(
+            19px,
+            3.4vw,
+            27px
+        );
+
+        line-height: 1;
+
+        text-align: center;
+
+        white-space: nowrap;
     }
 
 
+    /* ====================================
+   MESSAGE SPEECH
+   CENTER DI AREA KIRI
+==================================== */
+
+.color-game__message {
+    position: absolute;
+
+    left: 25%;
+
+    bottom: 78px;
+
+    width: min(
+        calc(50% - 60px),
+        260px
+    );
+
+    margin: 0;
+
+    padding: 7px 12px;
+
+    border-radius: 12px;
+
+    background: #08777b;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transform: translateX(-50%);
+
+    box-shadow:
+        0 5px 14px #0003;
+
+    z-index: 200;
+
+    pointer-events: none;
+
+    box-sizing: border-box;
+}
+
+    /* ====================================
+       SPEAKER
+       KIRI BAWAH
+    ==================================== */
+
     .color-game__speaker-button {
-        width: min(
-            360px,
-            80vw
+        position: absolute;
+
+        left: 10px;
+        bottom: 43px;
+
+        width: calc(50% - 18px);
+
+        min-height: 32px;
+
+        margin: 0;
+
+        padding: 5px 9px;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        font-size: clamp(
+            11px,
+            1.6vw,
+            13px
         );
 
-        min-height: 38px;
-
-        margin-top: 4px;
-
-        padding: 6px 14px;
-
-        gap: 8px;
-
-        font-size: 13px;
+        z-index: 25;
     }
 
 
     .color-game__speaker-icon {
-        font-size: 19px;
+        font-size: 16px;
     }
 
+
+    /* ====================================
+       HINT
+       KIRI BAWAH
+    ==================================== */
 
     .color-game__hint {
-        font-size: 13px;
+        position: absolute;
 
-        margin: 3px 0 3px;
-    }
+        left: 10px;
+        bottom: 22px;
 
+        width: calc(50% - 18px);
 
-    .color-game__colors {
-        width: min(
-            850px,
-            96vw
+        margin: 0;
+
+        color: #397477;
+
+        font-size: clamp(
+            10px,
+            1.5vw,
+            12px
         );
-
-        gap: 6px;
-
-        transform:
-            translateY(-2px);
-    }
-
-
-    .color-card {
-        padding: 3px 3px 4px;
-
-        border-radius: 17px;
-    }
-
-
-    .color-card__dot {
-        height: 38px;
-
-        margin-bottom: 1px;
-    }
-
-
-    .color-card__name {
-        font-size: 11px;
 
         line-height: 1;
 
-        transform:
-            translateY(-2px);
+        text-align: center;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        z-index: 25;
     }
 
 
+    /* ====================================
+       COLOR CARDS
+       KANAN
+    ==================================== */
+
+    .color-game__colors {
+        position: absolute;
+
+        /*
+         * Diturunkan supaya tidak menabrak
+         * title dan subtitle.
+         */
+        top: 84px;
+        right: 10px;
+
+        width: calc(50% - 18px);
+
+        /*
+         * Dipendekkan supaya ada ruang
+         * khusus untuk tombol Next.
+         */
+        height: calc(
+            100dvh - 200px
+        );
+
+        min-width: 0;
+        min-height: 0;
+
+        margin: 0;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        grid-template-rows:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 6px;
+
+        transform: none;
+
+        overflow: visible   ;
+
+        z-index: 10;
+    }
+
+
+    /* ====================================
+       COLOR CARD
+       HORIZONTAL + SLIM
+    ==================================== */
+
+    .color-card {
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding: 3px 7px;
+
+        border-radius: 13px;
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 7px;
+
+        overflow: hidden;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ====================================
+       COLOR DOT
+    ==================================== */
+
+    .color-card__dot {
+        width: clamp(
+            25px,
+            5.5vh,
+            38px
+        );
+
+        height: clamp(
+            25px,
+            5.5vh,
+            38px
+        );
+
+        flex-shrink: 0;
+
+        margin: 0;
+
+        border-radius: 50%;
+    }
+
+
+    /* ====================================
+       COLOR NAME
+    ==================================== */
+
+    .color-card__name {
+        flex: 1;
+
+        min-width: 0;
+
+        margin: 0;
+
+        color: #397477;
+
+        font-size: clamp(
+            10px,
+            1.7vw,
+            14px
+        );
+
+        line-height: 1;
+
+        text-align: left;
+
+        transform: none;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* ====================================
+       ACTIVE CARD
+    ==================================== */
+
+    .color-card--active {
+        outline: 2px solid #7dd3d3;
+
+        outline-offset: 0;
+    }
+
+
+    /* ====================================
+       NEXT BUTTON
+       BAWAH CARD
+    ==================================== */
+
     .color-game__next-button {
-        right: 12px !important;
+        position: absolute !important;
 
-        bottom: 10px !important;
+        top: auto !important;
 
-        padding: 9px 14px !important;
+        right: 10px !important;
 
-        font-size: 14px !important;
+        bottom: 43px !important;
 
-        gap: 7px !important;
+        left: auto !important;
+
+        width: calc(50% - 18px) !important;
+
+        min-height: 34px !important;
+
+        margin: 0 !important;
+
+        padding: 7px 12px !important;
+
+        border-radius: 13px;
+
+        font-size: 12px !important;
+
+        gap: 7px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        z-index: 100;
     }
 
 
     .color-game__next-button span:last-child {
-        font-size: 20px;
+        font-size: 18px;
     }
 
 }

@@ -656,101 +656,356 @@
 
 
 /* =========================================================
-   LANDSCAPE MOBILE (max-height: 600px)
+   LANDSCAPE MOBILE
 ========================================================= */
 
-@media (max-height: 600px) and (orientation: landscape) {
+@media (max-width: 900px) and (orientation: landscape) {
 
     .shape-learning {
-        padding: 8px 14px 10px;
+        position: relative;
+        width: 100%;
+        height: 100dvh;
+        min-height: 0;
+        padding: 7px 10px;
+        overflow: hidden;
     }
 
+    /* =========================
+       TOP
+    ========================= */
+
     .shape-learning__top {
-        grid-template-columns: 38px 1fr 38px;
+        position: absolute;
+        top: 7px;
+        left: 10px;
+        width: calc(100% - 20px);
+        height: 42px;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 42px 1fr 42px;
+        align-items: center;
+        z-index: 50;
     }
 
     .shape-learning__home-button,
     .shape-learning__top-spacer {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
     }
 
     .shape-learning__home-button {
-        font-size: 19px;
+        font-size: 20px;
+    }
+
+    /* =========================
+       TITLE
+    ========================= */
+
+        .shape-learning__title-area {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 20;
     }
 
     .shape-learning__title {
-        font-size: 20px;
-        margin-top: 0;
+        position: static;
+        width: 100%;
+        margin: 0;
+
+        text-align: center;
+        font-size: clamp(22px, 4.1vw, 32px);
+        line-height: 1.05;
     }
 
     .shape-learning__subtitle {
-        font-size: 12px;
-        margin-top: 2px;
-    }
+        position: static;
+        width: 100%;
+        margin: 3px 0 0;
+
+        text-align: center;
+        font-size: clamp(11px, 1.7vw, 14px);
+        line-height: 1.05;
+}
+
+    /* =========================
+       DISPLAY
+    ========================= */
 
     .shape-display {
-        width: min(360px, 60vw);
-        height: min(30vh, 150px);
-        min-height: 100px;
+        position: absolute;
+        top: 93px;
+        left: 10px;
+
+        width: calc(50% - 18px);
+        height: calc(100dvh - 205px);
+
+        min-width: 0;
+        min-height: 0;
+        margin: 0;
         padding: 8px;
-        border-width: 4px;
-        border-radius: 18px;
+
+        background: #fff;
+        border: 5px solid #9ad9d9;
+        border-radius: 26px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+        z-index: 2;
     }
 
     .shape-display__visual {
-        max-width: 130px;
+        width: min(25vh, 135px);
+        height: min(25vh, 135px);
+
+        min-width: 75px;
+        min-height: 75px;
+
+        max-width: 135px;
+        max-height: 135px;
+
+        flex-shrink: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .shape-display__name {
-        font-size: 16px;
-        margin-top: 3px;
+        margin-top: 4px;
+        color: #08777b;
+        font-size: clamp(19px, 3.4vw, 27px);
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
+    /* =========================
+       SPEAKER
+    ========================= */
+
     .shape-learning__speaker-button {
-        min-height: 34px;
-        margin-top: 5px;
-        padding: 5px 12px;
-        font-size: 12px;
+        position: absolute;
+        left: 10px;
+        bottom: 43px;
+
+        width: calc(50% - 18px);
+        min-height: 32px;
+
+        margin: 0;
+        padding: 5px 9px;
+
+        border-radius: 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        font-size: clamp(11px, 1.6vw, 13px);
+        z-index: 25;
     }
 
     .shape-learning__speaker-icon {
-        font-size: 15px;
+        font-size: 16px;
     }
+
+    /* =========================
+       HINT
+    ========================= */
 
     .shape-learning__hint {
-        margin: 4px 0 4px;
-        font-size: 11px;
+        position: absolute;
+        left: 10px;
+        bottom: 22px;
+
+        width: calc(50% - 18px);
+
+        margin: 0;
+
+        color: #397477;
+        font-size: clamp(10px, 1.5vw, 12px);
+        line-height: 1;
+        text-align: center;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        z-index: 25;
     }
 
+    /* =========================
+       SHAPE CARDS
+    ========================= */
+
     .shape-learning__list {
+        position: absolute;
+        top: 84px;
+        right: 10px;
+
+        width: calc(50% - 18px);
+        height: calc(100dvh - 200px);
+
+        min-width: 0;
+        min-height: 0;
+
+        margin: 0;
+
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+
         gap: 6px;
-        width: min(820px, 88vw);
+
+        overflow: visible;
+        z-index: 10;
     }
 
     .shape-card {
-        min-height: 70px;
-        padding: 4px 3px 4px;
-        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding: 3px 7px;
+        border-radius: 13px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 7px;
+
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .shape-card__visual {
-        height: 30px;
+        width: clamp(25px, 5.5vh, 38px);
+        height: clamp(25px, 5.5vh, 38px);
+
+        flex-shrink: 0;
+
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .shape-card__name {
-        font-size: 10px;
+        flex: 1;
+        min-width: 0;
+
+        margin: 0;
+
+        color: #397477;
+        font-size: clamp(10px, 1.7vw, 14px);
+        line-height: 1;
+        text-align: left;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    .shape-learning__next-button {
-        right: 12px;
-        bottom: 10px;
+    /* =========================
+       ACTIVE CARD
+    ========================= */
+
+    .shape-card--active {
+        outline: 2px solid #7dd3d3;
+        outline-offset: 0;
+    }
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .shape-learning__message {
+        position: absolute;
+        left: 25%;
+        bottom: 78px;
+
+        width: min(calc(50% - 60px), 260px);
+
+        margin: 0;
         padding: 7px 12px;
+
+        border-radius: 12px;
+        background: #08777b;
+        color: #fff;
+
         font-size: 12px;
-        gap: 6px;
+        font-weight: 900;
+        line-height: 1.1;
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transform: translateX(-50%);
+
+        box-shadow: 0 5px 14px #0003;
+
+        z-index: 200;
+        pointer-events: none;
+        box-sizing: border-box;
+    }
+
+    /* =========================
+       NEXT BUTTON
+    ========================= */
+
+    .shape-learning__next-button {
+        position: absolute !important;
+
+        top: auto !important;
+        right: 10px !important;
+        bottom: 43px !important;
+        left: auto !important;
+
+        width: calc(50% - 18px) !important;
+        min-height: 34px !important;
+
+        margin: 0 !important;
+        padding: 7px 12px !important;
+
+        border-radius: 13px;
+
+        font-size: 12px !important;
+        gap: 7px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        z-index: 100;
     }
 
     .shape-learning__next-button span:last-child {
-        font-size: 14px;
+        font-size: 18px;
     }
 }

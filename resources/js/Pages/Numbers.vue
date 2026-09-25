@@ -13,17 +13,16 @@ import NumberDisplay from '../Components/Numbers/NumberDisplay.vue'
 */
 
 const numbers = [
-    { id: 'zero',    value: 0,  word: 'nol'      },
-    { id: 'one',     value: 1,  word: 'satu'     },
-    { id: 'two',     value: 2,  word: 'dua'      },
-    { id: 'three',   value: 3,  word: 'tiga'     },
-    { id: 'four',    value: 4,  word: 'empat'    },
-    { id: 'five',    value: 5,  word: 'lima'     },
-    { id: 'six',     value: 6,  word: 'enam'     },
-    { id: 'seven',   value: 7,  word: 'tujuh'    },
-    { id: 'eight',   value: 8,  word: 'delapan'  },
-    { id: 'nine',    value: 9,  word: 'sembilan' },
-    { id: 'ten',     value: 10, word: 'sepuluh'  },
+    { id: 'one',    value: 1,  word: 'satu'      },
+    { id: 'twp',     value: 2,  word: 'dua'     },
+    { id: 'three',     value: 3,  word: 'tiga'      },
+    { id: 'four',   value: 4,  word: 'empat'     },
+    { id: 'five',    value: 5,  word: 'lima'    },
+    { id: 'six',    value: 6,  word: 'enam'     },
+    { id: 'seven',     value: 7,  word: 'tujuh'     },
+    { id: 'eight',   value: 8,  word: 'delapan'    },
+    { id: 'nine',   value: 9,  word: 'sembilan'  },
+    { id: 'zero',    value: 0,  word: 'nol' },
 ]
 
 

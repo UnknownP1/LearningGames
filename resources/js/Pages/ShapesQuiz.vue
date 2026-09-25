@@ -267,7 +267,7 @@ function goToLearning() {
                     class="shape-quiz__finished-button"
                     @click="goToLearning"
                 >
-                    🏠 Kembali ke Pembelajaran
+                    Kembali ke Pembelajaran
                 </button>
 
             </div>
